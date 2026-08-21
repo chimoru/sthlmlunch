@@ -1,0 +1,135 @@
+# Hämtar veckomenyerna och publicerar sidan.
+#
+# Körs vardagar 06:00 UTC = 08:00 svensk sommartid, 07:00 vintertid.
+# GitHubs cron går alltid i UTC och tar ingen hänsyn till sommartid.
+#
+# Går också att starta för hand: fliken Actions → "Hämta lunchmenyer" → Run workflow.
+
+name: Hämta lunchmenyer
+
+on:
+  schedule:
+    - cron: "0 6 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # för att kunna committa data/menus.js
+  pages: write      # för att kunna publicera sidan
+  id-token: write   # krävs av publiceringen
+
+# Låt aldrig två körningar publicera samtidigt.
+concurrency:
+  group: lunch
+  cancel-in-progress: false
+
+jobs:
+  uppdatera:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      # Claude läser restauranglistan, besöker varje sida, tolkar menyn
+      # och skriver om data/menus.js.
+      - name: Hämta menyerna med Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          claude_args: |
+            --allowedTools "WebFetch,Read,Write,Edit"
+            --max-turns 40
+          prompt: |
+            Du uppdaterar lunchmenyerna för en webbsida. Dagens datum framgår av systemet.
+
+            ARBETSGÅNG
+            1. Läs data/restaurants.js och notera varje restaurangs "id" och "url".
+            2. Läs den nuvarande data/menus.js. Den är din utgångspunkt — du ska
+               uppdatera den, inte börja om från noll.
+            3. Hämta varje restaurangs "url" med WebFetch och läs ut veckans lunchmeny.
+               Leta efter menyn för den innevarande veckan. Finns flera veckor, välj den
+               som innehåller dagens datum.
+            4. Skriv om data/menus.js med Write.
+
+            FILENS FORMAT
+            Filen börjar med kommentarsblocket som redan finns — behåll det ordagrant.
+            Därefter "window.MENUS = " följt av ETT objekt i STRIKT JSON:
+
+            {
+              "fetched": "<nu, ISO 8601 med Z>",
+              "week": <veckonummer som heltal>,
+              "restaurants": {
+                "<restaurangens id>": {
+                  "status": "ok" | "stale" | "error",
+                  "fetched": "<när just denna hämtades, ISO 8601 med Z>",
+                  "priceInfo": "<prisuppgift ordagrant från sidan, eller \"\">",
+                  "days": [
+                    {
+                      "weekday": "Måndag" | "Tisdag" | "Onsdag" | "Torsdag" | "Fredag" | "Lördag" | "Söndag",
+                      "date": "ÅÅÅÅ-MM-DD",
+                      "dishes": [
+                        {
+                          "name": "<rättens namn>",
+                          "desc": "<tillbehör och beskrivning, eller \"\">",
+                          "price": "<pris ordagrant, t.ex. \"135 kr\", eller \"\">",
+                          "tags": ["veg" | "vegan" | "fisk" | "kött" | "glutenfri"]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+
+            INGA kommentarer inuti JSON-objektet. Inget kommatecken efter sista posten.
+            Inga andra fält än de som står ovan. Filen kontrolleras maskinellt direkt
+            efteråt och en avvikelse gör att ingenting publiceras.
+
+            REGLER SOM GÄLLER FÖRE ALLT ANNAT
+            - Hitta ALDRIG på rätter, priser eller dagar. Är du osäker, utelämna.
+            - Priser skrivs ordagrant som de står på sidan. Räkna aldrig om, avrunda aldrig.
+            - Går en sida inte att läsa, eller hittar du ingen meny för veckan: sätt
+              status "stale" för den restaurangen och BEHÅLL dess "days" och "priceInfo"
+              exakt som de var i den gamla filen. Rör inte dess gamla "fetched".
+              Radera aldrig data du inte kunde ersätta.
+            - Finns ingen gammal data alls för en restaurang som inte gick att läsa:
+              status "error" och "days": [].
+            - Lyckas hämtningen: status "ok" och "fetched" satt till nu.
+            - Saknar en dag meny på sidan (t.ex. stängt): ta med dagen med "dishes": [].
+            - "tags" sätter du utifrån vad rätten faktiskt är. Är du osäker: tom lista.
+            - Är restauranglistan tom, ändra ingenting.
+
+            Skriv bara filen. Committa inte, pusha inte, kör inga kommandon.
+
+      # Vakten: är filen hel? Annars avbryts hela körningen här och nu.
+      - name: Kontrollera datan
+        run: python3 tools/validate.py
+
+      # Committa bara om menyerna faktiskt ändrats. Git-historiken blir därmed
+      # en logg över när varje restaurang bytte meny.
+      - name: Committa om något ändrats
+        run: |
+          if git diff --quiet -- data/menus.js; then
+            echo "Menyerna är oförändrade sedan förra körningen — ingen commit."
+          else
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/menus.js
+            git commit -m "Uppdatera lunchmenyer $(date -u +%Y-%m-%d)"
+            git push
+            echo "Menyerna har ändrats och är committade."
+          fi
+
+      # Publiceringen ligger i SAMMA körning som committen. GitHub startar
+      # nämligen inga workflows från commits gjorda med GITHUB_TOKEN — hade vi
+      # delat upp detta hade sidan slutat uppdateras utan felmeddelande.
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,161 @@
+/* ---------- Färger. Ljust läge här, mörkt läge längst ner. ---------- */
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --border: #e2ded6;
+  --text: #1c1a17;
+  --muted: #6f6a62;
+  --accent: #9a4a1e;
+  --accent-soft: #f4e6dd;
+  --today: #1f6b3a;
+  --today-soft: #e4f1e8;
+  --warn: #8a6a12;
+  --warn-soft: #f8efd6;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(28, 26, 23, .05), 0 8px 24px rgba(28, 26, 23, .05);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Topp ---------- */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 0;
+  margin-bottom: 28px;
+}
+.topbar .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.logo { margin: 0; font-size: 22px; letter-spacing: -.02em; }
+.today { margin: 0; color: var(--muted); font-size: 15px; }
+.back { color: var(--accent); text-decoration: none; font-size: 15px; font-weight: 500; }
+.back:hover { text-decoration: underline; }
+
+/* ---------- Verktygsrad ---------- */
+.toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filters button {
+  font: inherit; font-size: 14px; cursor: pointer;
+  padding: 6px 13px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+}
+.filters button:hover { border-color: var(--accent); color: var(--accent); }
+.filters button[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500;
+}
+.stamp { margin: 0; font-size: 13px; color: var(--muted); }
+
+/* ---------- Korten ---------- */
+.grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.card {
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px 16px;
+  text-decoration: none; color: inherit;
+  transition: transform .12s ease, border-color .12s ease;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.card.is-stale { background: color-mix(in srgb, var(--surface) 92%, var(--bg)); }
+
+.card h2 { margin: 0 0 2px; font-size: 18px; letter-spacing: -.01em; }
+.meta { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+
+.dishes { list-style: none; margin: 0 0 14px; padding: 0; flex: 1; }
+.dishes li { padding: 8px 0; border-top: 1px solid var(--border); }
+.dishes li:first-child { border-top: none; padding-top: 0; }
+.dish-name { font-weight: 500; }
+.dish-price { float: right; color: var(--muted); font-variant-numeric: tabular-nums; padding-left: 10px; }
+.dish-desc { display: block; font-size: 14px; color: var(--muted); }
+
+.tag {
+  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; padding: 1px 7px; border-radius: 4px;
+  background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 1px;
+}
+
+.price-info { margin: 0; font-size: 13px; color: var(--muted); }
+
+.note {
+  margin: 0 0 12px; font-size: 14px; padding: 8px 11px; border-radius: 8px;
+  background: var(--warn-soft); color: var(--warn);
+}
+.card-foot { margin-top: auto; padding-top: 12px; }
+
+/* ---------- Veckomenyn ---------- */
+.detail-head { margin-bottom: 24px; }
+.detail-head h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -.02em; }
+.detail-head .meta { margin-bottom: 10px; }
+.source { color: var(--accent); font-size: 15px; }
+
+.days { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.day {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow);
+}
+.day.is-today { border-color: var(--today); box-shadow: 0 0 0 1px var(--today), var(--shadow); }
+.day h3 { margin: 0 0 2px; font-size: 16px; }
+.day-date { margin: 0 0 12px; font-size: 13px; color: var(--muted); }
+.badge-today {
+  font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  background: var(--today-soft); color: var(--today); padding: 2px 8px; border-radius: 999px; margin-left: 8px;
+}
+.no-dish { color: var(--muted); font-size: 14px; font-style: italic; margin: 0; }
+
+/* ---------- Status ---------- */
+.status {
+  font-size: 13px; padding: 8px 11px; border-radius: 8px; margin: 0 0 14px;
+  background: var(--warn-soft); color: var(--warn);
+}
+.empty { color: var(--muted); text-align: center; padding: 40px 0; }
+.foot { margin: 44px 0 32px; color: var(--muted); font-size: 13px; }
+.foot p { margin: 0; max-width: 60ch; }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em;
+  background: var(--accent-soft); color: var(--accent); padding: 1px 5px; border-radius: 4px;
+}
+
+/* ---------- Mörkt läge ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16150f;
+    --surface: #201f19;
+    --border: #35332a;
+    --text: #f0ede5;
+    --muted: #a49e91;
+    --accent: #e8945c;
+    --accent-soft: #3a2a1d;
+    --today: #7ec898;
+    --today-soft: #1e3428;
+    --warn: #e3bf6a;
+    --warn-soft: #382e17;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+  }
+  .filters button[aria-pressed="true"] { color: #16150f; }
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 560px) {
+  .wrap { padding: 0 16px; }
+  .grid, .days { grid-template-columns: 1fr; }
+  .topbar { margin-bottom: 20px; }
+  .detail-head h1 { font-size: 23px; }
+}
