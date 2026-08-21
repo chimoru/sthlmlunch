@@ -36,6 +36,10 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # TILLFÄLLIGT för felsökning: visar Claudes fullständiga utskrift i
+          # loggen, som är publik eftersom repot är publikt. Tas bort så snart
+          # vi vet varför körningen dör. Se körning #2.
+          show_full_output: true
           claude_args: |
             --allowedTools "WebFetch,Read,Write,Edit"
             --max-turns 40
