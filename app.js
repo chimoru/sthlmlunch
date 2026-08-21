@@ -72,6 +72,9 @@
 
   // Hittar dagens dag i en veckomeny. Datum först, veckodagsnamn som reserv
   // (vissa restauranger skriver bara "Måndag" utan datum).
+  // Datum först. Matchar inget datum — antingen för att sidan inte anger några,
+  // eller för att de tillhör en annan vecka — faller vi tillbaka på veckodagens
+  // namn. Båda vyerna anropar den här, så de kan aldrig svara olika.
   function findToday(days) {
     if (!days) return null;
     var iso = todayISO(), name = todayWeekday(), i;
@@ -244,11 +247,11 @@
       root.appendChild(el("p", "status", "Ingen meny kunde läsas. Öppna restaurangens egen sida ovan."));
     }
 
-    var iso = todayISO(), name = todayWeekday();
+    var todayDay = findToday(menu.days);
     var days = el("div", "days");
 
     (menu.days || []).forEach(function (d) {
-      var isToday = d.date === iso || (!d.date && d.weekday === name);
+      var isToday = d === todayDay;
       var box = el("div", "day" + (isToday ? " is-today" : ""));
 
       var h = el("h3", null, d.weekday || "");

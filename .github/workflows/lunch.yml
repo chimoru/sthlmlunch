@@ -36,10 +36,6 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # TILLFÄLLIGT för felsökning: visar Claudes fullständiga utskrift i
-          # loggen, som är publik eftersom repot är publikt. Tas bort så snart
-          # vi vet varför körningen dör. Se körning #2.
-          show_full_output: true
           claude_args: |
             --allowedTools "WebFetch,Read,Write,Edit"
             --max-turns 40
@@ -111,6 +107,9 @@ jobs:
               status "error" och "days": [].
             - Lyckas hämtningen: status "ok" och "fetched" satt till nu.
             - Saknar en dag meny på sidan (t.ex. stängt): ta med dagen med "dishes": [].
+            - "date" skriver du BARA om sidan faktiskt tryckt ett datum för dagen.
+              Räkna aldrig fram datum ur ett veckonummer och gissa aldrig — utelämna
+              fältet i stället. Sidan hittar dagens dag på veckodagens namn ändå.
             - Anger sidan ett veckonummer: skriv det i "week" ORDAGRANT som det står,
               även om det ser fel ut. Sidan jämför själv med den pågående veckan och
               varnar besökaren. Rätta aldrig ett veckonummer du tror är felaktigt.
