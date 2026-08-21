@@ -15,17 +15,18 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-08-21T14:35:00Z",
+  "fetched": "2026-08-21T14:53:41Z",
   "week": 34,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-08-21T14:35:00Z",
+      "fetched": "2026-08-21T14:53:41Z",
       "week": 34,
-      "priceInfo": "Dagens lunch 165 kr inkl. salladsbuffé och kaffe · Serveras vardagar 11.00–14.00",
+      "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
         {
           "weekday": "Måndag",
+          "date": "2026-08-17",
           "dishes": [
             {
               "name": "Krispig kycklinglårfilé",
@@ -39,6 +40,7 @@ window.MENUS = {
         },
         {
           "weekday": "Tisdag",
+          "date": "2026-08-18",
           "dishes": [
             {
               "name": "Mjukbakad torskfilé",
@@ -52,6 +54,7 @@ window.MENUS = {
         },
         {
           "weekday": "Onsdag",
+          "date": "2026-08-19",
           "dishes": [
             {
               "name": "Wallenbergare",
@@ -65,6 +68,7 @@ window.MENUS = {
         },
         {
           "weekday": "Torsdag",
+          "date": "2026-08-20",
           "dishes": [
             {
               "name": "Bräserat lammlägg",
@@ -78,6 +82,7 @@ window.MENUS = {
         },
         {
           "weekday": "Fredag",
+          "date": "2026-08-21",
           "dishes": [
             {
               "name": "Marinerad fläsknoisette",
@@ -93,7 +98,7 @@ window.MENUS = {
       "always": [
         {
           "name": "Köttbullar",
-          "desc": "",
+          "desc": "med potatispuré, gräddsås och rårörda lingon",
           "price": "195 kr",
           "tags": [
             "kött"
@@ -101,13 +106,13 @@ window.MENUS = {
         },
         {
           "name": "Raggmunk",
-          "desc": "",
+          "desc": "med stekt fläsk och rårörda lingon",
           "price": "210 kr",
           "tags": []
         },
         {
           "name": "Gravad lax",
-          "desc": "",
+          "desc": "med dillstuvad potatis och hovmästarsås",
           "price": "210 kr",
           "tags": [
             "fisk"
@@ -115,11 +120,23 @@ window.MENUS = {
         },
         {
           "name": "Hamburgare",
-          "desc": "",
+          "desc": "med provoloneost, fänkålsslaw och pommes",
           "price": "230 kr",
           "tags": [
             "kött"
           ]
+        },
+        {
+          "name": "Pizza Bianca",
+          "desc": "",
+          "price": "",
+          "tags": []
+        },
+        {
+          "name": "Pizza Calabria",
+          "desc": "",
+          "price": "",
+          "tags": []
         }
       ]
     }
