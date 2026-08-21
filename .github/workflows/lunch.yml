@@ -62,6 +62,8 @@ jobs:
                 "<restaurangens id>": {
                   "status": "ok" | "stale" | "error",
                   "fetched": "<när just denna hämtades, ISO 8601 med Z>",
+                  "week": <veckonummer som RESTAURANGENS sida anger, heltal.
+                           Utelämna fältet helt om sidan inte anger något.>,
                   "priceInfo": "<prisuppgift ordagrant från sidan, eller \"\">",
                   "days": [
                     {
@@ -76,10 +78,19 @@ jobs:
                         }
                       ]
                     }
+                  ],
+                  "always": [
+                    {
+                      "name": "<rätt som finns hela veckan, t.ex. \"Köttbullar\">",
+                      "desc": "", "price": "<pris ordagrant>", "tags": []
+                    }
                   ]
                 }
               }
             }
+
+            Både "week" och "always" är frivilliga — utelämna dem helt om sidan
+            inte har någon sådan uppgift. Hitta aldrig på ett veckonummer.
 
             INGA kommentarer inuti JSON-objektet. Inget kommatecken efter sista posten.
             Inga andra fält än de som står ovan. Filen kontrolleras maskinellt direkt
@@ -96,6 +107,11 @@ jobs:
               status "error" och "days": [].
             - Lyckas hämtningen: status "ok" och "fetched" satt till nu.
             - Saknar en dag meny på sidan (t.ex. stängt): ta med dagen med "dishes": [].
+            - Anger sidan ett veckonummer: skriv det i "week" ORDAGRANT som det står,
+              även om det ser fel ut. Sidan jämför själv med den pågående veckan och
+              varnar besökaren. Rätta aldrig ett veckonummer du tror är felaktigt.
+            - Rätter som gäller hela veckan (à la carte, "alltid på menyn") hör inte
+              till någon dag — lägg dem i "always" med sina egna priser.
             - "tags" sätter du utifrån vad rätten faktiskt är. Är du osäker: tom lista.
             - Är restauranglistan tom, ändra ingenting.
 

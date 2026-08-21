@@ -19,6 +19,6 @@ window.RESTAURANTS = [
     url: "https://maninthemoon.se/dagens-lunch/",
     area: "Tegnérgatan 2C",
     walk: "",
-    note: "Lunch serveras vardagar 11.00–14.00."
+    note: ""
   }
 ]

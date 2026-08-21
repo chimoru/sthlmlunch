@@ -100,6 +100,20 @@ def check(data, ids):
         if status not in VALID_STATUS:
             fail(f"{where} har status '{status}'. Tillåtet: {', '.join(sorted(VALID_STATUS))}.")
 
+        if "week" in r and not isinstance(r.get("week"), int):
+            fail(f"{where}: 'week' måste vara ett heltal eller utelämnas.")
+
+        always = r.get("always")
+        if always is not None:
+            if not isinstance(always, list):
+                fail(f"{where}: 'always' är inte en lista.")
+            else:
+                for dish in always:
+                    if not isinstance(dish, dict) or not dish.get("name"):
+                        fail(f"{where}: en rätt under 'always' saknar namn.")
+                    else:
+                        usable += 1
+
         days = r.get("days")
         if days is None:
             if status != "error":

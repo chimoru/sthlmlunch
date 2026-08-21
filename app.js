@@ -29,6 +29,18 @@
     return name.charAt(0).toUpperCase() + name.slice(1);
   }
 
+  // Veckonummer enligt ISO 8601, samma räknesätt som svenska kalendrar.
+  // Veckan tillhör det år som dess torsdag ligger i.
+  function isoWeek(iso) {
+    var d = new Date(iso + "T00:00:00Z");
+    var offset = (d.getUTCDay() + 6) % 7;          // måndag = 0
+    d.setUTCDate(d.getUTCDate() - offset + 3);      // flytta till veckans torsdag
+    var firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+    var fOffset = (firstThursday.getUTCDay() + 6) % 7;
+    firstThursday.setUTCDate(firstThursday.getUTCDate() - fOffset + 3);
+    return 1 + Math.round((d - firstThursday) / (7 * 24 * 3600 * 1000));
+  }
+
   // "Fredag 21 augusti" — bara veckodagen får stor bokstav, som svenskan vill ha det.
   function longToday() {
     var s = new Intl.DateTimeFormat("sv-SE", {
@@ -66,6 +78,16 @@
     for (i = 0; i < days.length; i++) if (days[i].date === iso) return days[i];
     for (i = 0; i < days.length; i++) if (days[i].weekday === name) return days[i];
     return null;
+  }
+
+  // Restauranger glömmer ibland uppdatera sin sida. Anger de ett veckonummer
+  // kan vi upptäcka det istället för att visa förra veckans meny som dagens.
+  function staleWeekWarning(menu) {
+    if (!menu || typeof menu.week !== "number") return null;
+    var now = isoWeek(todayISO());
+    if (menu.week === now) return null;
+    return "Restaurangen anger vecka " + menu.week + " — nu är det vecka " + now +
+           ". Menyn kan vara gammal.";
   }
 
   function dishMatchesFilter(dish, filter) {
@@ -127,6 +149,9 @@
       } else if (menu.status === "error" || !menu.days) {
         a.appendChild(el("p", "status", "Ingen meny kunde läsas från restaurangens sida"));
       }
+
+      var weekWarning = staleWeekWarning(menu);
+      if (weekWarning) a.appendChild(el("p", "status", weekWarning));
 
       var day = findToday(menu.days);
       var dishes = (day && day.dishes ? day.dishes : []).filter(function (d) {
@@ -210,17 +235,19 @@
 
     if (r.note) root.appendChild(el("p", "note", r.note));
 
+    var weekWarning = staleWeekWarning(menu);
+    if (weekWarning) root.appendChild(el("p", "status", weekWarning));
+
     if (menu.status === "stale") {
       root.appendChild(el("p", "status", "Kunde inte läsas vid senaste försöket. " + stampText(menu.fetched) + "."));
     } else if (menu.status === "error" || !menu.days || !menu.days.length) {
       root.appendChild(el("p", "status", "Ingen meny kunde läsas. Öppna restaurangens egen sida ovan."));
-      return;
     }
 
     var iso = todayISO(), name = todayWeekday();
     var days = el("div", "days");
 
-    menu.days.forEach(function (d) {
+    (menu.days || []).forEach(function (d) {
       var isToday = d.date === iso || (!d.date && d.weekday === name);
       var box = el("div", "day" + (isToday ? " is-today" : ""));
 
@@ -246,6 +273,16 @@
     });
 
     root.appendChild(days);
+
+    if (menu.always && menu.always.length) {
+      var box = el("section", "always");
+      box.appendChild(el("h2", null, "Alltid på menyn"));
+      var ul = el("ul", "dishes");
+      menu.always.forEach(function (dish) { ul.appendChild(renderDish(dish)); });
+      box.appendChild(ul);
+      root.appendChild(box);
+    }
+
     root.appendChild(el("p", "stamp", stampText(menu.fetched)));
   }
 

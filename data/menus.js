@@ -21,6 +21,7 @@ window.MENUS = {
     "man-in-the-moon": {
       "status": "ok",
       "fetched": "2026-08-21T14:35:00Z",
+      "week": 34,
       "priceInfo": "Dagens lunch 165 kr inkl. salladsbuffé och kaffe · Serveras vardagar 11.00–14.00",
       "days": [
         {
@@ -86,6 +87,38 @@ window.MENUS = {
                 "kött"
               ]
             }
+          ]
+        }
+      ],
+      "always": [
+        {
+          "name": "Köttbullar",
+          "desc": "",
+          "price": "195 kr",
+          "tags": [
+            "kött"
+          ]
+        },
+        {
+          "name": "Raggmunk",
+          "desc": "",
+          "price": "210 kr",
+          "tags": []
+        },
+        {
+          "name": "Gravad lax",
+          "desc": "",
+          "price": "210 kr",
+          "tags": [
+            "fisk"
+          ]
+        },
+        {
+          "name": "Hamburgare",
+          "desc": "",
+          "price": "230 kr",
+          "tags": [
+            "kött"
           ]
         }
       ]
