@@ -14,21 +14,17 @@ on:
 
 permissions:
   contents: write   # för att kunna committa data/menus.js
-  pages: write      # för att kunna publicera sidan
-  id-token: write   # krävs av publiceringen
+  pages: write      # publiceringen ärver dessa
+  id-token: write
 
-# Låt aldrig två körningar publicera samtidigt.
 concurrency:
   group: lunch
   cancel-in-progress: false
 
 jobs:
-  uppdatera:
+  hamta:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
       - uses: actions/checkout@v6
@@ -105,7 +101,8 @@ jobs:
 
             Skriv bara filen. Committa inte, pusha inte, kör inga kommandon.
 
-      # Vakten: är filen hel? Annars avbryts hela körningen här och nu.
+      # Vakten: är filen hel? Annars avbryts hela körningen här och nu,
+      # ingenting committas, och den gamla sidan ligger kvar.
       - name: Kontrollera datan
         run: python3 tools/validate.py
 
@@ -124,12 +121,12 @@ jobs:
             echo "Menyerna har ändrats och är committade."
           fi
 
-      # Publiceringen ligger i SAMMA körning som committen. GitHub startar
-      # nämligen inga workflows från commits gjorda med GITHUB_TOKEN — hade vi
-      # delat upp detta hade sidan slutat uppdateras utan felmeddelande.
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - id: deploy
-        uses: actions/deploy-pages@v4
+  # Publicerar med samma steg som en vanlig push gör. Se kommentaren i deploy.yml
+  # om varför automatikens commit inte kan publicera sig själv.
+  publicera:
+    needs: hamta
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

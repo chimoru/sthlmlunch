@@ -1,0 +1,47 @@
+# Publicerar sidan till GitHub Pages.
+#
+# Körs i tre fall:
+#   1. push till main        — du ändrar något och pushar, sidan uppdateras direkt
+#   2. workflow_call         — anropas av lunch.yml efter morgonhämtningen
+#   3. workflow_dispatch     — startas för hand från fliken Actions
+#
+# Varför lunch.yml måste ANROPA den här istället för att lita på push-triggern:
+# GitHub startar inga workflows från commits gjorda med GITHUB_TOKEN. En commit
+# från automatiken hade alltså aldrig publicerats.
+
+name: Publicera sidan
+
+on:
+  push:
+    branches: [main]
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicera:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+
+      # Sista kontrollen innan något går publikt.
+      - name: Kontrollera datan
+        run: python3 tools/validate.py
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4

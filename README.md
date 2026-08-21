@@ -12,8 +12,13 @@ En webbsida får av säkerhetsskäl inte hämta innehåll från andra hemsidor (
 Därför sker hämtningen någon annanstans: **GitHub Actions** kör
 `.github/workflows/lunch.yml` varje vardag 06:00 UTC (08:00 svensk sommartid).
 Där läser Claude Code varje restaurangs sida, tolkar veckomenyn och skriver om
-`data/menus.js`. Sedan kontrolleras filen, committas om något ändrats, och sidan
-publiceras — allt i samma körning.
+`data/menus.js`. Sedan kontrolleras filen, committas om något ändrats, och
+`deploy.yml` publicerar sidan.
+
+`deploy.yml` körs också vid varje push till `main`, så ändrar du restauranglistan
+och pushar syns det på sidan direkt. Automatikens egen commit kan däremot inte
+utlösa den — GitHub startar inga workflows från commits gjorda med `GITHUB_TOKEN`
+— därför anropar `lunch.yml` publiceringen uttryckligen.
 
 Ingen dator behöver vara påslagen. Autentiseringen sker med ett abonnemangs-token
 i repo-secreten `CLAUDE_CODE_OAUTH_TOKEN`, så det kostar inget extra.
@@ -29,7 +34,8 @@ i repo-secreten `CLAUDE_CODE_OAUTH_TOKEN`, så det kostar inget extra.
 | `data/restaurants.js` | **Din lista.** Redigeras för hand |
 | `data/menus.js` | Menyerna. **Skrivs automatiskt — redigera inte** |
 | `tools/validate.py` | Kontrollerar `menus.js` innan publicering |
-| `.github/workflows/lunch.yml` | Morgonhämtningen och publiceringen |
+| `.github/workflows/lunch.yml` | Morgonhämtningen |
+| `.github/workflows/deploy.yml` | Publiceringen till GitHub Pages |
 
 ## Lägga till en restaurang
 
