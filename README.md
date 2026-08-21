@@ -76,3 +76,5 @@ python3 tools/validate.py
 | "Kunde inte läsas idag" på ett kort | Menyn ligger i en PDF, på Facebook, eller sidan är ombyggd | Peka `url` på en annan sida, eller skriv en `note` |
 | Hela sidan visar gammal data | Actions-körningen är röd | Titta i fliken Actions. Oftast har tokenet gått ut — kör `claude setup-token` igen och uppdatera secreten |
 | Ingen ny commit på flera dagar | Menyerna är oförändrade | Normalt. Commit sker bara när något faktiskt ändrats |
+| Körningen dör direkt, 0 kostnad, `is_error` | Nästan alltid tokenet | Kör om `npx @anthropic-ai/claude-code setup-token`, städa klippbordet med `pbpaste \| tr -d '[:space:]' \| pbcopy`, och uppdatera secreten. En radbrytning mitt i tokenet räcker för att anropet avvisas |
+| Behöver se Claudes utskrift i loggen | Den döljs som standard | Lägg tillfälligt till `show_full_output: true` under `with:` i `lunch.yml`. Ta bort den efteråt — loggen är publik |
