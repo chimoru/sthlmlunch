@@ -22,6 +22,8 @@
  *   note     Valfritt. Anteckning som visas för besökaren.
  *   linkText Valfritt, bara för section "lunch". Texten på kortets länk.
  *            Standard: "Öppna menyn".
+ *   placeId  Valfritt. Googles plats-id för restaurangen. Behövs bara om
+ *            kartlänken hamnar på fel ställe — namn plus adress räcker normalt.
  *   hint     Valfritt, bara för section "veckomeny". Instruktion till
  *            AUTOMATIKEN om var menyn finns. Visas inte för besökare.
  *            Ange aldrig en direktlänk till en PDF som byts varje vecka —
