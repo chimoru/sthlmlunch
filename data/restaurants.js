@@ -60,5 +60,25 @@ window.RESTAURANTS = [
     walk: "",
     note: "",
     linkText: "Beställ och se menyn"
+  },
+  {
+    id: "the-good-gringo",
+    name: "The Good Gringo",
+    url: "https://www.thegoodgringo.se/our-menu",
+    section: "lunch",
+    area: "Kungstensgatan 14",
+    walk: "",
+    note: "Ingen onlinebeställning. Sidan visar menyer för flera adresser — leta efter Vasastan.",
+    linkText: "Se menyn"
+  },
+  {
+    id: "babel-deli",
+    name: "Babel Deli",
+    url: "https://qopla.com/restaurant/babel-deli---vasastan/qEQQeBrjz8/order",
+    section: "lunch",
+    area: "Kungstensgatan 33",
+    walk: "",
+    note: "",
+    linkText: "Beställ och se menyn"
   }
 ]
