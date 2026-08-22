@@ -68,7 +68,7 @@ window.RESTAURANTS = [
     section: "lunch",
     area: "Kungstensgatan 14",
     walk: "",
-    note: "Ingen onlinebeställning. Sidan visar menyer för flera adresser — leta efter Vasastan.",
+    note: "Ingen onlinebeställning.",
     linkText: "Se menyn"
   },
   {
