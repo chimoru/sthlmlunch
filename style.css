@@ -143,8 +143,18 @@ section + section { margin-top: 34px; }
 }
 
 .empty { color: var(--muted); text-align: center; padding: 40px 0; }
-.foot { margin: 44px 0 32px; color: var(--muted); font-size: 13px; }
-.foot p { margin: 0; max-width: 60ch; }
+/* auto i sidled, inte 0 — annars skriver den över .wrap:s centrering och hela
+   foten hamnar i vänsterkanten, förskjuten mot resten av sidan. */
+.foot { margin: 44px auto 32px; color: var(--muted); font-size: 13px; }
+.foot p {
+  max-width: 62ch;
+  margin: 0 auto;                 /* centrerar rutan i sidan */
+  text-align: center;             /* centrerar texten i rutan */
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  text-wrap: balance;             /* jämnar ut radlängderna, ignoreras av äldre webbläsare */
+}
 
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em;
