@@ -7,19 +7,21 @@
    color-scheme får rullister och inbyggda kontroller att följa temat. */
 :root {
   color-scheme: light;
-  --bg: #f6f5f2;
-  --surface: #ffffff;
-  --border: #e2ded6;
-  --text: #1c1a17;
-  --muted: #6f6a62;
-  --accent: #9a4a1e;
-  --accent-soft: #f4e6dd;
-  --today: #1f6b3a;
-  --today-soft: #e4f1e8;
-  --warn: #8a6a12;
-  --warn-soft: #f8efd6;
-  --radius: 14px;
-  --shadow: 0 1px 2px rgba(28, 26, 23, .05), 0 8px 24px rgba(28, 26, 23, .05);
+  --bg: #f2eee4;
+  --surface: #fbf9f4;
+  --border: #ddd5c4;
+  --text: #1b1712;
+  --muted: #6d6355;
+  --accent: #8c2f18;
+  --accent-soft: #f0e3d8;
+  --today: #2f5d3a;
+  --today-soft: #e3ecdf;
+  --warn: #7d5a12;
+  --warn-soft: #f2e7cd;
+  --radius: 3px;
+  --shadow: none;
+  --antikva: ui-serif, "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -28,7 +30,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font: 16.5px/1.5 var(--antikva);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -37,19 +39,19 @@ body {
 /* ---------- Topp ---------- */
 .topbar {
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 18px 0;
-  margin-bottom: 28px;
+  border-bottom: 3px double var(--border);
+  padding: 24px 0 20px;
+  margin-bottom: 32px;
 }
 .topbar .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.logo { margin: 0; font-size: 22px; letter-spacing: -.02em; }
-.today { margin: 0; color: var(--muted); font-size: 15px; }
+.logo { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: .01em; font-variant: small-caps; }
+.today { margin: 0; color: var(--muted); font-size: 14.5px; font-style: italic; }
 .back { color: var(--accent); text-decoration: none; font-size: 15px; font-weight: 500; }
 
 .topbar-hoger { display: flex; align-items: center; gap: 14px; }
 .tema-knapp {
-  font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap;
-  padding: 5px 12px; border-radius: 999px;
+  font: inherit; font-size: 13.5px; font-style: italic; cursor: pointer; white-space: nowrap;
+  padding: 4px 13px; border-radius: 2px;
   border: 1px solid var(--border); background: var(--surface); color: var(--muted);
 }
 .tema-knapp:hover { border-color: var(--accent); color: var(--accent); }
@@ -59,15 +61,18 @@ body {
 /* ---------- Sektionshuvud ---------- */
 .sektionshuvud {
   display: flex; align-items: baseline; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 16px;
+  border-bottom: 1px solid var(--border); padding-bottom: 6px;
 }
+/* Kapitäler och vid spärrning i stället för versaler — mjukare i en antikva,
+   och den detalj som mest får sidan att likna en tryckt meny. */
 .sektionshuvud h2 {
-  margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--muted);
+  margin: 0; font-size: 14px; font-weight: 400; letter-spacing: .2em;
+  font-variant: small-caps; text-transform: none; color: var(--accent);
 }
 section + section { margin-top: 34px; }
 
-.stamp { margin: 0; font-size: 13px; color: var(--muted); }
+.stamp { margin: 0; font-size: 13px; font-style: italic; color: var(--muted); }
 
 /* ---------- Korten ---------- */
 .grid {
@@ -80,27 +85,29 @@ section + section { margin-top: 34px; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 18px 20px 16px;
+  padding: 20px 22px 18px;
   text-decoration: none; color: inherit;
-  transition: transform .12s ease, border-color .12s ease;
+  transition: border-color .14s ease, background-color .14s ease;
 }
-.card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.card:hover { border-color: var(--accent); background: var(--surface); }
 .card.is-stale { background: color-mix(in srgb, var(--surface) 92%, var(--bg)); }
 
-.card h2 { margin: 0 0 2px; font-size: 18px; letter-spacing: -.01em; }
-.meta { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+.card h2 { margin: 0 0 2px; font-size: 21px; font-weight: 400; letter-spacing: 0; }
+.meta { margin: 0 0 14px; font-size: 13.5px; font-style: italic; color: var(--muted); }
 
 .dishes { list-style: none; margin: 0 0 14px; padding: 0; flex: 1; }
-.dishes li { padding: 8px 0; border-top: 1px solid var(--border); }
+.dishes li { padding: 8px 0; border-top: 1px dotted var(--border); }
 .dishes li:first-child { border-top: none; padding-top: 0; }
-.dish-name { font-weight: 500; }
-.dish-price { float: right; color: var(--muted); font-variant-numeric: tabular-nums; padding-left: 10px; }
+.dish-name { font-weight: 600; }
+.dish-price { float: right; color: var(--muted); font-variant-numeric: tabular-nums;
+  padding-left: 10px; font-size: 15px; }
 .dish-desc { display: block; font-size: 14px; color: var(--muted); }
 
 .tag {
-  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .04em;
-  text-transform: uppercase; padding: 1px 7px; border-radius: 4px;
-  background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 1px;
+  display: inline-block; font-family: var(--sans); font-size: 9.5px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; padding: 1px 6px; border-radius: 2px;
+  background: transparent; border: 1px solid var(--accent); color: var(--accent);
+  margin-left: 7px; vertical-align: 1px;
 }
 
 .price-info { margin: 0; font-size: 13px; color: var(--muted); }
@@ -117,7 +124,7 @@ section + section { margin-top: 34px; }
 /* Anteckning på ett Lunch-kort: en rad, ingen ruta. Håller korten låga. */
 .note-rad { margin: -8px 0 0; font-size: 13px; color: var(--muted); }
 .card-extern:hover { border-style: solid; }
-.extern-lank { margin: 0; font-size: 14px; font-weight: 500; color: var(--accent); }
+.extern-lank { margin: 0; font-size: 15px; font-weight: 400; color: var(--accent); }
 
 /* Anteckningar är upplysningar, aldrig fel — därför neutral ton, samma som
    .info. Gult är reserverat för att något faktiskt är på tok. */
@@ -130,7 +137,7 @@ section + section { margin-top: 34px; }
 
 /* ---------- Veckomenyn ---------- */
 .detail-head { margin-bottom: 24px; }
-.detail-head h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -.02em; }
+.detail-head h1 { margin: 0 0 4px; font-size: 32px; font-weight: 400; letter-spacing: 0; }
 .detail-head .meta { margin-bottom: 10px; }
 .source { color: var(--accent); font-size: 15px; }
 
@@ -139,12 +146,14 @@ section + section { margin-top: 34px; }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow);
 }
-.day.is-today { border-color: var(--today); box-shadow: 0 0 0 1px var(--today), var(--shadow); }
-.day h3 { margin: 0 0 2px; font-size: 16px; }
-.day-date { margin: 0 0 12px; font-size: 13px; color: var(--muted); }
+.day.is-today { border-color: var(--today); box-shadow: 0 0 0 1px var(--today); }
+.day h3 { margin: 0 0 2px; font-size: 17px; font-weight: 400; font-variant: small-caps;
+  letter-spacing: .06em; }
+.day-date { margin: 0 0 12px; font-size: 13px; font-style: italic; color: var(--muted); }
 .badge-today {
-  font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-  background: var(--today-soft); color: var(--today); padding: 2px 8px; border-radius: 999px; margin-left: 8px;
+  font-family: var(--sans); font-size: 9.5px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; background: var(--today-soft); color: var(--today);
+  padding: 2px 7px; border-radius: 2px; margin-left: 8px;
 }
 .no-dish { color: var(--muted); font-size: 14px; font-style: italic; margin: 0; }
 
@@ -153,7 +162,8 @@ section + section { margin-top: 34px; }
   margin-top: 18px; background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow);
 }
-.always h2 { margin: 0 0 10px; font-size: 16px; }
+.always h2 { margin: 0 0 10px; font-size: 19px; font-weight: 400;
+  font-variant: small-caps; letter-spacing: .1em; }
 
 /* ---------- Status ---------- */
 .status {
@@ -179,12 +189,13 @@ section + section { margin-top: 34px; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 16px 20px;
+  font-style: italic;
   text-wrap: balance;             /* jämnar ut radlängderna, ignoreras av äldre webbläsare */
 }
 
 code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em;
-  background: var(--accent-soft); color: var(--accent); padding: 1px 5px; border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em;
+  background: var(--accent-soft); color: var(--accent); padding: 1px 5px; border-radius: 2px;
 }
 
 /* ---------- Mörkt läge ---------- */
@@ -193,18 +204,18 @@ code {
    någon färgkod, allt går via variablerna. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #16150f;
-  --surface: #201f19;
-  --border: #35332a;
-  --text: #f0ede5;
-  --muted: #a49e91;
-  --accent: #e8945c;
-  --accent-soft: #3a2a1d;
-  --today: #7ec898;
-  --today-soft: #1e3428;
-  --warn: #e3bf6a;
-  --warn-soft: #382e17;
-  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+  --bg: #141210;
+  --surface: #1c1a16;
+  --border: #332e26;
+  --text: #f2ece0;
+  --muted: #a79c8a;
+  --accent: #dc9a63;
+  --accent-soft: #332417;
+  --today: #8fc39a;
+  --today-soft: #1e2c20;
+  --warn: #d9b877;
+  --warn-soft: #332a17;
+  --shadow: none;
 }
 
 /* ---------- Mobil ---------- */

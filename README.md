@@ -148,6 +148,23 @@ omdefinierade under `:root[data-theme="dark"]`. Ingen annan regel i `style.css`
 nämner någon färgkod, vilket är varför nya inslag automatiskt fungerar i båda
 lägena.
 
+## Designen
+
+Riktningen heter *Trattoria* och ska likna en tryckt meny snarare än en app.
+
+| Grepp | Var |
+|---|---|
+| Antikva i all text | `--antikva` på `:root`, satt på `body` |
+| Kapitäler i namn och sektionsrubriker | `font-variant: small-caps` |
+| Kursiva adresser, tider och stämplar | `.meta`, `.today`, `.stamp`, `.day-date` |
+| Nästan skarpa hörn, inga skuggor | `--radius: 3px`, `--shadow: none` |
+| Prickade linjer mellan rätterna | `.dishes li` |
+| Dubbel linje under sidhuvudet | `.topbar` |
+| Kostmärkning i sans-serif | `.tag`, `.badge-today` — enda undantaget från antikvan, så att de små versalerna håller sig läsbara |
+
+Papperstonen och det djupa tegelröda hör ihop; byter du accentfärgen bör du byta
+`--accent-soft` samtidigt, annars spricker etiketternas kontrast.
+
 ## Titta på sidan lokalt
 
 ```bash
