@@ -68,7 +68,7 @@ window.RESTAURANTS = [
     section: "lunch",
     area: "Kungstensgatan 14",
     walk: "",
-    note: "Ingen onlinebeställning.",
+    note: "",
     linkText: "Se menyn"
   },
   {
