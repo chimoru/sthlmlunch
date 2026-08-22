@@ -45,6 +45,8 @@ i repo-secreten `CLAUDE_CODE_OAUTH_TOKEN`, så det kostar inget extra.
 | `data/menus.js` | Menyerna. **Skrivs automatiskt — redigera inte** |
 | `tools/validate.py` | Kontrollerar `menus.js` innan publicering |
 | `tools/test-veckonotis.js` | Tester för veckonotisen |
+| `tools/kontrollera-status.py` | Larmar när en meny inte kunde läsas |
+| `manifest.json`, `icon-*.png` | Gör att sidan kan läggas på mobilens hemskärm |
 | `.github/workflows/lunch.yml` | Morgonhämtningen |
 | `.github/workflows/deploy.yml` | Publiceringen till GitHub Pages |
 
@@ -173,10 +175,52 @@ python3 -m http.server 8765
 
 Öppna sedan http://localhost:8765 i webbläsaren.
 
+## Lägg sidan på mobilens hemskärm
+
+Öppna `chimoru.dev/sthlmlunch` i Safari på telefonen, tryck på dela-ikonen och
+välj **Lägg till på hemskärmen**. Sidan startar då utan adressfält, och
+statusfältet får sidans egen färg.
+
+`theme-color` sätts av `app.js` utifrån `--surface`, inte som en egen hexkod, så
+färgen kan aldrig glida ifrån temat när paletten ändras.
+
+## Adressen är en kartlänk
+
+Ett klick på adressen öppnar Google Maps; resten av kortet leder till menyn.
+
+Det kräver att kortet är en `<div>` och inte en `<a>`, eftersom en länk inuti en
+länk är ogiltig HTML som webbläsaren bryter sönder. I stället spänner rubrikens
+länk ut ett osynligt `::after` över hela kortet, och adressen läggs ovanpå med
+`z-index`. Ändrar du kortets uppmärkning: behåll `position: relative` på `.card`,
+annars spänns klickytan ut över hela sidan.
+
+## När hämtningen tystnar
+
+`tools/kontrollera-status.py` körs som ett eget jobb **efter** publiceringen och
+gör körningen röd om någon restaurang har status `stale` eller `error`. GitHub
+mejlar då automatiskt.
+
+Ordningen är avsiktlig: låg kontrollen före publiceringen skulle en enda trasig
+restaurangsida hindra alla andra från att uppdateras.
+
+## Klockan och sommartid
+
+GitHubs cron känner bara UTC, så 08:00 svensk tid är 06:00 UTC på sommaren och
+07:00 på vintern. Båda är schemalagda, och jobbet `grind` släpper bara igenom den
+körning som råkar vara klockan 8 i Stockholm. Den andra avslutas på någon sekund.
+
 ## Kontrollera datan för hand
 
 ```bash
 python3 tools/validate.py
+```
+
+```bash
+python3 tools/kontrollera-status.py
+```
+
+```bash
+node tools/test-veckonotis.js
 ```
 
 ## När något ser fel ut

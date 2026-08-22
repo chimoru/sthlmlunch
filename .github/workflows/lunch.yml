@@ -1,7 +1,11 @@
 # Hämtar veckomenyerna och publicerar sidan.
 #
-# Körs vardagar 06:00 UTC = 08:00 svensk sommartid, 07:00 vintertid.
-# GitHubs cron går alltid i UTC och tar ingen hänsyn till sommartid.
+# Körs vardagar 08:00 svensk tid, året runt.
+#
+# GitHubs cron känner bara UTC, så 08:00 svensk tid är två olika UTC-tider: 06:00
+# på sommaren och 07:00 på vintern. Båda är därför schemalagda, och jobbet "grind"
+# släpper bara igenom den som råkar vara klockan 8 i Stockholm just då. Den andra
+# körningen avslutas efter någon sekund utan att göra något.
 #
 # Går också att starta för hand: fliken Actions → "Hämta lunchmenyer" → Run workflow.
 
@@ -9,7 +13,8 @@ name: Hämta lunchmenyer
 
 on:
   schedule:
-    - cron: "0 6 * * 1-5"
+    - cron: "0 6 * * 1-5"   # 08:00 svensk sommartid
+    - cron: "0 7 * * 1-5"   # 08:00 svensk vintertid
   workflow_dispatch:
 
 permissions:
@@ -22,7 +27,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Avgör om den här körningen är den som ska göra jobbet. Utan grinden hade
+  # menyerna hämtats två gånger om dagen, varav en gång vid fel klockslag.
+  grind:
+    runs-on: ubuntu-latest
+    outputs:
+      kor: ${{ steps.klocka.outputs.kor }}
+    steps:
+      - id: klocka
+        run: |
+          TIMME=$(TZ=Europe/Stockholm date +%H)
+          echo "Svensk tid: ${TIMME}:00 (händelse: ${{ github.event_name }})"
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Startad för hand — kör."
+            echo "kor=ja" >> "$GITHUB_OUTPUT"
+          elif [ "$TIMME" = "08" ]; then
+            echo "Rätt schemalagd körning — kör."
+            echo "kor=ja" >> "$GITHUB_OUTPUT"
+          else
+            echo "Fel klockslag i Stockholm — den andra cron-tiden tar den här dagen."
+            echo "kor=nej" >> "$GITHUB_OUTPUT"
+          fi
+
   hamta:
+    needs: grind
+    if: needs.grind.outputs.kor == 'ja'
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -178,3 +207,17 @@ jobs:
       contents: read
       pages: write
       id-token: write
+
+  # Larmar om någon restaurang inte kunde läsas. Ligger EFTER publiceringen med
+  # flit: en trasig restaurangsida ska inte hindra de fungerande från att
+  # uppdateras. Blir jobbet rött mejlar GitHub dig automatiskt.
+  larm:
+    needs: publicera
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+      - run: python3 tools/kontrollera-status.py

@@ -82,6 +82,43 @@
     return r.section === "lunch" ? "lunch" : "veckomeny";
   }
 
+  // Kortet är en <div>, inte en <a>. Rubrikens länk täcker hela kortet med ett
+  // ::after som spänns ut över ytan, så kortet är fortfarande klickbart i sin
+  // helhet — men adressen kan vara en egen länk. En <a> inuti en <a> är ogiltig
+  // HTML, och webbläsaren bryter sönder det yttre kortet om man försöker.
+  function kortRubrik(text, href, nyFlik) {
+    var h = el("h2");
+    var a = el("a", "kort-lank", text);
+    a.href = href;
+    if (nyFlik) { a.target = "_blank"; a.rel = "noopener"; }
+    h.appendChild(a);
+    return h;
+  }
+
+  // Adressen blir en kartlänk. Den ligger över kortets klickyta via z-index,
+  // så ett klick på adressen öppnar kartan i stället för kortets egen länk.
+  function adressRad(r) {
+    var p = el("p", "meta");
+
+    if (r.area) {
+      var a = el("a", "karta", r.area);
+      a.href = "https://www.google.com/maps/search/?api=1&query=" +
+               encodeURIComponent(r.area + ", Stockholm");
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.title = "Visa " + r.area + " på karta";
+      p.appendChild(a);
+    }
+
+    if (r.walk) {
+      p.appendChild(document.createTextNode((r.area ? " · " : "") + r.walk));
+    }
+
+    // Hårt blanksteg när båda saknas, så raden behåller sin höjd.
+    if (!r.area && !r.walk) p.textContent = "\u00a0";
+    return p;
+  }
+
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -197,14 +234,10 @@
     // praktiken en genväg — det leder direkt till restaurangens egen meny- eller
     // beställningssida, i ny flik eftersom besökaren lämnar vår sida.
     function linkCard(r) {
-      var a = el("a", "card card-extern");
-      a.href = r.url;
-      a.target = "_blank";
-      a.rel = "noopener";
+      var a = el("div", "card card-extern");
 
-      a.appendChild(el("h2", null, r.name));
-      var bits = [r.area, r.walk].filter(Boolean);
-      a.appendChild(el("p", "meta", bits.join(" · ") || " "));
+      a.appendChild(kortRubrik(r.name, r.url, true));
+      a.appendChild(adressRad(r));
 
       // Kompakt rad i stället för ruta: en ruta här gör kortet mycket högre än
       // de utan anteckning, och då blir sektionen ojämn.
@@ -218,12 +251,10 @@
 
     function card(r) {
       var menu = MENUS[r.id] || {};
-      var a = el("a", "card" + (menu.status === "stale" ? " is-stale" : ""));
-      a.href = "restaurang.html?id=" + encodeURIComponent(r.id);
+      var a = el("div", "card" + (menu.status === "stale" ? " is-stale" : ""));
 
-      a.appendChild(el("h2", null, r.name));
-      var bits = [r.area, r.walk].filter(Boolean);
-      a.appendChild(el("p", "meta", bits.join(" · ") || " "));
+      a.appendChild(kortRubrik(r.name, "restaurang.html?id=" + encodeURIComponent(r.id)));
+      a.appendChild(adressRad(r));
 
       if (menu.status === "stale") {
         a.appendChild(el("p", "status", "Kunde inte läsas idag — visar senast hämtade meny"));
@@ -273,8 +304,7 @@
 
     var head = el("div", "detail-head");
     head.appendChild(el("h1", null, r.name));
-    var bits = [r.area, r.walk].filter(Boolean);
-    if (bits.length) head.appendChild(el("p", "meta", bits.join(" · ")));
+    if (r.area || r.walk) head.appendChild(adressRad(r));
     if (menu.priceInfo) head.appendChild(el("p", "price-info", menu.priceInfo));
 
     var link = el("a", "source", "Restaurangens egen sida →");
@@ -366,6 +396,16 @@
   function anvandTema(val) {
     var morkt = val === "dark" || (val === "system" && systemArMorkt());
     document.documentElement.dataset.theme = morkt ? "dark" : "light";
+
+    // Färgen på webbläsarens ram och telefonens statusfält. Läses ur paletten
+    // i stället för att skrivas som en egen hexkod, så den aldrig kan glida
+    // ifrån temat.
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      var yta = getComputedStyle(document.documentElement)
+                  .getPropertyValue("--surface").trim();
+      if (yta) meta.setAttribute("content", yta);
+    }
   }
 
   function initTema() {
