@@ -255,6 +255,11 @@
       return;
     }
 
+    // Töms först, så att en omritning med färsk data ersätter korten i stället
+    // för att lägga nya under de gamla.
+    if (grid) grid.textContent = "";
+    if (gridLunch) gridLunch.textContent = "";
+
     var veckomeny = RESTAURANTS.filter(function (r) { return sectionOf(r) === "veckomeny"; });
     var lunch = RESTAURANTS.filter(function (r) { return sectionOf(r) === "lunch"; });
 
@@ -487,10 +492,71 @@
     });
   }
 
+  /* ---------- Färsk data utan att sidan laddas om ---------- */
+
+  // Datafilerna laddas som vanliga <script> för att första ritningen ska ske
+  // direkt, men de kommer då ur webbläsarens cache och kan vara upp till tio
+  // minuter gamla. På en telefon där sidan ligger på hemskärmen finns inget
+  // adressfält att ladda om från, så sidan hämtar dem själv på nytt i stället.
+  var DATAFILER = ["data/restaurants.js", "data/menus.js"];
+  var hamtarNu = false;
+
+  function rita() {
+    if (document.getElementById("grid")) renderHome();
+    else if (document.getElementById("detail")) renderDetail();
+  }
+
+  // Filerna sätter window.RESTAURANTS och window.MENUS. De körs mot ett tomt
+  // skal, så att den nya datan kan jämföras med den gamla innan något byts ut.
+  function tolka(texter) {
+    var skal = {};
+    texter.forEach(function (text) { new Function("window", text)(skal); });
+    return skal;
+  }
+
+  function hamtaFarsk() {
+    if (hamtarNu) return;
+    hamtarNu = true;
+
+    Promise.all(DATAFILER.map(function (fil) {
+      // no-store: cachen ska inte kunna ligga i vägen. Frågetecknet är ett
+      // bälte till hängslena för webbläsare som ändå cachar.
+      return fetch(fil + "?t=" + Date.now(), { cache: "no-store" })
+        .then(function (svar) {
+          if (!svar.ok) throw new Error(fil + " svarade " + svar.status);
+          return svar.text();
+        });
+    })).then(function (texter) {
+      var ny = tolka(texter);
+      var forandrat =
+        JSON.stringify(ny.MENUS) !== JSON.stringify(window.MENUS) ||
+        JSON.stringify(ny.RESTAURANTS) !== JSON.stringify(window.RESTAURANTS);
+
+      if (forandrat) {
+        window.RESTAURANTS = ny.RESTAURANTS || [];
+        window.MENUS = ny.MENUS || {};
+        RESTAURANTS = window.RESTAURANTS;
+        MENUS = (window.MENUS && window.MENUS.restaurants) || {};
+        rita();
+      }
+    }).catch(function () {
+      // Utan nät eller vid ett serverfel behåller vi det som redan visas.
+      // Gammal meny är bättre än en tom sida.
+    }).then(function () {
+      hamtarNu = false;
+    });
+  }
+
   /* ---------- Start ---------- */
 
   initTema();
+  rita();
 
-  if (document.getElementById("grid")) renderHome();
-  else if (document.getElementById("detail")) renderDetail();
+  // Direkt vid öppning, och varje gång sidan tas fram igen. Det senare är det
+  // som gör att appen på hemskärmen visar dagens meny utan att laddas om.
+  hamtaFarsk();
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") hamtaFarsk();
+  });
+  window.addEventListener("focus", hamtaFarsk);
 })();

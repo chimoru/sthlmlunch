@@ -218,6 +218,25 @@ används hela sidtiteln, som är för lång för att synas.
 Hamnar fel ikon på hemskärmen: iOS sparar ikonen tillsammans med genvägen och
 uppdaterar den aldrig. Ta bort genvägen, ladda om sidan i Safari, lägg till igen.
 
+## Sidan hämtar färsk data av sig själv
+
+Datafilerna laddas som vanliga `<script>` för att första ritningen ska ske direkt.
+De kommer då ur webbläsarens cache och kan vara upp till tio minuter gamla.
+
+Därför hämtar `app.js` dem **på nytt** med `cache: "no-store"` — vid öppning, och
+varje gång sidan tas fram igen (`visibilitychange` och `focus`). Skiljer sig datan
+ritas korten om; annars händer ingenting.
+
+Det är avgörande för sidan på mobilens hemskärm: där finns inget adressfält att
+ladda om från, och utan detta hade appen kunnat visa gårdagens meny i tio minuter
+eller mer.
+
+Går hämtningen inte igenom — inget nät, serverfel — behålls det som redan visas.
+Gammal meny är bättre än en tom sida.
+
+`renderHome()` tömmer sina behållare först, så en omritning ersätter korten i
+stället för att lägga nya under de gamla. Ändrar du renderingen: behåll det.
+
 ## Adressen är en kartlänk
 
 Ett klick på adressen öppnar Google Maps; resten av kortet leder till menyn.
