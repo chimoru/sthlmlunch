@@ -34,6 +34,7 @@ i repo-secreten `CLAUDE_CODE_OAUTH_TOKEN`, så det kostar inget extra.
 | `data/restaurants.js` | **Din lista.** Redigeras för hand. `hint` styr automatiken |
 | `data/menus.js` | Menyerna. **Skrivs automatiskt — redigera inte** |
 | `tools/validate.py` | Kontrollerar `menus.js` innan publicering |
+| `tools/test-veckonotis.js` | Tester för veckonotisen |
 | `.github/workflows/lunch.yml` | Morgonhämtningen |
 | `.github/workflows/deploy.yml` | Publiceringen till GitHub Pages |
 
@@ -75,14 +76,26 @@ textläsning på ord utan att märka det. Därför installerar workflowet
 
 Anger menyn ett veckonummer i `week` jämför sidan det med den pågående veckan:
 
-| Läge | Vad besökaren ser |
-|---|---|
-| Samma vecka | Dagens rätt markeras som vanligt |
-| Menyns vecka är äldre | "Menyn har inte uppdaterats" — ingen dag markeras som idag |
-| Menyns vecka är senare | "Denna veckas meny finns inte uppe" — ingen dag markeras som idag |
+| Läge | Vad besökaren ser | Ton |
+|---|---|---|
+| Samma vecka | Dagens rätt markeras som vanligt | — |
+| Nästa veckas meny, **på en helg** | "Nästa veckas meny (vecka 35), som gäller från måndag" | Neutral |
+| Nästa veckas meny, **på en vardag** | "Denna veckas meny finns inte uppe" | Varning |
+| Äldre vecka | "Menyn har inte uppdaterats" | Varning |
+| Annan vecka | "Menyn gäller vecka X, inte den pågående vecka Y" | Varning |
 
-Poängen: hellre säga att vi inte vet vad som serveras idag, än att peka på en rätt
-från fel vecka.
+I alla fall utom det första markeras **ingen** dag som idag. Hellre säga att vi
+inte vet vad som serveras, än att peka på en rätt från fel vecka.
+
+Att restaurangen lagt upp nästa veckas meny är ett problem på en tisdag och
+fullkomligt normalt på en lördag — samma data, olika innebörd. Därför beror tonen
+på veckodagen. Utan den skillnaden hade sidan sett trasig ut varje helg.
+
+Logiken har egna tester, inklusive årsskiftet där vecka 53 följs av vecka 1:
+
+```bash
+node tools/test-veckonotis.js
+```
 
 ## Titta på sidan lokalt
 

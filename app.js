@@ -41,6 +41,20 @@
     return 1 + Math.round((d - firstThursday) / (7 * 24 * 3600 * 1000));
   }
 
+  // Flyttar ett datum n dagar framåt. Används för att räkna ut nästa veckas
+  // nummer genom kalendern istället för att addera 1 — det senare går fel vid
+  // årsskiftet, där vecka 52 följs av vecka 1.
+  function shiftISO(iso, days) {
+    var d = new Date(iso + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() + days);
+    return d.toISOString().slice(0, 10);
+  }
+
+  function isWeekend() {
+    var day = todayWeekday();
+    return day === "Lördag" || day === "Söndag";
+  }
+
   // "Fredag 21 augusti" — bara veckodagen får stor bokstav, som svenskan vill ha det.
   function longToday() {
     var s = new Intl.DateTimeFormat("sv-SE", {
@@ -88,16 +102,37 @@
   //   gammal  — restaurangen har inte uppdaterat sedan förra veckan
   //   framtid — de har redan lagt upp nästa vecka, denna vecka saknas
   // Returnerar null när menyn gäller nu, eller när inget veckonummer finns.
+  // Returnerar { level, text } eller null. level styr tonen:
+  //   "warn" gult, något är fel och besökaren bör veta det
+  //   "info" neutralt, allt är som det ska men värt att nämna
+  //
+  // Att restaurangen lagt upp nästa veckas meny är ett problem på en tisdag och
+  // fullkomligt normalt på en lördag — samma data, olika innebörd. Därför
+  // avgörs tonen av vilken dag det är, inte bara av veckonumret.
   function weekNotice(menu) {
     if (!menu || typeof menu.week !== "number") return null;
+
     var now = isoWeek(todayISO());
     if (menu.week === now) return null;
-    if (menu.week < now) {
-      return "Restaurangen anger vecka " + menu.week + " — nu är det vecka " + now +
-             ". Menyn har inte uppdaterats.";
+
+    var next = isoWeek(shiftISO(todayISO(), 7));
+
+    if (menu.week === next) {
+      if (isWeekend()) {
+        return { level: "info", text: "Nästa veckas meny (vecka " + menu.week +
+                 "), som gäller från måndag." };
+      }
+      return { level: "warn", text: "Menyn gäller nästa vecka (vecka " + menu.week +
+               "). Denna veckas meny finns inte uppe." };
     }
-    return "Menyn gäller vecka " + menu.week + ", inte den pågående vecka " + now +
-           ". Denna veckas meny finns inte uppe.";
+
+    if (menu.week < now) {
+      return { level: "warn", text: "Restaurangen anger vecka " + menu.week +
+               " — nu är det vecka " + now + ". Menyn har inte uppdaterats." };
+    }
+
+    return { level: "warn", text: "Menyn gäller vecka " + menu.week +
+             ", inte den pågående vecka " + now + "." };
   }
 
   // Gäller menyn en annan vecka vet vi inte vad som serveras idag, och då ska
@@ -167,7 +202,7 @@
       }
 
       var notice = weekNotice(menu);
-      if (notice) a.appendChild(el("p", "status", notice));
+      if (notice) a.appendChild(el("p", notice.level, notice.text));
 
       var day = menuAppliesNow(menu) ? findToday(menu.days) : null;
       var dishes = (day && day.dishes ? day.dishes : []).filter(function (d) {
@@ -253,7 +288,7 @@
     if (r.note) root.appendChild(el("p", "note", r.note));
 
     var notice = weekNotice(menu);
-    if (notice) root.appendChild(el("p", "status", notice));
+    if (notice) root.appendChild(el("p", notice.level, notice.text));
 
     if (menu.status === "stale") {
       root.appendChild(el("p", "status", "Kunde inte läsas vid senaste försöket. " + stampText(menu.fetched) + "."));

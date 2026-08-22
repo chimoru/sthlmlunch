@@ -131,6 +131,14 @@ body {
   font-size: 13px; padding: 8px 11px; border-radius: 8px; margin: 0 0 14px;
   background: var(--warn-soft); color: var(--warn);
 }
+/* Neutral notis: inget är fel, men värt att nämna. Skiljs medvetet från
+   .status så att en helt normal helg inte ser ut som ett problem. */
+.info {
+  font-size: 13px; padding: 8px 11px; border-radius: 8px; margin: 0 0 14px;
+  background: color-mix(in srgb, var(--muted) 12%, transparent);
+  color: var(--muted);
+}
+
 .empty { color: var(--muted); text-align: center; padding: 40px 0; }
 .foot { margin: 44px 0 32px; color: var(--muted); font-size: 13px; }
 .foot p { margin: 0; max-width: 60ch; }
