@@ -63,6 +63,11 @@
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
+  // "Vecka 34 · Fredag 21 augusti"
+  function headerLine() {
+    return "Vecka " + isoWeek(todayISO()) + " · " + longToday();
+  }
+
   // "Uppdaterad idag 08:04" / "Uppdaterad 20 aug 06:03"
   function stampText(iso) {
     if (!iso) return "Ingen hämtning gjord än";
@@ -170,7 +175,7 @@
     // och gammal cachad JS, eller omvänt — då saknas något element. Det får
     // aldrig kunna krascha innan korten ritas, för då blir sidan helt tom.
     var todayEl = document.getElementById("today");
-    if (todayEl) todayEl.textContent = longToday();
+    if (todayEl) todayEl.textContent = headerLine();
 
     var stampEl = document.getElementById("stamp");
     if (stampEl) stampEl.textContent = stampText(window.MENUS && window.MENUS.fetched);
