@@ -99,6 +99,26 @@ window.RESTAURANTS = [
     linkText: "Beställ och se menyn"
   },
   {
+    id: "taameya",
+    name: "Ta'ameya",
+    url: "https://taameya.qopla.com/restaurant/taameya---t%C3%A9gnergatan/qJNKB22dq3/order",
+    section: "lunch",
+    area: "Tegnérgatan 18",
+    walk: "",
+    note: "",
+    linkText: "Beställ och se menyn"
+  },
+  {
+    id: "holy-kebab",
+    name: "Holy Kebab",
+    url: "https://qopla.com/restaurant/holy-kebab---vasastan/qQAZwgRZYW/order",
+    section: "lunch",
+    area: "Odengatan 45",
+    walk: "",
+    note: "",
+    linkText: "Beställ och se menyn"
+  },
+  {
     id: "babel-deli",
     name: "Babel Deli",
     url: "https://qopla.com/restaurant/babel-deli---vasastan/qEQQeBrjz8/order",
