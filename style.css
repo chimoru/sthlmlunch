@@ -238,6 +238,29 @@ code {
   --shadow: none;
 }
 
+/* ---------- Appläget ---------- */
+/* Gäller bara när sidan startats från hemskärmen, inte i en vanlig webbläsare.
+   I webbläsaren SKA en länk bete sig som en länk — långtryck ger förhandsvisning
+   och "kopiera länk", vilket folk förväntar sig där. I appen är det tvärtom:
+   samma gest avslöjar att det är en webbsida och bryter illusionen. */
+@media (display-mode: standalone) {
+
+  /* Långtryck ska inte ge iOS förhandsvisning av länken. */
+  a {
+    -webkit-touch-callout: none;
+  }
+
+  /* Bort med webbläsarens grå blink vid tryck — men ersatt med egen respons
+     nedan. Att ta bort återkopplingen helt gör appen känslolös. */
+  a, button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .card:active { border-color: var(--accent); background: var(--surface); }
+  .karta:active, .source:active, .back:active { opacity: .6; }
+  .tema-knapp:active { border-color: var(--accent); color: var(--accent); }
+}
+
 /* ---------- Mobil ---------- */
 @media (max-width: 560px) {
   .wrap { padding: 0 16px; }

@@ -125,6 +125,25 @@ Logiken har egna tester, inklusive årsskiftet där vecka 53 följs av vecka 1:
 node tools/test-veckonotis.js
 ```
 
+## Appläget kontra webbläsaren
+
+`@media (display-mode: standalone)` i `style.css` gäller bara när sidan startats
+från hemskärmen. Där stängs iOS förhandsvisning vid långtryck av med
+`-webkit-touch-callout: none`, och webbläsarens grå tryckblink ersätts med egna
+`:active`-tillstånd.
+
+I en vanlig webbläsare gäller inget av det, med flit: där **ska** en länk bete sig
+som en länk. Långtryck ger förhandsvisning och "kopiera länk", vilket folk
+förväntar sig. I appen avslöjar samma gest att det är en webbsida.
+
+Två saker att veta om du ändrar detta:
+
+- `-webkit-touch-callout` finns bara i Safari och WebKit. Chromium slänger
+  deklarationen, så effekten går inte att se i en vanlig testwebbläsare — bara på
+  en iPhone.
+- Ta aldrig bort tryckåterkopplingen utan att sätta något i dess ställe. Utan
+  `:active` känns appen död vid tryck.
+
 ## Rubriknivåer
 
 Nivåerna beskriver innehållets hierarki, inte textstorleken — storleken kommer
