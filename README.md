@@ -160,7 +160,7 @@ Riktningen heter *Trattoria* och ska likna en tryckt meny snarare än en app.
 | Nästan skarpa hörn, inga skuggor | `--radius: 3px`, `--shadow: none` |
 | Prickade linjer mellan rätterna | `.dishes li` |
 | Dubbel linje under sidhuvudet | `.topbar` |
-| Kostmärkning i sans-serif | `.tag`, `.badge-today` — enda undantaget från antikvan, så att de små versalerna håller sig läsbara |
+| Idag-brickan i sans-serif | `.badge-today` — enda undantaget från antikvan, så att de små versalerna håller sig läsbara |
 
 Papperstonen och det djupa tegelröda hör ihop; byter du accentfärgen bör du byta
 `--accent-soft` samtidigt, annars spricker etiketternas kontrast.

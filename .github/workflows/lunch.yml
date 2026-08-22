@@ -96,8 +96,7 @@ jobs:
                         {
                           "name": "<rättens namn>",
                           "desc": "<tillbehör och beskrivning, eller \"\">",
-                          "price": "<pris ordagrant, t.ex. \"135 kr\", eller \"\">",
-                          "tags": ["veg" | "vegan" | "fisk" | "kött" | "glutenfri"]
+                          "price": "<pris ordagrant, t.ex. \"135 kr\", eller \"\">"
                         }
                       ]
                     }
@@ -105,7 +104,7 @@ jobs:
                   "always": [
                     {
                       "name": "<rätt som finns hela veckan, t.ex. \"Köttbullar\">",
-                      "desc": "", "price": "<pris ordagrant>", "tags": []
+                      "desc": "", "price": "<pris ordagrant>"
                     }
                   ]
                 }
@@ -138,11 +137,12 @@ jobs:
               varnar besökaren. Rätta aldrig ett veckonummer du tror är felaktigt.
             - Rätter som gäller hela veckan (à la carte, "alltid på menyn") hör inte
               till någon dag — lägg dem i "always" med sina egna priser.
-            - "tags" sätter du utifrån vad rätten faktiskt är. Är du osäker: tom lista.
+            - Kostmärkning som "veg" eller "vegetarisk" ska INTE läggas i egna fält.
+              Står det på restaurangens sida hör det i "desc", ordagrant. Sidan visar
+              inga kostetiketter — det framgår av rätten själv.
             - Allergenmarkeringar som (L), (Ä), (G), (N) betyder att rätten INNEHÅLLER
-              laktos, ägg, gluten eller nötter. De är inte kostmärkning och får aldrig
-              bli "glutenfri" eller liknande i "tags". Låt dem stå kvar i "desc"
-              ordagrant, så besökaren ser dem.
+              laktos, ägg, gluten eller nötter. Låt dem stå kvar i "desc" ordagrant,
+              så besökaren ser dem. Tolka dem aldrig som att rätten är fri från något.
             - Är restauranglistan tom, ändra ingenting.
             - Finns en post i menus.js vars id inte längre är en "veckomeny"-restaurang
               i restaurants.js: ta bort posten. Den visas inte på sidan ändå.

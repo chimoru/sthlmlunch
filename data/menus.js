@@ -30,10 +30,7 @@ window.MENUS = {
             {
               "name": "Chipotleglaserad kalv tri-tip steak",
               "desc": "med rostad potatis och majsröra",
-              "price": "165 kr",
-              "tags": [
-                "kött"
-              ]
+              "price": "165 kr"
             }
           ]
         },
@@ -43,10 +40,7 @@ window.MENUS = {
             {
               "name": "Kycklingfilé",
               "desc": "med tomatrisotto och gremolata",
-              "price": "165 kr",
-              "tags": [
-                "kött"
-              ]
+              "price": "165 kr"
             }
           ]
         },
@@ -56,18 +50,12 @@ window.MENUS = {
             {
               "name": "Pytt Bellman",
               "desc": "med rödbetor, inlagd gurka och stekt ägg",
-              "price": "165 kr",
-              "tags": [
-                "kött"
-              ]
+              "price": "165 kr"
             },
             {
               "name": "Fish and Chips",
               "desc": "med tartarsås och gröna ärtor",
-              "price": "165 kr",
-              "tags": [
-                "fisk"
-              ]
+              "price": "165 kr"
             }
           ]
         },
@@ -77,10 +65,7 @@ window.MENUS = {
             {
               "name": "Tagliatelle med högrevsragu",
               "desc": "soltorkade tomater och parmesan",
-              "price": "165 kr",
-              "tags": [
-                "kött"
-              ]
+              "price": "165 kr"
             }
           ]
         },
@@ -90,10 +75,7 @@ window.MENUS = {
             {
               "name": "Ostpanerad schnitzel",
               "desc": "med krämig tomatsås och grönsaksris",
-              "price": "165 kr",
-              "tags": [
-                "kött"
-              ]
+              "price": "165 kr"
             }
           ]
         }
@@ -102,44 +84,32 @@ window.MENUS = {
         {
           "name": "Köttbullar",
           "desc": "med potatispuré, gräddsås och rårörda lingon",
-          "price": "195 kr",
-          "tags": [
-            "kött"
-          ]
+          "price": "195 kr"
         },
         {
           "name": "Raggmunk",
           "desc": "med stekt fläsk och rårörda lingon",
-          "price": "210 kr",
-          "tags": []
+          "price": "210 kr"
         },
         {
           "name": "Gravad lax",
           "desc": "med dillstuvad potatis och hovmästarsås",
-          "price": "210 kr",
-          "tags": [
-            "fisk"
-          ]
+          "price": "210 kr"
         },
         {
           "name": "Hamburgare",
           "desc": "med provoloneost, fänkålsslaw och pommes",
-          "price": "230 kr",
-          "tags": [
-            "kött"
-          ]
+          "price": "230 kr"
         },
         {
           "name": "Pizza Bianca",
           "desc": "",
-          "price": "",
-          "tags": []
+          "price": ""
         },
         {
           "name": "Pizza Calabria",
           "desc": "",
-          "price": "",
-          "tags": []
+          "price": ""
         }
       ]
     },
@@ -155,18 +125,12 @@ window.MENUS = {
             {
               "name": "Örtgrillad opanerad fläskschnitzel",
               "desc": "lökgräddsky, kål- & vitlöksrostad potatis (L)",
-              "price": "156:-",
-              "tags": [
-                "kött"
-              ]
+              "price": "156:-"
             },
             {
               "name": "Halstrad kolja",
               "desc": "krispig chorizo, brynt smör, vårlökskokt potatis (L)",
-              "price": "156:-",
-              "tags": [
-                "fisk"
-              ]
+              "price": "156:-"
             }
           ]
         },
@@ -176,18 +140,12 @@ window.MENUS = {
             {
               "name": "Wallenbergare",
               "desc": "rödvinssky, rårörda lingon, potatispuré, små gröna ärter (L,Ä,G)",
-              "price": "156:-",
-              "tags": [
-                "kött"
-              ]
+              "price": "156:-"
             },
             {
               "name": "Flundra fylld med fisk- & skaldjursfärs",
               "desc": "skaldjursås, dill, lök, citronkokt potatis (Ä,L)",
-              "price": "156:-",
-              "tags": [
-                "fisk"
-              ]
+              "price": "156:-"
             }
           ]
         },
@@ -197,18 +155,12 @@ window.MENUS = {
             {
               "name": "Chili- & vitlöksstekt majskyckling",
               "desc": "citron, vitt vin, grädde, purjolök, dirty fries (L)",
-              "price": "156:-",
-              "tags": [
-                "kött"
-              ]
+              "price": "156:-"
             },
             {
               "name": "Persiljesotad kapkummel",
               "desc": "tabascosmör, rött vin, lökrostad potatis",
-              "price": "156:-",
-              "tags": [
-                "fisk"
-              ]
+              "price": "156:-"
             }
           ]
         },
@@ -218,18 +170,12 @@ window.MENUS = {
             {
               "name": "Pannbiff fylld med bacon & ost",
               "desc": "dragonvinägersås, örter, råstekt potatis (L,Ä,G)",
-              "price": "156:-",
-              "tags": [
-                "kött"
-              ]
+              "price": "156:-"
             },
             {
               "name": "Örtbakad sejrygg",
               "desc": "vitvinsås, räkor, dill, spenat, tomatkokt potatis (L)",
-              "price": "156:-",
-              "tags": [
-                "fisk"
-              ]
+              "price": "156:-"
             }
           ]
         },
@@ -239,18 +185,12 @@ window.MENUS = {
             {
               "name": "Helstekt tempererad oxfilé",
               "desc": "bearnaisesås, marinerade bönor, pommes frites (Ä) — varje fredag",
-              "price": "163:-",
-              "tags": [
-                "kött"
-              ]
+              "price": "163:-"
             },
             {
               "name": "Krämig laxröra på toast",
               "desc": "sallad, tempererat ägg (Ä)",
-              "price": "163:-",
-              "tags": [
-                "fisk"
-              ]
+              "price": "163:-"
             }
           ]
         }
@@ -259,26 +199,17 @@ window.MENUS = {
         {
           "name": "Fisksoppa",
           "desc": "het aioli, vitlöksbröd (G,Ä)",
-          "price": "",
-          "tags": [
-            "fisk"
-          ]
+          "price": ""
         },
         {
           "name": "Vegetarisk",
           "desc": "pasta, pesto, champinjoner, grädde, parmesan, rucola (L,G)",
-          "price": "",
-          "tags": [
-            "veg"
-          ]
+          "price": ""
         },
         {
           "name": "Soulfood",
           "desc": "tandoori chicken, nudelwok, grönsaker, koriander, purjolök (Ä,G)",
-          "price": "",
-          "tags": [
-            "kött"
-          ]
+          "price": ""
         }
       ]
     },
@@ -294,10 +225,7 @@ window.MENUS = {
             {
               "name": "Salt im bocca",
               "desc": "bankad och mjölad kalv med smör och salvia, rostad potatis, haricot verts",
-              "price": "165:-",
-              "tags": [
-                "kött"
-              ]
+              "price": "165:-"
             }
           ]
         },
@@ -307,10 +235,7 @@ window.MENUS = {
             {
               "name": "Tagliatelle med blåmusslor",
               "desc": "tomatsås, chili, vitlök, persilja",
-              "price": "165:-",
-              "tags": [
-                "fisk"
-              ]
+              "price": "165:-"
             }
           ]
         },
@@ -320,10 +245,7 @@ window.MENUS = {
             {
               "name": "Ugnstekt kummelfilé",
               "desc": "kokt potatis, rostad fänkål, citronsås",
-              "price": "165:-",
-              "tags": [
-                "fisk"
-              ]
+              "price": "165:-"
             }
           ]
         },
@@ -333,10 +255,7 @@ window.MENUS = {
             {
               "name": "La Carbonara",
               "desc": "spaghetti, rostad griskind, pecorino romano, äggula, svartpeppar",
-              "price": "165:-",
-              "tags": [
-                "kött"
-              ]
+              "price": "165:-"
             }
           ]
         }
@@ -345,26 +264,17 @@ window.MENUS = {
         {
           "name": "Mums Mums",
           "desc": "färska Sedanini med tryffelsalsiccia, svamp, lök, grädde, salvia, Parmigiano",
-          "price": "155:-",
-          "tags": [
-            "kött"
-          ]
+          "price": "155:-"
         },
         {
           "name": "Pomodoro e Burrata",
           "desc": "färska Tagliatelle med krämig tomatsås på datterinitomater, Parmigiano, basilika, burrata",
-          "price": "155:-",
-          "tags": [
-            "veg"
-          ]
+          "price": "155:-"
         },
         {
           "name": "Insalata di Pollo",
           "desc": "blandsallad med datterinitomater, morot, rädisa, friterad kyckling, chilimajonäs, Parmigiano, krutonger",
-          "price": "155:-",
-          "tags": [
-            "kött"
-          ]
+          "price": "155:-"
         }
       ]
     }

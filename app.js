@@ -10,11 +10,6 @@
   var TZ = "Europe/Stockholm";
   var WEEKDAYS = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"];
 
-  var TAG_LABELS = {
-    veg: "Vegetariskt", vegan: "Veganskt", fisk: "Fisk",
-    "kött": "Kött", glutenfri: "Glutenfritt"
-  };
-
   /* ---------- Datum ---------- */
 
   // Dagens datum som "2026-08-21", alltid i svensk tid oavsett var besökaren är.
@@ -156,9 +151,6 @@
     var head = el("div");
     if (dish.price) head.appendChild(el("span", "dish-price", dish.price));
     head.appendChild(el("span", "dish-name", dish.name || "Namnlös rätt"));
-    (dish.tags || []).forEach(function (tag) {
-      if (TAG_LABELS[tag]) head.appendChild(el("span", "tag", TAG_LABELS[tag]));
-    });
     li.appendChild(head);
     if (dish.desc) li.appendChild(el("span", "dish-desc", dish.desc));
     return li;
