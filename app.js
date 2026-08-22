@@ -137,6 +137,28 @@
     return p;
   }
 
+  // Pil som pekar ut ur sidan, ritad i stället för skriven. Tecknet ↗ har
+  // emojiform som standard på iOS och blev en blå ruta i telefonen — en ritad
+  // pil ärver textens färg och storlek och ser likadan ut överallt.
+  function utPil() {
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "ut-pil");
+    svg.setAttribute("viewBox", "0 0 10 10");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+
+    var strecket = document.createElementNS(NS, "path");
+    strecket.setAttribute("d", "M2.2 7.8 L7.6 2.4");
+    svg.appendChild(strecket);
+
+    var spetsen = document.createElementNS(NS, "path");
+    spetsen.setAttribute("d", "M4.1 2.4 H7.6 V5.9");
+    svg.appendChild(spetsen);
+
+    return svg;
+  }
+
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -262,7 +284,9 @@
       if (r.note) a.appendChild(el("p", "note-rad", r.note));
 
       var foot = el("div", "card-foot");
-      foot.appendChild(el("p", "extern-lank", (r.linkText || "Öppna menyn") + " ↗"));
+      var lankText = el("p", "extern-lank", r.linkText || "Öppna menyn");
+      lankText.appendChild(utPil());
+      foot.appendChild(lankText);
       a.appendChild(foot);
       return a;
     }
@@ -325,7 +349,10 @@
     if (r.area || r.walk) head.appendChild(adressRad(r));
     if (menu.priceInfo) head.appendChild(el("p", "price-info", menu.priceInfo));
 
-    var link = el("a", "source", "Restaurangens egen sida →");
+    // Samma ritade pil som på Lunch-korten, så "lämnar sidan" ser likadant ut
+    // överallt. Tidigare stod här ett annat piltecken.
+    var link = el("a", "source", "Restaurangens egen sida");
+    link.appendChild(utPil());
     link.href = r.url;
     link.rel = "noopener";
     link.target = "_blank";

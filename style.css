@@ -138,6 +138,14 @@ section + section { margin-top: 34px; }
 .card-extern:hover { border-style: solid; }
 .extern-lank { margin: 0; font-size: 15px; font-weight: 400; color: var(--accent); }
 
+/* Ritad pil i stället för tecknet ↗, som iOS visar som emoji. Ärver textens
+   färg via currentColor och skalar med teckenstorleken via em. */
+.ut-pil {
+  width: .62em; height: .62em; margin-left: .38em;
+  fill: none; stroke: currentColor; stroke-width: 1.25;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
 /* Anteckningar är upplysningar, aldrig fel — därför neutral ton, samma som
    .info. Gult är reserverat för att något faktiskt är på tok. */
 .note {

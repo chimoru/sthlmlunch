@@ -184,6 +184,7 @@ Riktningen heter *Trattoria* och ska likna en tryckt meny snarare än en app.
 | Nästan skarpa hörn, inga skuggor | `--radius: 3px`, `--shadow: none` |
 | Prickade linjer mellan rätterna | `.dishes li` |
 | Dubbel linje under sidhuvudet | `.topbar` |
+| Diagonal pil = lämnar sidan | Ritad i SVG av `utPil()`, inte skriven som tecken. `↗` har emojiform som standard på iOS och blev en blå ruta i telefonen. Pilen ärver textens färg via `currentColor` och skalar med teckenstorleken via `em` |
 | Idag-brickan i sans-serif | `.badge-today` — enda undantaget från antikvan, så att de små versalerna håller sig läsbara |
 
 Papperstonen och det djupa tegelröda hör ihop; byter du accentfärgen bör du byta
