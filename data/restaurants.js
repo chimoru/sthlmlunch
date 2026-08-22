@@ -89,6 +89,16 @@ window.RESTAURANTS = [
     linkText: "Se menyn"
   },
   {
+    id: "bastard-burgers",
+    name: "Bastard Burgers",
+    url: "https://order.bastardburgers.com/se/sv-se",
+    section: "lunch",
+    area: "Rehnsgatan 22",
+    walk: "",
+    note: "Välj Vasastan.",
+    linkText: "Beställ och se menyn"
+  },
+  {
     id: "babel-deli",
     name: "Babel Deli",
     url: "https://qopla.com/restaurant/babel-deli---vasastan/qEQQeBrjz8/order",
