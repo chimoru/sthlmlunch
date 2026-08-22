@@ -3,8 +3,18 @@
 Samlar dagens lunch från kontorets lunchställen på en sida.
 Ligger publikt på **https://chimoru.dev/sthlmlunch/**
 
-Startsidan visar ett kort per restaurang med dagens rätter och pris.
-Klick på ett kort ger hela veckomenyn.
+Startsidan har två sektioner:
+
+**Veckomeny** — restauranger som publicerar en veckomeny vi hämtar automatiskt.
+Kortet visar dagens rätter och pris, och klick leder till vår egen veckomenysida.
+
+**Lunch** — restauranger utan veckomeny att hämta. Kortet leder direkt till deras
+egen meny- eller beställningssida, i en ny flik. Ingenting hämtas för dessa, och
+de ska inte finnas i `data/menus.js`.
+
+Vilken sektion en restaurang hamnar i styrs av fältet `section` i
+`data/restaurants.js` (`"veckomeny"` eller `"lunch"`). Utelämnas fältet gäller
+`"veckomeny"`. En tom sektion visas inte alls.
 
 ## Hur uppdateringen fungerar
 
@@ -42,14 +52,30 @@ i repo-secreten `CLAUDE_CODE_OAUTH_TOKEN`, så det kostar inget extra.
 
 Öppna `data/restaurants.js` och lägg till en post:
 
+En restaurang med veckomeny:
+
 ```js
 {
   id: "kortnamn",                    // unikt, inga mellanslag eller å ä ö
   name: "Restaurangens namn",
   url: "https://.../veckomeny",      // sidan med VECKOMENYN
+  section: "veckomeny",
   area: "Gatan 1",                   // valfritt
   walk: "5 min",                     // valfritt
   note: ""                           // valfritt
+}
+```
+
+En restaurang utan veckomeny, där kortet bara ska leda vidare:
+
+```js
+{
+  id: "kortnamn",
+  name: "Restaurangens namn",
+  url: "https://.../bestall",        // menysida eller beställningssida
+  section: "lunch",
+  area: "Gatan 1",
+  linkText: "Beställ och se menyn"   // valfritt, standard "Öppna menyn"
 }
 ```
 

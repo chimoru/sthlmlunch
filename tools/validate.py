@@ -59,12 +59,30 @@ def load_menus():
 
 
 def restaurant_ids():
-    """Läser id:n ur restaurants.js. Enkel textsökning — filen är handredigerad."""
+    """
+    Läser id:n ur restaurants.js — men bara för restauranger i sektionen
+    "veckomeny". De i sektionen "lunch" har ingen meny som hämtas, så de ska
+    inte heller finnas i menus.js.
+
+    Enkel textsökning eftersom filen är handredigerad: för varje id tas texten
+    fram till nästa id, och där letas efter section-fältet.
+    """
     if not RESTAURANTS.exists():
         fail(f"{RESTAURANTS.name} finns inte.")
         return []
+
     text = RESTAURANTS.read_text(encoding="utf-8")
-    return re.findall(r'\bid\s*:\s*["\']([^"\']+)["\']', text)
+    traffar = list(re.finditer(r'\bid\s*:\s*["\']([^"\']+)["\']', text))
+
+    ids = []
+    for i, m in enumerate(traffar):
+        slut = traffar[i + 1].start() if i + 1 < len(traffar) else len(text)
+        block = text[m.end():slut]
+        sektion = re.search(r'\bsection\s*:\s*["\']([^"\']+)["\']', block)
+        if sektion and sektion.group(1) == "lunch":
+            continue
+        ids.append(m.group(1))
+    return ids
 
 
 def check(data, ids):
@@ -85,7 +103,9 @@ def check(data, ids):
             fail(f"Restaurangen '{rid}' finns i restaurants.js men saknas helt i menus.js.")
 
     for extra in set(restaurants) - set(ids):
-        warn(f"'{extra}' finns i menus.js men inte i restaurants.js — visas inte på sidan.")
+        warn(f"'{extra}' finns i menus.js men hämtas inte — borttagen ur "
+             f"restaurants.js, eller flyttad till sektionen 'lunch'. Posten "
+             f"visas inte på sidan och kan tas bort.")
 
     usable = 0
 

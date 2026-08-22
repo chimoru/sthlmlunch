@@ -16,11 +16,23 @@
   </header>
 
   <main class="wrap">
-    <div class="toolbar">
-      <p class="stamp" id="stamp"></p>
-    </div>
+    <!-- Restauranger med veckomeny vi hämtar automatiskt -->
+    <section id="sektion-veckomeny" hidden>
+      <div class="sektionshuvud">
+        <h2>Veckomeny</h2>
+        <p class="stamp" id="stamp"></p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
 
-    <div class="grid" id="grid"></div>
+    <!-- Restauranger utan veckomeny. Korten går direkt till deras egen sida. -->
+    <section id="sektion-lunch" hidden>
+      <div class="sektionshuvud">
+        <h2>Lunch</h2>
+        <p class="stamp">Leder till restaurangens egen sida</p>
+      </div>
+      <div class="grid" id="grid-lunch"></div>
+    </section>
 
     <p class="empty" id="empty" hidden>
       Inga restauranger tillagda än. Lägg till dem i <code>data/restaurants.js</code>.
@@ -28,8 +40,9 @@
   </main>
 
   <footer class="wrap foot">
-    <p>Menyerna hämtas automatiskt varje vardagsmorgon från restaurangernas egna sidor.
-       Stämmer något inte — lita på restaurangens sida, inte den här.</p>
+    <p>Veckomenyerna hämtas automatiskt varje vardagsmorgon från restaurangernas egna
+       sidor. Korten under Lunch hämtas inte — de leder direkt vidare.
+       Stämmer något inte, lita på restaurangens sida och inte den här.</p>
   </footer>
 
   <script src="data/restaurants.js"></script>

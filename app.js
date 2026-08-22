@@ -77,6 +77,11 @@
 
   /* ---------- Hjälpare ---------- */
 
+  // "veckomeny" är standard när fältet utelämnas, så äldre poster fungerar.
+  function sectionOf(r) {
+    return r.section === "lunch" ? "lunch" : "veckomeny";
+  }
+
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -158,7 +163,8 @@
 
   function renderHome() {
     var grid = document.getElementById("grid");
-    if (!grid) return;
+    var gridLunch = document.getElementById("grid-lunch");
+    if (!grid && !gridLunch) return;
 
     // Sätt text bara om elementet finns. En återvändande besökare kan ha ny HTML
     // och gammal cachad JS, eller omvänt — då saknas något element. Det får
@@ -175,9 +181,41 @@
       return;
     }
 
-    RESTAURANTS.forEach(function (r) {
-      grid.appendChild(card(r));
-    });
+    var veckomeny = RESTAURANTS.filter(function (r) { return sectionOf(r) === "veckomeny"; });
+    var lunch = RESTAURANTS.filter(function (r) { return sectionOf(r) === "lunch"; });
+
+    if (grid) veckomeny.forEach(function (r) { grid.appendChild(card(r)); });
+    if (gridLunch) lunch.forEach(function (r) { gridLunch.appendChild(linkCard(r)); });
+
+    // En tom sektion ska inte visa sin rubrik — då ser sidan ut att sakna något.
+    show("sektion-veckomeny", veckomeny.length);
+    show("sektion-lunch", lunch.length);
+
+    function show(id, antal) {
+      var node = document.getElementById(id);
+      if (node) node.hidden = !antal;
+    }
+
+    // Kort för "Lunch"-sektionen. Ingen meny hämtas för dessa, så kortet är i
+    // praktiken en genväg — det leder direkt till restaurangens egen meny- eller
+    // beställningssida, i ny flik eftersom besökaren lämnar vår sida.
+    function linkCard(r) {
+      var a = el("a", "card card-extern");
+      a.href = r.url;
+      a.target = "_blank";
+      a.rel = "noopener";
+
+      a.appendChild(el("h2", null, r.name));
+      var bits = [r.area, r.walk].filter(Boolean);
+      a.appendChild(el("p", "meta", bits.join(" · ") || " "));
+
+      if (r.note) a.appendChild(el("p", "note", r.note));
+
+      var foot = el("div", "card-foot");
+      foot.appendChild(el("p", "extern-lank", (r.linkText || "Öppna menyn") + " ↗"));
+      a.appendChild(foot);
+      return a;
+    }
 
     function card(r) {
       var menu = MENUS[r.id] || {};

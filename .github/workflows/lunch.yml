@@ -50,6 +50,10 @@ jobs:
 
             ARBETSGÅNG
             1. Läs data/restaurants.js och notera varje restaurangs "id" och "url".
+               HOPPA ÖVER varje restaurang som har "section": "lunch". De har ingen
+               veckomeny att hämta — deras kort länkar direkt till restaurangens
+               egen sida. Hämta ingenting för dem, och lägg INTE in dem i
+               data/menus.js. Saknas fältet "section" gäller "veckomeny".
             2. Läs den nuvarande data/menus.js. Den är din utgångspunkt — du ska
                uppdatera den, inte börja om från noll.
             3. Har restaurangen ett "hint"-fält: läs det först. Det beskriver var
@@ -140,6 +144,8 @@ jobs:
               bli "glutenfri" eller liknande i "tags". Låt dem stå kvar i "desc"
               ordagrant, så besökaren ser dem.
             - Är restauranglistan tom, ändra ingenting.
+            - Finns en post i menus.js vars id inte längre är en "veckomeny"-restaurang
+              i restaurants.js: ta bort posten. Den visas inte på sidan ändå.
 
             Skriv bara filen. Committa inte, pusha inte, kör inga kommandon.
 
