@@ -125,6 +125,28 @@ Logiken har egna tester, inklusive årsskiftet där vecka 53 följs av vecka 1:
 node tools/test-veckonotis.js
 ```
 
+## Rubriknivåer
+
+Nivåerna beskriver innehållets hierarki, inte textstorleken — storleken kommer
+från CSS:en. Skärmläsare hoppar mellan rubriker som i en innehållsförteckning,
+så nivån avgör om det framgår vilka kort som hör till vilken sektion.
+
+Startsidan:
+
+```
+H1  STHLM Lunch
+  H2  Veckomeny
+    H3  Man in the Moon
+  H2  Lunch
+    H3  Fullmoon Wok
+```
+
+Veckomenysidan: `H1` restaurangens namn, sedan `H2` för varje dag och för
+"Alltid på menyn" — de är syskon.
+
+Byter du en rubriks nivå: uppdatera motsvarande CSS-regel samtidigt, annars
+tappar rubriken sin form. Hoppa aldrig över en nivå.
+
 ## Färgtema
 
 Knappen uppe till höger växlar mellan tre lägen:

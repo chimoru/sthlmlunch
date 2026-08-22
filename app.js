@@ -86,8 +86,11 @@
   // ::after som spänns ut över ytan, så kortet är fortfarande klickbart i sin
   // helhet — men adressen kan vara en egen länk. En <a> inuti en <a> är ogiltig
   // HTML, och webbläsaren bryter sönder det yttre kortet om man försöker.
+  // h3, eftersom kortet ligger inuti en sektion vars rubrik är h2. Nivån styr
+  // inte storleken — den kommer från CSS — utan berättar för skärmläsare och
+  // sökmotorer vilka kort som hör till vilken sektion.
   function kortRubrik(text, href, nyFlik) {
-    var h = el("h2");
+    var h = el("h3");
     var a = el("a", "kort-lank", text);
     a.href = href;
     if (nyFlik) { a.target = "_blank"; a.rel = "noopener"; }
@@ -347,7 +350,10 @@
       var isToday = d === todayDay;
       var box = el("div", "day" + (isToday ? " is-today" : ""));
 
-      var h = el("h3", null, d.weekday || "");
+      // h2: dagarna och "Alltid på menyn" är syskon direkt under restaurangens
+      // h1. Tidigare var dagarna h3 medan "Alltid på menyn" var h2, vilket lät
+      // som om rutan rangordnades över veckans dagar.
+      var h = el("h2", null, d.weekday || "");
       if (isToday) h.appendChild(el("span", "badge-today", "Idag"));
       box.appendChild(h);
 
