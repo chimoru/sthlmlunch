@@ -158,15 +158,20 @@
 
   function renderHome() {
     var grid = document.getElementById("grid");
-    var todayEl = document.getElementById("today");
-    var stampEl = document.getElementById("stamp");
-    var emptyEl = document.getElementById("empty");
+    if (!grid) return;
 
-    todayEl.textContent = longToday();
-    stampEl.textContent = stampText(window.MENUS && window.MENUS.fetched);
+    // Sätt text bara om elementet finns. En återvändande besökare kan ha ny HTML
+    // och gammal cachad JS, eller omvänt — då saknas något element. Det får
+    // aldrig kunna krascha innan korten ritas, för då blir sidan helt tom.
+    var todayEl = document.getElementById("today");
+    if (todayEl) todayEl.textContent = longToday();
+
+    var stampEl = document.getElementById("stamp");
+    if (stampEl) stampEl.textContent = stampText(window.MENUS && window.MENUS.fetched);
 
     if (!RESTAURANTS.length) {
-      emptyEl.hidden = false;
+      var emptyEl = document.getElementById("empty");
+      if (emptyEl) emptyEl.hidden = false;
       return;
     }
 
@@ -215,6 +220,7 @@
 
   function renderDetail() {
     var root = document.getElementById("detail");
+    if (!root) return;
     var id = new URLSearchParams(location.search).get("id");
     var r = RESTAURANTS.filter(function (x) { return x.id === id; })[0];
 

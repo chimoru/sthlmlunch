@@ -45,6 +45,25 @@ jobs:
       - name: Kontrollera datan
         run: python3 tools/validate.py
 
+      # HTML och JS cachas var för sig i 10 minuter. Ändras båda samtidigt kan en
+      # återvändande besökare få ny HTML men gammal JS, och då kraschar sidan på
+      # ett element som inte längre finns. Genom att stämpla filnamnen med
+      # commitens id pekar varje HTML-version på exakt de filer den hör ihop med,
+      # och blandningen kan inte uppstå.
+      - name: Versionsmärk statiska filer
+        run: |
+          V=$(git rev-parse --short HEAD)
+          echo "Versionsmärker med $V"
+          # perl istället för sed: sed -i betyder olika saker på Linux och macOS,
+          # och mönstren nedan är verifierade med perl.
+          for f in index.html restaurang.html; do
+            perl -pi -e "s|\"style\\.css\"|\"style.css?v=$V\"|g;
+                         s|\"app\\.js\"|\"app.js?v=$V\"|g;
+                         s|\"data/restaurants\\.js\"|\"data/restaurants.js?v=$V\"|g;
+                         s|\"data/menus\\.js\"|\"data/menus.js?v=$V\"|g" "$f"
+          done
+          grep -o 'app.js?v=[a-f0-9]*' index.html | head -1
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
