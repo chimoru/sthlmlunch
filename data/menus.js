@@ -15,12 +15,12 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-08-22T12:27:45Z",
+  "fetched": "2026-08-22T12:44:11Z",
   "week": 34,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-08-22T12:27:45Z",
+      "fetched": "2026-08-22T12:44:11Z",
       "week": 35,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
@@ -145,7 +145,7 @@ window.MENUS = {
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-08-22T12:27:45Z",
+      "fetched": "2026-08-22T12:44:11Z",
       "week": 35,
       "priceInfo": "Måndag–torsdag 156:- (13.00–14.00 146:-, Take Away 139:-) · Fredagar 163:- (13.00–14.00 153:-, Take Away 145:-) · 11.00–14.00",
       "days": [
