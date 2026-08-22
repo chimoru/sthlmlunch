@@ -106,4 +106,5 @@ python3 tools/validate.py
 | Hela sidan visar gammal data | Actions-körningen är röd | Titta i fliken Actions. Oftast har tokenet gått ut — kör `claude setup-token` igen och uppdatera secreten |
 | Ingen ny commit på flera dagar | Menyerna är oförändrade | Normalt. Commit sker bara när något faktiskt ändrats |
 | Körningen dör direkt, 0 kostnad, `is_error` | Nästan alltid tokenet | Kör om `npx @anthropic-ai/claude-code setup-token`, städa klippbordet med `pbpaste \| tr -d '[:space:]' \| pbcopy`, och uppdatera secreten. En radbrytning mitt i tokenet räcker för att anropet avvisas |
+| Sidan visar äldre data än `data/menus.js` i repot | Publiceringen checkade ut fel commit | Ska vara fixat: `deploy.yml` har `ref: ${{ github.ref }}`. Saknas den ligger sidan permanent en körning efter |
 | Behöver se Claudes utskrift i loggen | Den döljs som standard | Lägg tillfälligt till `show_full_output: true` under `with:` i `lunch.yml`. Ta bort den efteråt — loggen är publik |

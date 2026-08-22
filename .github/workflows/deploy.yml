@@ -33,7 +33,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      # ref är nödvändigt. Utan det checkar actions/checkout ut den commit som
+      # STARTADE körningen. Anropas vi från lunch.yml är det läget FÖRE
+      # automatikens commit, så den nyhämtade menyn publiceras aldrig och sidan
+      # ligger permanent en körning efter. Med ref hämtas grenens senaste läge.
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
 
       # Sista kontrollen innan något går publikt.
       - name: Kontrollera datan
