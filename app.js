@@ -141,11 +141,6 @@
     return !menu || typeof menu.week !== "number" || menu.week === isoWeek(todayISO());
   }
 
-  function dishMatchesFilter(dish, filter) {
-    if (!filter) return true;
-    return (dish.tags || []).indexOf(filter) !== -1;
-  }
-
   function renderDish(dish) {
     var li = el("li");
     var head = el("div");
@@ -175,16 +170,9 @@
       return;
     }
 
-    var activeFilter = null;
-    buildFilters();
-    draw();
-
-    function draw() {
-      grid.textContent = "";
-      RESTAURANTS.forEach(function (r) {
-        grid.appendChild(card(r));
-      });
-    }
+    RESTAURANTS.forEach(function (r) {
+      grid.appendChild(card(r));
+    });
 
     function card(r) {
       var menu = MENUS[r.id] || {};
@@ -205,16 +193,12 @@
       if (notice) a.appendChild(el("p", notice.level, notice.text));
 
       var day = menuAppliesNow(menu) ? findToday(menu.days) : null;
-      var dishes = (day && day.dishes ? day.dishes : []).filter(function (d) {
-        return dishMatchesFilter(d, activeFilter);
-      });
+      var dishes = (day && day.dishes) ? day.dishes : [];
 
       if (dishes.length) {
         var ul = el("ul", "dishes");
         dishes.forEach(function (d) { ul.appendChild(renderDish(d)); });
         a.appendChild(ul);
-      } else if (day && day.dishes && day.dishes.length && activeFilter) {
-        a.appendChild(el("p", "no-dish", "Inget som matchar filtret idag"));
       } else if (menu.days) {
         a.appendChild(el("p", "no-dish",
           menuAppliesNow(menu) ? "Ingen meny för idag" : "Se hela veckan nedan"));
@@ -224,34 +208,6 @@
       foot.appendChild(el("p", "price-info", menu.priceInfo || "Se hela veckomenyn →"));
       a.appendChild(foot);
       return a;
-    }
-
-    function buildFilters() {
-      var box = document.getElementById("filters");
-      var present = {};
-      Object.keys(MENUS).forEach(function (id) {
-        (MENUS[id].days || []).forEach(function (d) {
-          (d.dishes || []).forEach(function (dish) {
-            (dish.tags || []).forEach(function (t) { if (TAG_LABELS[t]) present[t] = true; });
-          });
-        });
-      });
-
-      var tags = Object.keys(present);
-      if (!tags.length) return;
-
-      tags.forEach(function (tag) {
-        var b = el("button", null, TAG_LABELS[tag]);
-        b.setAttribute("aria-pressed", "false");
-        b.addEventListener("click", function () {
-          activeFilter = activeFilter === tag ? null : tag;
-          Array.prototype.forEach.call(box.querySelectorAll("button"), function (other) {
-            other.setAttribute("aria-pressed", String(other === b && activeFilter === tag));
-          });
-          draw();
-        });
-        box.appendChild(b);
-      });
     }
   }
 
