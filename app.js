@@ -214,7 +214,9 @@
       var bits = [r.area, r.walk].filter(Boolean);
       a.appendChild(el("p", "meta", bits.join(" · ") || " "));
 
-      if (r.note) a.appendChild(el("p", "note", r.note));
+      // Kompakt rad i stället för ruta: en ruta här gör kortet mycket högre än
+      // de utan anteckning, och då blir sektionen ojämn.
+      if (r.note) a.appendChild(el("p", "note-rad", r.note));
 
       var foot = el("div", "card-foot");
       foot.appendChild(el("p", "extern-lank", (r.linkText || "Öppna menyn") + " ↗"));

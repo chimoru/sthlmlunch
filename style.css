@@ -90,9 +90,17 @@ section + section { margin-top: 34px; }
 
 .price-info { margin: 0; font-size: 13px; color: var(--muted); }
 
+/* Alla Lunch-kort får samma höjd, även det som står ensamt i sista raden.
+   grid-auto-rows: 1fr ger varje rad lika stor andel, så höjden bestäms av det
+   innehållsrikaste kortet i stället för av vilken rad kortet råkar hamna på. */
+#grid-lunch { grid-auto-rows: 1fr; }
+
 /* Kort som lämnar sidan. Streckad ram signalerar att det är en genväg ut,
    inte en av våra egna veckomenysidor. */
 .card-extern { border-style: dashed; }
+
+/* Anteckning på ett Lunch-kort: en rad, ingen ruta. Håller korten låga. */
+.note-rad { margin: -8px 0 0; font-size: 13px; color: var(--muted); }
 .card-extern:hover { border-style: solid; }
 .extern-lank { margin: 0; font-size: 14px; font-weight: 500; color: var(--accent); }
 
