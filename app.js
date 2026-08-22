@@ -97,16 +97,31 @@
 
   // Adressen blir en kartlänk. Den ligger över kortets klickyta via z-index,
   // så ett klick på adressen öppnar kartan i stället för kortets egen länk.
+  //
+  // Sökningen innehåller restaurangens NAMN och inte bara adressen. Då matchar
+  // Google mot verksamheten och visar dess platskort, i stället för att sätta en
+  // nål på gatan. Det avgör också rätt bland flera adresser: The Good Gringo har
+  // fyra ställen i Stockholm, och namn plus adress pekar ut Vasastan.
+  //
+  // Finns fältet placeId används det i stället. Det är Googles egen identifierare
+  // och kan inte missförstås — men den måste letas upp för hand, så den behövs
+  // bara om en restaurang hamnar fel.
+  function kartlank(r) {
+    var url = "https://www.google.com/maps/search/?api=1&query=" +
+              encodeURIComponent([r.name, r.area, "Stockholm"].filter(Boolean).join(", "));
+    if (r.placeId) url += "&query_place_id=" + encodeURIComponent(r.placeId);
+    return url;
+  }
+
   function adressRad(r) {
     var p = el("p", "meta");
 
     if (r.area) {
       var a = el("a", "karta", r.area);
-      a.href = "https://www.google.com/maps/search/?api=1&query=" +
-               encodeURIComponent(r.area + ", Stockholm");
+      a.href = kartlank(r);
       a.target = "_blank";
       a.rel = "noopener";
-      a.title = "Visa " + r.area + " på karta";
+      a.title = "Visa " + r.name + " på karta";
       p.appendChild(a);
     }
 

@@ -188,6 +188,16 @@ färgen kan aldrig glida ifrån temat när paletten ändras.
 
 Ett klick på adressen öppnar Google Maps; resten av kortet leder till menyn.
 
+Sökningen innehåller restaurangens **namn** och inte bara adressen, så Google
+matchar mot verksamheten och visar dess platskort i stället för att sätta en nål
+på gatan. Det avgör också rätt bland flera adresser — The Good Gringo har fyra
+ställen i Stockholm, och namn plus adress pekar ut Vasastan.
+
+Hamnar en restaurang ändå fel finns en utväg: lägg till `placeId` i
+`data/restaurants.js` med Googles egen identifierare för stället, och länken
+använder den i stället. Den måste letas upp för hand, så den behövs bara vid
+behov.
+
 Det kräver att kortet är en `<div>` och inte en `<a>`, eftersom en länk inuti en
 länk är ogiltig HTML som webbläsaren bryter sönder. I stället spänner rubrikens
 länk ut ett osynligt `::after` över hela kortet, och adressen läggs ovanpå med
