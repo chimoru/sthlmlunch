@@ -5,13 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>STHLM Lunch — dagens lunch på ett ställe</title>
   <meta name="description" content="Dagens lunch från kontorets lunchställen, samlat på en sida.">
+  <script>
+    /* Körs innan sidan målas, så att man inte ser en blink av fel färger.
+       Måste hållas i takt med initTema() i app.js — samma nyckel, samma värden. */
+    (function () {
+      var val = null;
+      try { val = localStorage.getItem("tema"); } catch (e) {}
+      var morkt = val === "dark" ||
+                  (val !== "light" && window.matchMedia &&
+                   matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.dataset.theme = morkt ? "dark" : "light";
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
     <div class="wrap">
       <h1 class="logo">STHLM&nbsp;Lunch</h1>
-      <p class="today" id="today"></p>
+      <div class="topbar-hoger">
+        <p class="today" id="today"></p>
+        <button class="tema-knapp" id="tema" type="button"></button>
+      </div>
     </div>
   </header>
 

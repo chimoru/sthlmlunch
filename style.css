@@ -1,5 +1,12 @@
 /* ---------- Färger. Ljust läge här, mörkt läge längst ner. ---------- */
+/* Temat styrs av attributet data-theme på <html>, som sätts av ett litet skript
+   i sidhuvudet innan sidan målas. Värdet "dark" ger den mörka paletten nedan;
+   allt annat ger den ljusa här. Skriptet läser besökarens val ur localStorage,
+   och följer systemets inställning när inget val gjorts.
+
+   color-scheme får rullister och inbyggda kontroller att följa temat. */
 :root {
+  color-scheme: light;
   --bg: #f6f5f2;
   --surface: #ffffff;
   --border: #e2ded6;
@@ -38,6 +45,14 @@ body {
 .logo { margin: 0; font-size: 22px; letter-spacing: -.02em; }
 .today { margin: 0; color: var(--muted); font-size: 15px; }
 .back { color: var(--accent); text-decoration: none; font-size: 15px; font-weight: 500; }
+
+.topbar-hoger { display: flex; align-items: center; gap: 14px; }
+.tema-knapp {
+  font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+}
+.tema-knapp:hover { border-color: var(--accent); color: var(--accent); }
 .back:hover { text-decoration: underline; }
 
 /* ---------- Verktygsrad ---------- */
@@ -173,21 +188,23 @@ code {
 }
 
 /* ---------- Mörkt läge ---------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #16150f;
-    --surface: #201f19;
-    --border: #35332a;
-    --text: #f0ede5;
-    --muted: #a49e91;
-    --accent: #e8945c;
-    --accent-soft: #3a2a1d;
-    --today: #7ec898;
-    --today-soft: #1e3428;
-    --warn: #e3bf6a;
-    --warn-soft: #382e17;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
-  }
+/* Sätts av skriptet i sidhuvudet, antingen efter besökarens val eller efter
+   systemets inställning. Bara färgerna byts — ingen annan regel i filen nämner
+   någon färgkod, allt går via variablerna. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #16150f;
+  --surface: #201f19;
+  --border: #35332a;
+  --text: #f0ede5;
+  --muted: #a49e91;
+  --accent: #e8945c;
+  --accent-soft: #3a2a1d;
+  --today: #7ec898;
+  --today-soft: #1e3428;
+  --warn: #e3bf6a;
+  --warn-soft: #382e17;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
 }
 
 /* ---------- Mobil ---------- */

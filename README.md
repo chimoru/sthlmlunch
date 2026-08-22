@@ -123,6 +123,31 @@ Logiken har egna tester, inklusive årsskiftet där vecka 53 följs av vecka 1:
 node tools/test-veckonotis.js
 ```
 
+## Färgtema
+
+Knappen uppe till höger växlar mellan tre lägen:
+
+| Läge | Innebörd |
+|---|---|
+| **Auto** | Följer datorns inställning, och byter direkt om du ändrar den |
+| **Ljust** | Låst till ljust, oavsett systemet |
+| **Mörkt** | Låst till mörkt, oavsett systemet |
+
+Valet sparas per webbläsare i `localStorage` under nyckeln `tema`, och gäller båda
+sidorna. Utan ett Auto-läge hade det inte funnits någon väg tillbaka till att följa
+systemet igen.
+
+Temat styrs av attributet `data-theme` på `<html>`. Ett litet skript i sidhuvudet
+sätter det **innan** sidan målas — läggs det i `app.js` i stället hinner sidan
+ritas i fel färger och blinka om. Skriptet är därför medvetet duplicerat i båda
+HTML-filerna, och måste hållas i takt med `initTema()` i `app.js`: samma nyckel,
+samma värden.
+
+Alla färger ligger i variabler på `:root`. Den mörka paletten är samma variabler
+omdefinierade under `:root[data-theme="dark"]`. Ingen annan regel i `style.css`
+nämner någon färgkod, vilket är varför nya inslag automatiskt fungerar i båda
+lägena.
+
 ## Titta på sidan lokalt
 
 ```bash

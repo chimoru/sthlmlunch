@@ -4,12 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Veckomeny — STHLM Lunch</title>
+  <script>
+    /* Körs innan sidan målas, så att man inte ser en blink av fel färger.
+       Måste hållas i takt med initTema() i app.js — samma nyckel, samma värden. */
+    (function () {
+      var val = null;
+      try { val = localStorage.getItem("tema"); } catch (e) {}
+      var morkt = val === "dark" ||
+                  (val !== "light" && window.matchMedia &&
+                   matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.dataset.theme = morkt ? "dark" : "light";
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
     <div class="wrap">
       <a class="back" href="index.html">&larr; Alla restauranger</a>
+      <button class="tema-knapp" id="tema" type="button"></button>
     </div>
   </header>
 

@@ -345,7 +345,71 @@
     root.appendChild(el("p", "stamp", stampText(menu.fetched)));
   }
 
+  /* ---------- Färgtema ---------- */
+
+  // Tre lägen, i den ordning knappen växlar mellan dem. "system" följer datorns
+  // inställning; de andra två låser fast valet. Utan "system" finns ingen väg
+  // tillbaka när man en gång klickat.
+  var TEMAN = ["system", "light", "dark"];
+  var TEMA_TEXT = { system: "Auto", light: "Ljust", dark: "Mörkt" };
+
+  // localStorage kan vara avstängt, och kastar då i stället för att svara.
+  // Temat är inte värt ett kraschat sidhuvud, så allt sker inom try.
+  function lastTema() {
+    try {
+      var v = localStorage.getItem("tema");
+      return TEMAN.indexOf(v) === -1 ? "system" : v;
+    } catch (e) { return "system"; }
+  }
+
+  function sparaTema(v) {
+    try { localStorage.setItem("tema", v); } catch (e) {}
+  }
+
+  function systemArMorkt() {
+    return !!(window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+
+  // Samma nyckel och samma värden som skriptet i sidhuvudet använder.
+  function anvandTema(val) {
+    var morkt = val === "dark" || (val === "system" && systemArMorkt());
+    document.documentElement.dataset.theme = morkt ? "dark" : "light";
+  }
+
+  function initTema() {
+    var val = lastTema();
+    anvandTema(val);
+
+    // Byter besökaren systemtema medan sidan är öppen ska Auto följa med.
+    if (window.matchMedia) {
+      var mq = matchMedia("(prefers-color-scheme: dark)");
+      if (mq.addEventListener) {
+        mq.addEventListener("change", function () {
+          if (lastTema() === "system") anvandTema("system");
+        });
+      }
+    }
+
+    var knapp = document.getElementById("tema");
+    if (!knapp) return;
+
+    function rita() {
+      knapp.textContent = TEMA_TEXT[val];
+      knapp.setAttribute("aria-label", "Färgtema: " + TEMA_TEXT[val] + ". Klicka för att byta.");
+    }
+
+    rita();
+    knapp.addEventListener("click", function () {
+      val = TEMAN[(TEMAN.indexOf(val) + 1) % TEMAN.length];
+      sparaTema(val);
+      anvandTema(val);
+      rita();
+    });
+  }
+
   /* ---------- Start ---------- */
+
+  initTema();
 
   if (document.getElementById("grid")) renderHome();
   else if (document.getElementById("detail")) renderDetail();
