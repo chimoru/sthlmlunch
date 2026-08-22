@@ -52,6 +52,23 @@ window.RESTAURANTS = [
           "ner filen och läs den med Read, som renderar sidan som bild."
   },
   {
+    id: "adria",
+    name: "Adria",
+    url: "https://www.adriaristorante.se/menyer",
+    section: "veckomeny",
+    area: "Tulegatan 10",
+    walk: "",
+    note: "Lunch tisdag–fredag. Ingen måndagslunch.",
+    hint: "Menyn ligger INTE på sidan. Under rubriken MENYER finns en länk med " +
+          "texten \"LUNCH\" som pekar på en PDF, t.ex. /s/Lunch-V-34-2026.pdf. " +
+          "Veckonumret står i filnamnet och byts varje vecka, så leta upp länken " +
+          "på nytt varje gång. Ladda ner PDF:en och läs den med Read. " +
+          "PDF:en har två delar: \"DAGENS\" är dagens rätter per veckodag, " +
+          "\"HELA VECKAN\" hör till fältet always. Hoppa över lunchdessert, " +
+          "lunchvin samt dryck och kaffe — det är inte lunchrätter. " +
+          "Lunch serveras tisdag till fredag; ta inte med måndag."
+  },
+  {
     id: "fullmoon-wok",
     name: "Fullmoon Wok",
     url: "https://order.openpos.tech/fullmoonwok/",

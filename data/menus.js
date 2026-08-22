@@ -15,7 +15,7 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-08-22T12:44:11Z",
+  "fetched": "2026-08-22T15:35:00Z",
   "week": 34,
   "restaurants": {
     "man-in-the-moon": {
@@ -276,6 +276,92 @@ window.MENUS = {
           "name": "Soulfood",
           "desc": "tandoori chicken, nudelwok, grönsaker, koriander, purjolök (Ä,G)",
           "price": "",
+          "tags": [
+            "kött"
+          ]
+        }
+      ]
+    },
+    "adria": {
+      "status": "ok",
+      "fetched": "2026-08-22T15:35:00Z",
+      "week": 34,
+      "priceInfo": "Lunch tisdag–fredag 11.30–14.00 · Dagens 165:- · Hela veckan 155:- · Hembakad focaccia och olivolja ingår · Ekologisk glutenfri pasta +20 SEK",
+      "days": [
+        {
+          "weekday": "Tisdag",
+          "dishes": [
+            {
+              "name": "Salt im bocca",
+              "desc": "bankad och mjölad kalv med smör och salvia, rostad potatis, haricot verts",
+              "price": "165:-",
+              "tags": [
+                "kött"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Onsdag",
+          "dishes": [
+            {
+              "name": "Tagliatelle med blåmusslor",
+              "desc": "tomatsås, chili, vitlök, persilja",
+              "price": "165:-",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Torsdag",
+          "dishes": [
+            {
+              "name": "Ugnstekt kummelfilé",
+              "desc": "kokt potatis, rostad fänkål, citronsås",
+              "price": "165:-",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Fredag",
+          "dishes": [
+            {
+              "name": "La Carbonara",
+              "desc": "spaghetti, rostad griskind, pecorino romano, äggula, svartpeppar",
+              "price": "165:-",
+              "tags": [
+                "kött"
+              ]
+            }
+          ]
+        }
+      ],
+      "always": [
+        {
+          "name": "Mums Mums",
+          "desc": "färska Sedanini med tryffelsalsiccia, svamp, lök, grädde, salvia, Parmigiano",
+          "price": "155:-",
+          "tags": [
+            "kött"
+          ]
+        },
+        {
+          "name": "Pomodoro e Burrata",
+          "desc": "färska Tagliatelle med krämig tomatsås på datterinitomater, Parmigiano, basilika, burrata",
+          "price": "155:-",
+          "tags": [
+            "veg"
+          ]
+        },
+        {
+          "name": "Insalata di Pollo",
+          "desc": "blandsallad med datterinitomater, morot, rädisa, friterad kyckling, chilimajonäs, Parmigiano, krutonger",
+          "price": "155:-",
           "tags": [
             "kött"
           ]
