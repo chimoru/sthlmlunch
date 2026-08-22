@@ -29,6 +29,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # Krävs för att Claudes Read-verktyg ska kunna rendera PDF-sidor till
+      # bilder. Flera restauranger lägger menyn i en PDF vars textlager är
+      # trasigt — då är den renderade bilden enda tillförlitliga vägen.
+      - name: Installera PDF-stöd
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+
       # Claude läser restauranglistan, besöker varje sida, tolkar menyn
       # och skriver om data/menus.js.
       - name: Hämta menyerna med Claude
@@ -37,8 +43,8 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           claude_args: |
-            --allowedTools "WebFetch,Read,Write,Edit"
-            --max-turns 40
+            --allowedTools "WebFetch,Read,Write,Edit,Bash(curl:*)"
+            --max-turns 60
           prompt: |
             Du uppdaterar lunchmenyerna för en webbsida. Dagens datum framgår av systemet.
 
@@ -46,10 +52,23 @@ jobs:
             1. Läs data/restaurants.js och notera varje restaurangs "id" och "url".
             2. Läs den nuvarande data/menus.js. Den är din utgångspunkt — du ska
                uppdatera den, inte börja om från noll.
-            3. Hämta varje restaurangs "url" med WebFetch och läs ut veckans lunchmeny.
+            3. Har restaurangen ett "hint"-fält: läs det först. Det beskriver var
+               menyn faktiskt finns, och gäller före din egen gissning.
+            4. Hämta varje restaurangs "url" med WebFetch och läs ut veckans lunchmeny.
                Leta efter menyn för den innevarande veckan. Finns flera veckor, välj den
                som innehåller dagens datum.
-            4. Skriv om data/menus.js med Write.
+            5. LIGGER MENYN INTE PÅ SIDAN — vanligt — så leta efter en länk till den.
+               Den heter ofta "Lunchmeny", "Veckans lunch" eller liknande, och kan
+               innehålla ett veckonummer. Följ den länken.
+               Är målet en PDF:
+                 a) Ladda ner den:  curl -sL "<url>" -o /tmp/meny.pdf
+                 b) Läs den med Read på /tmp/meny.pdf. Read renderar sidorna som
+                    bilder, vilket fungerar även när PDF:ens textlager är trasigt.
+                    Lita INTE på rå text ur en PDF — små bokstäver blir ofta
+                    frågetecken, och då hittar du på ord utan att märka det.
+               Spara ALDRIG PDF-länken någonstans. Den byts ut varje vecka; den
+               ska letas upp på nytt varje körning.
+            6. Skriv om data/menus.js med Write.
 
             FILENS FORMAT
             Filen börjar med kommentarsblocket som redan finns — behåll det ordagrant.
@@ -116,6 +135,10 @@ jobs:
             - Rätter som gäller hela veckan (à la carte, "alltid på menyn") hör inte
               till någon dag — lägg dem i "always" med sina egna priser.
             - "tags" sätter du utifrån vad rätten faktiskt är. Är du osäker: tom lista.
+            - Allergenmarkeringar som (L), (Ä), (G), (N) betyder att rätten INNEHÅLLER
+              laktos, ägg, gluten eller nötter. De är inte kostmärkning och får aldrig
+              bli "glutenfri" eller liknande i "tags". Låt dem stå kvar i "desc"
+              ordagrant, så besökaren ser dem.
             - Är restauranglistan tom, ändra ingenting.
 
             Skriv bara filen. Committa inte, pusha inte, kör inga kommandon.

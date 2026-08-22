@@ -15,7 +15,7 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-08-21T14:53:41Z",
+  "fetched": "2026-08-22T14:20:00Z",
   "week": 34,
   "restaurants": {
     "man-in-the-moon": {
@@ -137,6 +137,145 @@ window.MENUS = {
           "desc": "",
           "price": "",
           "tags": []
+        }
+      ]
+    },
+    "sue-ellen": {
+      "status": "ok",
+      "fetched": "2026-08-22T14:20:00Z",
+      "week": 35,
+      "priceInfo": "Måndag–torsdag 156:- (13.00–14.00 146:-, Take Away 139:-) · Fredagar 163:- (13.00–14.00 153:-, Take Away 145:-) · 11.00–14.00",
+      "days": [
+        {
+          "weekday": "Måndag",
+          "dishes": [
+            {
+              "name": "Örtgrillad opanerad fläskschnitzel",
+              "desc": "lökgräddsky, kål- & vitlöksrostad potatis (L)",
+              "price": "156:-",
+              "tags": [
+                "kött"
+              ]
+            },
+            {
+              "name": "Halstrad kolja",
+              "desc": "krispig chorizo, brynt smör, vårlökskokt potatis (L)",
+              "price": "156:-",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Tisdag",
+          "dishes": [
+            {
+              "name": "Wallenbergare",
+              "desc": "rödvinssky, rårörda lingon, potatispuré, små gröna ärter (L,Ä,G)",
+              "price": "156:-",
+              "tags": [
+                "kött"
+              ]
+            },
+            {
+              "name": "Flundra fylld med fisk- & skaldjursfärs",
+              "desc": "skaldjursås, dill, lök, citronkokt potatis (Ä,L)",
+              "price": "156:-",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Onsdag",
+          "dishes": [
+            {
+              "name": "Chili- & vitlöksstekt majskyckling",
+              "desc": "citron, vitt vin, grädde, purjolök, dirty fries (L)",
+              "price": "156:-",
+              "tags": [
+                "kött"
+              ]
+            },
+            {
+              "name": "Persiljesotad kapkummel",
+              "desc": "tabascosmör, rött vin, lökrostad potatis",
+              "price": "156:-",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Torsdag",
+          "dishes": [
+            {
+              "name": "Pannbiff fylld med bacon & ost",
+              "desc": "dragonvinägersås, örter, råstekt potatis (L,Ä,G)",
+              "price": "156:-",
+              "tags": [
+                "kött"
+              ]
+            },
+            {
+              "name": "Örtbakad sejrygg",
+              "desc": "vitvinsås, räkor, dill, spenat, tomatkokt potatis (L)",
+              "price": "156:-",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Fredag",
+          "dishes": [
+            {
+              "name": "Helstekt tempererad oxfilé",
+              "desc": "bearnaisesås, marinerade bönor, pommes frites (Ä) — varje fredag",
+              "price": "163:-",
+              "tags": [
+                "kött"
+              ]
+            },
+            {
+              "name": "Krämig laxröra på toast",
+              "desc": "sallad, tempererat ägg (Ä)",
+              "price": "163:-",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        }
+      ],
+      "always": [
+        {
+          "name": "Fisksoppa",
+          "desc": "het aioli, vitlöksbröd (G,Ä)",
+          "price": "",
+          "tags": [
+            "fisk"
+          ]
+        },
+        {
+          "name": "Vegetarisk",
+          "desc": "pasta, pesto, champinjoner, grädde, parmesan, rucola (L,G)",
+          "price": "",
+          "tags": [
+            "veg"
+          ]
+        },
+        {
+          "name": "Soulfood",
+          "desc": "tandoori chicken, nudelwok, grönsaker, koriander, purjolök (Ä,G)",
+          "price": "",
+          "tags": [
+            "kött"
+          ]
         }
       ]
     }

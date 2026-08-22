@@ -83,14 +83,27 @@
     return null;
   }
 
-  // Restauranger glömmer ibland uppdatera sin sida. Anger de ett veckonummer
-  // kan vi upptäcka det istället för att visa förra veckans meny som dagens.
-  function staleWeekWarning(menu) {
+  // Anger restaurangen ett veckonummer kan vi se om menyn alls gäller nu.
+  // Två olika fall, som inte ska beskrivas likadant:
+  //   gammal  — restaurangen har inte uppdaterat sedan förra veckan
+  //   framtid — de har redan lagt upp nästa vecka, denna vecka saknas
+  // Returnerar null när menyn gäller nu, eller när inget veckonummer finns.
+  function weekNotice(menu) {
     if (!menu || typeof menu.week !== "number") return null;
     var now = isoWeek(todayISO());
     if (menu.week === now) return null;
-    return "Restaurangen anger vecka " + menu.week + " — nu är det vecka " + now +
-           ". Menyn kan vara gammal.";
+    if (menu.week < now) {
+      return "Restaurangen anger vecka " + menu.week + " — nu är det vecka " + now +
+             ". Menyn har inte uppdaterats.";
+    }
+    return "Menyn gäller vecka " + menu.week + ", inte den pågående vecka " + now +
+           ". Denna veckas meny finns inte uppe.";
+  }
+
+  // Gäller menyn en annan vecka vet vi inte vad som serveras idag, och då ska
+  // ingen rätt påstås vara dagens. Saknas veckonummer litar vi på veckodagen.
+  function menuAppliesNow(menu) {
+    return !menu || typeof menu.week !== "number" || menu.week === isoWeek(todayISO());
   }
 
   function dishMatchesFilter(dish, filter) {
@@ -153,10 +166,10 @@
         a.appendChild(el("p", "status", "Ingen meny kunde läsas från restaurangens sida"));
       }
 
-      var weekWarning = staleWeekWarning(menu);
-      if (weekWarning) a.appendChild(el("p", "status", weekWarning));
+      var notice = weekNotice(menu);
+      if (notice) a.appendChild(el("p", "status", notice));
 
-      var day = findToday(menu.days);
+      var day = menuAppliesNow(menu) ? findToday(menu.days) : null;
       var dishes = (day && day.dishes ? day.dishes : []).filter(function (d) {
         return dishMatchesFilter(d, activeFilter);
       });
@@ -168,7 +181,8 @@
       } else if (day && day.dishes && day.dishes.length && activeFilter) {
         a.appendChild(el("p", "no-dish", "Inget som matchar filtret idag"));
       } else if (menu.days) {
-        a.appendChild(el("p", "no-dish", "Ingen meny för idag"));
+        a.appendChild(el("p", "no-dish",
+          menuAppliesNow(menu) ? "Ingen meny för idag" : "Se hela veckan nedan"));
       }
 
       var foot = el("div", "card-foot");
@@ -238,8 +252,8 @@
 
     if (r.note) root.appendChild(el("p", "note", r.note));
 
-    var weekWarning = staleWeekWarning(menu);
-    if (weekWarning) root.appendChild(el("p", "status", weekWarning));
+    var notice = weekNotice(menu);
+    if (notice) root.appendChild(el("p", "status", notice));
 
     if (menu.status === "stale") {
       root.appendChild(el("p", "status", "Kunde inte läsas vid senaste försöket. " + stampText(menu.fetched) + "."));
@@ -247,7 +261,7 @@
       root.appendChild(el("p", "status", "Ingen meny kunde läsas. Öppna restaurangens egen sida ovan."));
     }
 
-    var todayDay = findToday(menu.days);
+    var todayDay = menuAppliesNow(menu) ? findToday(menu.days) : null;
     var days = el("div", "days");
 
     (menu.days || []).forEach(function (d) {

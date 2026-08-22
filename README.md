@@ -31,7 +31,7 @@ i repo-secreten `CLAUDE_CODE_OAUTH_TOKEN`, så det kostar inget extra.
 | `restaurang.html` | Veckomenyn. Samma sida för alla, väljer restaurang via `?id=` |
 | `style.css` | All design, ljust och mörkt läge |
 | `app.js` | Ritar korten och veckomenyn |
-| `data/restaurants.js` | **Din lista.** Redigeras för hand |
+| `data/restaurants.js` | **Din lista.** Redigeras för hand. `hint` styr automatiken |
 | `data/menus.js` | Menyerna. **Skrivs automatiskt — redigera inte** |
 | `tools/validate.py` | Kontrollerar `menus.js` innan publicering |
 | `.github/workflows/lunch.yml` | Morgonhämtningen |
@@ -54,6 +54,35 @@ i repo-secreten `CLAUDE_CODE_OAUTH_TOKEN`, så det kostar inget extra.
 
 Commit och push. Nästa morgon hämtas menyn automatiskt — eller starta körningen
 direkt via fliken **Actions → Hämta lunchmenyer → Run workflow**.
+
+### När menyn ligger i en PDF
+
+Många restauranger länkar till en PDF vars filnamn byts varje vecka. **Peka aldrig
+`url` mot PDF:en** — då slutar sidan fungera nästa vecka. Peka den mot sidan där
+länken sitter, och beskriv i `hint` var länken finns:
+
+```js
+hint: "Menyn ligger bakom länken \"Lunchmeny v.NN\" längre ner på sidan."
+```
+
+Automatiken följer länken varje morgon och hittar därmed alltid aktuell fil. Den
+laddar ner PDF:en och läser den som *bild*, inte som text — flera restaurangers
+PDF:er har trasigt textlager där små bokstäver blir frågetecken, och då hittar en
+textläsning på ord utan att märka det. Därför installerar workflowet
+`poppler-utils`.
+
+### Veckonummer och ärlighet
+
+Anger menyn ett veckonummer i `week` jämför sidan det med den pågående veckan:
+
+| Läge | Vad besökaren ser |
+|---|---|
+| Samma vecka | Dagens rätt markeras som vanligt |
+| Menyns vecka är äldre | "Menyn har inte uppdaterats" — ingen dag markeras som idag |
+| Menyns vecka är senare | "Denna veckas meny finns inte uppe" — ingen dag markeras som idag |
+
+Poängen: hellre säga att vi inte vet vad som serveras idag, än att peka på en rätt
+från fel vecka.
 
 ## Titta på sidan lokalt
 
