@@ -15,12 +15,12 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-08-22T15:35:00Z",
+  "fetched": "2026-08-22T22:19:09Z",
   "week": 34,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-08-22T12:44:11Z",
+      "fetched": "2026-08-22T22:19:09Z",
       "week": 35,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
@@ -115,7 +115,7 @@ window.MENUS = {
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-08-22T12:44:11Z",
+      "fetched": "2026-08-22T22:19:09Z",
       "week": 35,
       "priceInfo": "Måndag–torsdag 156:- (13.00–14.00 146:-, Take Away 139:-) · Fredagar 163:- (13.00–14.00 153:-, Take Away 145:-) · 11.00–14.00",
       "days": [
@@ -215,16 +215,16 @@ window.MENUS = {
     },
     "adria": {
       "status": "ok",
-      "fetched": "2026-08-22T15:35:00Z",
-      "week": 34,
-      "priceInfo": "Lunch tisdag–fredag 11.30–14.00 · Dagens 165:- · Hela veckan 155:- · Hembakad focaccia och olivolja ingår · Ekologisk glutenfri pasta +20 SEK",
+      "fetched": "2026-08-22T22:19:09Z",
+      "week": 35,
+      "priceInfo": "Lunch tisdag - fredag 11:30-14:00 · Hembakad focaccia och olivolja ingår i lunchen · Dagens 165:- · Hela veckan 155:- · Ekologisk Glutenfri pasta + 20 SEK",
       "days": [
         {
           "weekday": "Tisdag",
           "dishes": [
             {
-              "name": "Salt im bocca",
-              "desc": "bankad och mjölad kalv med smör och salvia, rostad potatis, haricot verts",
+              "name": "Panerad koljafilé",
+              "desc": "rostad potatis och morot, grön ärtkräm, citron",
               "price": "165:-"
             }
           ]
@@ -233,8 +233,8 @@ window.MENUS = {
           "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Tagliatelle med blåmusslor",
-              "desc": "tomatsås, chili, vitlök, persilja",
+              "name": "Bräserad oxkind",
+              "desc": "potatismos, karamelliserad lök, skysås",
               "price": "165:-"
             }
           ]
@@ -243,8 +243,8 @@ window.MENUS = {
           "weekday": "Torsdag",
           "dishes": [
             {
-              "name": "Ugnstekt kummelfilé",
-              "desc": "kokt potatis, rostad fänkål, citronsås",
+              "name": "Gnocchi 4 formaggi",
+              "desc": "Potatisgnocchi med sås på fyra ostar, valnötter, päron",
               "price": "165:-"
             }
           ]
@@ -253,8 +253,8 @@ window.MENUS = {
           "weekday": "Fredag",
           "dishes": [
             {
-              "name": "La Carbonara",
-              "desc": "spaghetti, rostad griskind, pecorino romano, äggula, svartpeppar",
+              "name": "Vongole",
+              "desc": "Spaghetti, vongolemusslor från Adriatiska havet, chili, vitlök, persilja",
               "price": "165:-"
             }
           ]
