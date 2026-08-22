@@ -217,6 +217,22 @@ python3 -m http.server 8765
 
 Öppna sedan http://localhost:8765 i webbläsaren.
 
+## Identiteten i commits
+
+Repot har en egen `user.email` satt lokalt:
+
+```
+287733010+chimoru@users.noreply.github.com
+```
+
+Det är GitHubs anonyma adress. Den kopplar commits till kontot utan att lägga ut
+någon riktig e-post i den publika historiken.
+
+**Skicka aldrig med `-c user.email=...` när du committar här.** De 33 första
+commitarna gjordes så, med en jobbadress, och den ligger kvar i historiken —
+publik och dessutom okopplad till GitHub-kontot, så den gav ingen attribution
+heller. Låt repots egen inställning gälla.
+
 ## Lägg sidan på mobilens hemskärm
 
 Öppna `chimoru.dev/sthlmlunch` i Safari på telefonen, tryck på dela-ikonen och
