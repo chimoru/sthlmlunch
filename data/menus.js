@@ -15,22 +15,21 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-08-22T14:20:00Z",
+  "fetched": "2026-08-22T12:27:45Z",
   "week": 34,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-08-21T14:53:41Z",
-      "week": 34,
+      "fetched": "2026-08-22T12:27:45Z",
+      "week": 35,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
         {
           "weekday": "Måndag",
-          "date": "2026-08-17",
           "dishes": [
             {
-              "name": "Krispig kycklinglårfilé",
-              "desc": "med ugnsbakad potatis, parmesancréme och tomatsallad",
+              "name": "Chipotleglaserad kalv tri-tip steak",
+              "desc": "med rostad potatis och majsröra",
               "price": "165 kr",
               "tags": [
                 "kött"
@@ -40,25 +39,10 @@ window.MENUS = {
         },
         {
           "weekday": "Tisdag",
-          "date": "2026-08-18",
           "dishes": [
             {
-              "name": "Mjukbakad torskfilé",
-              "desc": "med fräst broccoli, ägg- och persiljesås, räkor och färskpotatis",
-              "price": "165 kr",
-              "tags": [
-                "fisk"
-              ]
-            }
-          ]
-        },
-        {
-          "weekday": "Onsdag",
-          "date": "2026-08-19",
-          "dishes": [
-            {
-              "name": "Wallenbergare",
-              "desc": "med brynt smör, rårörda lingon och potatispuré",
+              "name": "Kycklingfilé",
+              "desc": "med tomatrisotto och gremolata",
               "price": "165 kr",
               "tags": [
                 "kött"
@@ -67,12 +51,32 @@ window.MENUS = {
           ]
         },
         {
-          "weekday": "Torsdag",
-          "date": "2026-08-20",
+          "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Bräserat lammlägg",
-              "desc": "med örtkryddad potatisstomp, bordelaisesås och picklade rotsaker",
+              "name": "Pytt Bellman",
+              "desc": "med rödbetor, inlagd gurka och stekt ägg",
+              "price": "165 kr",
+              "tags": [
+                "kött"
+              ]
+            },
+            {
+              "name": "Fish and Chips",
+              "desc": "med tartarsås och gröna ärtor",
+              "price": "165 kr",
+              "tags": [
+                "fisk"
+              ]
+            }
+          ]
+        },
+        {
+          "weekday": "Torsdag",
+          "dishes": [
+            {
+              "name": "Tagliatelle med högrevsragu",
+              "desc": "soltorkade tomater och parmesan",
               "price": "165 kr",
               "tags": [
                 "kött"
@@ -82,11 +86,10 @@ window.MENUS = {
         },
         {
           "weekday": "Fredag",
-          "date": "2026-08-21",
           "dishes": [
             {
-              "name": "Marinerad fläsknoisette",
-              "desc": "med råstekt potatis, haricots verts och chilibearnaise",
+              "name": "Ostpanerad schnitzel",
+              "desc": "med krämig tomatsås och grönsaksris",
               "price": "165 kr",
               "tags": [
                 "kött"
@@ -142,7 +145,7 @@ window.MENUS = {
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-08-22T14:20:00Z",
+      "fetched": "2026-08-22T12:27:45Z",
       "week": 35,
       "priceInfo": "Måndag–torsdag 156:- (13.00–14.00 146:-, Take Away 139:-) · Fredagar 163:- (13.00–14.00 153:-, Take Away 145:-) · 11.00–14.00",
       "days": [
