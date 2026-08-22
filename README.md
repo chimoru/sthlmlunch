@@ -206,6 +206,17 @@ statusfältet får sidans egen färg.
 `theme-color` sätts av `app.js` utifrån `--surface`, inte som en egen hexkod, så
 färgen kan aldrig glida ifrån temat när paletten ändras.
 
+Ikonen är en tallrik — två ringar i papper mot tegel — och ritas av ett skript i
+varje storlek för sig, så linjerna blir jämna i stället för nedskalade. Ytterringen
+ligger inom 80 % av bredden, eftersom Android klipper maskerade ikoner till en
+cirkel och skulle skära av en tallrik som gick närmare kanten.
+
+`apple-mobile-web-app-title` sätter texten under ikonen till *Lunch*. Utan den
+används hela sidtiteln, som är för lång för att synas.
+
+Hamnar fel ikon på hemskärmen: iOS sparar ikonen tillsammans med genvägen och
+uppdaterar den aldrig. Ta bort genvägen, ladda om sidan i Safari, lägg till igen.
+
 ## Adressen är en kartlänk
 
 Ett klick på adressen öppnar Google Maps; resten av kortet leder till menyn.
