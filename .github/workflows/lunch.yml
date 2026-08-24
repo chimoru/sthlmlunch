@@ -1,11 +1,20 @@
 # Hämtar veckomenyerna och publicerar sidan.
 #
-# Körs vardagar 08:00 svensk tid, året runt.
+# Körs vardagsmorgnar, året runt.
 #
 # GitHubs cron känner bara UTC, så 08:00 svensk tid är två olika UTC-tider: 06:00
-# på sommaren och 07:00 på vintern. Båda är därför schemalagda, och jobbet "grind"
-# släpper bara igenom den som råkar vara klockan 8 i Stockholm just då. Den andra
-# körningen avslutas efter någon sekund utan att göra något.
+# på sommaren och 07:00 på vintern. Båda är därför schemalagda, plus en senare
+# reservtid.
+#
+# Grinden frågar INTE vad klockan är. GitHub startar schemalagda körningar när det
+# finns kapacitet, inte på utsatt minut — förseningar på en timme är normala. En
+# grind som krävde "klockan 08 i Stockholm" hoppade därför över hela dagen när
+# körningen kom 09:01, och eftersom överhoppade jobb räknas som lyckade blev det
+# varken uppdatering eller larm. Det hände 2026-08-24.
+#
+# I stället frågar grinden efter datan: har menyerna redan hämtats idag? Då spelar
+# det ingen roll när körningen råkar starta, hur många cron-tider som pekar på
+# samma dag, eller om ett tidigare försök misslyckades — nästa tar över.
 #
 # Går också att starta för hand: fliken Actions → "Hämta lunchmenyer" → Run workflow.
 
@@ -15,6 +24,7 @@ on:
   schedule:
     - cron: "0 6 * * 1-5"   # 08:00 svensk sommartid
     - cron: "0 7 * * 1-5"   # 08:00 svensk vintertid
+    - cron: "0 9 * * 1-5"   # reserv om morgonens körning försenats bort eller misslyckats
   workflow_dispatch:
 
 permissions:
@@ -27,26 +37,27 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Avgör om den här körningen är den som ska göra jobbet. Utan grinden hade
-  # menyerna hämtats två gånger om dagen, varav en gång vid fel klockslag.
+  # Avgör om den här körningen ska göra jobbet. Flera cron-tider pekar på samma
+  # dag, så någon måste hindra dubbelarbete — men utan att kunna hoppa över dagen
+  # bara för att GitHub startade sent.
   grind:
     runs-on: ubuntu-latest
     outputs:
-      kor: ${{ steps.klocka.outputs.kor }}
+      kor: ${{ steps.behov.outputs.kor }}
     steps:
-      - id: klocka
+      - uses: actions/checkout@v6
+
+      - id: behov
         run: |
-          TIMME=$(TZ=Europe/Stockholm date +%H)
-          echo "Svensk tid: ${TIMME}:00 (händelse: ${{ github.event_name }})"
+          echo "Händelse: ${{ github.event_name }}"
+          echo "Svensk tid nu: $(TZ=Europe/Stockholm date '+%Y-%m-%d %H:%M')"
+
           if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "Startad för hand — kör."
-            echo "kor=ja" >> "$GITHUB_OUTPUT"
-          elif [ "$TIMME" = "08" ]; then
-            echo "Rätt schemalagd körning — kör."
+            echo "Startad för hand — kör oavsett vad datan säger."
             echo "kor=ja" >> "$GITHUB_OUTPUT"
           else
-            echo "Fel klockslag i Stockholm — den andra cron-tiden tar den här dagen."
-            echo "kor=nej" >> "$GITHUB_OUTPUT"
+            SVAR=$(python3 tools/behovs-hamtning.py)
+            echo "kor=$SVAR" >> "$GITHUB_OUTPUT"
           fi
 
   hamta:

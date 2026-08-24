@@ -217,6 +217,31 @@ python3 -m http.server 8765
 
 Öppna sedan http://localhost:8765 i webbläsaren.
 
+## Varför grinden inte tittar på klockan
+
+`tools/behovs-hamtning.py` avgör om menyerna behöver hämtas, genom att jämföra
+`fetched` i `data/menus.js` med dagens datum i svensk tid.
+
+Den frågade tidigare vad klockan var, och krävde 08 i Stockholm. Det gick sönder
+2026-08-24: GitHub startade morgonens två schemalagda körningar 07:01 och 07:46
+UTC i stället för 06:00 och 07:00 — alltså 09:01 och 09:46 svensk tid. Grinden sa
+nej till båda, allt hoppades över, och eftersom överhoppade jobb räknas som
+lyckade blev körningarna gröna. Ingen uppdatering, inget larm.
+
+**GitHub startar schemalagda körningar när det finns kapacitet, inte på utsatt
+minut.** Förseningar på en timme är normala. Bygg aldrig en grind som kräver ett
+exakt klockslag.
+
+Att fråga efter datan i stället ger tre saker gratis:
+
+- Förseningar spelar ingen roll.
+- Flera cron-tider kan peka på samma dag; den första som hinner gör jobbet.
+- Misslyckas ett försök står `fetched` kvar på gårdagen, så nästa cron-tid gör om
+  det. Reservtiden 09:00 UTC finns just för det.
+
+Varje feltillstånd — trasig fil, oläsbar tidsstämpel, saknad fil — svarar **ja**.
+Hellre en onödig hämtning än en tyst utebliven.
+
 ## Identiteten i commits
 
 Repot har en egen `user.email` satt lokalt:
