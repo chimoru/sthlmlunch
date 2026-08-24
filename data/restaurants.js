@@ -121,6 +121,26 @@ window.RESTAURANTS = [
     linkText: "Beställ och se menyn"
   },
   {
+    id: "reggev-hummus",
+    name: "Reggev Hummus",
+    url: "https://yabie.online/reggevginga/en?deliveryType=takeAway&store=2#9d4f7805-9a57-4ace-b89b-a58403717c14",
+    section: "lunch",
+    area: "Döbelnsgatan 51",
+    walk: "",
+    note: "",
+    linkText: "Beställ och se menyn"
+  },
+  {
+    id: "akoya-sushi",
+    name: "Akoya Sushi",
+    url: "https://qopla.com/restaurant/akoya-sushi/qbg99gZ7rA/order",
+    section: "lunch",
+    area: "Döbelnsgatan 51",
+    walk: "",
+    note: "",
+    linkText: "Beställ och se menyn"
+  },
+  {
     id: "babel-deli",
     name: "Babel Deli",
     url: "https://qopla.com/restaurant/babel-deli---vasastan/qEQQeBrjz8/order",
