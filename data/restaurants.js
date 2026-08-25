@@ -88,7 +88,7 @@ window.RESTAURANTS = [
     manual: true,
     area: "Rehnsgatan 22",
     walk: "~240 m",
-    note: "Beställningen går till hela kedjan — välj Vasastan."
+    note: "Närmast: Vasastan"
   },
   {
     id: "fullmoon-wok",

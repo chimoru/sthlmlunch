@@ -366,7 +366,7 @@
       return;
     }
 
-    document.title = r.name + " — STHLM Lunch";
+    document.title = r.name + " — TVX STHLM Lunch";
     var menu = MENUS[r.id] || {};
 
     var head = el("div", "detail-head");
