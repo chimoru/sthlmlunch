@@ -18,7 +18,8 @@
  *              Ingenting hämtas automatiskt för dessa.
  *
  *   area     Valfritt. Adress eller område.
- *   walk     Valfritt. Gångtid från kontoret, t.ex. "4 min".
+ *   walk     Valfritt. Gångavstånd från kontoret, t.ex. "~250 m". Räknas ut
+ *            med ./tools/avstand.sh "Gatunamn 12".
  *   note     Valfritt. Anteckning som visas för besökaren.
  *   linkText Valfritt, bara för section "lunch". Texten på kortets länk.
  *            Standard: "Öppna menyn".
@@ -36,7 +37,7 @@ window.RESTAURANTS = [
     url: "https://maninthemoon.se/dagens-lunch/",
     section: "veckomeny",
     area: "Tegnérgatan 2C",
-    walk: "",
+    walk: "~290 m",
     note: ""
   },
   {
@@ -45,7 +46,7 @@ window.RESTAURANTS = [
     url: "https://www.sue-ellen.se/",
     section: "veckomeny",
     area: "Tulegatan 17",
-    walk: "",
+    walk: "~180 m",
     note: "Lunch 11.00–14.00. Billigare efter 13.00.",
     hint: "Menyn ligger INTE på sidan. Längre ner finns en länk med texten " +
           "\"Lunchmeny v.NN\" som pekar på en PDF hos cdn.prod.website-files.com. " +
@@ -59,7 +60,7 @@ window.RESTAURANTS = [
     url: "https://www.adriaristorante.se/menyer",
     section: "veckomeny",
     area: "Tulegatan 10",
-    walk: "",
+    walk: "~170 m",
     note: "Lunch tisdag–fredag. Ingen måndagslunch.",
     hint: "Menyn ligger INTE på sidan. Under rubriken MENYER finns en länk med " +
           "texten \"LUNCH\" som pekar på en PDF, t.ex. /s/Lunch-V-34-2026.pdf. " +
@@ -76,7 +77,7 @@ window.RESTAURANTS = [
     url: "https://order.openpos.tech/fullmoonwok/",
     section: "lunch",
     area: "Sveavägen 84",
-    walk: "",
+    walk: "~250 m",
     note: "",
     linkText: "Beställ och se menyn"
   },
@@ -86,7 +87,7 @@ window.RESTAURANTS = [
     url: "https://www.thegoodgringo.se/our-menu",
     section: "lunch",
     area: "Kungstensgatan 14",
-    walk: "",
+    walk: "~170 m",
     note: "",
     linkText: "Se menyn"
   },
@@ -96,7 +97,7 @@ window.RESTAURANTS = [
     url: "https://order.bastardburgers.com/se/sv-se",
     section: "lunch",
     area: "Rehnsgatan 22",
-    walk: "",
+    walk: "~240 m",
     note: "Välj Vasastan.",
     linkText: "Beställ och se menyn"
   },
@@ -106,7 +107,7 @@ window.RESTAURANTS = [
     url: "https://taameya.qopla.com/restaurant/taameya---t%C3%A9gnergatan/qJNKB22dq3/order",
     section: "lunch",
     area: "Tegnérgatan 18",
-    walk: "",
+    walk: "~310 m",
     note: "",
     linkText: "Beställ och se menyn"
   },
@@ -116,7 +117,7 @@ window.RESTAURANTS = [
     url: "https://qopla.com/restaurant/holy-kebab---vasastan/qQAZwgRZYW/order",
     section: "lunch",
     area: "Odengatan 45",
-    walk: "",
+    walk: "~410 m",
     note: "",
     linkText: "Beställ och se menyn"
   },
@@ -126,7 +127,7 @@ window.RESTAURANTS = [
     url: "https://yabie.online/reggevginga/en?deliveryType=takeAway&store=2#9d4f7805-9a57-4ace-b89b-a58403717c14",
     section: "lunch",
     area: "Döbelnsgatan 51",
-    walk: "",
+    walk: "~90 m",
     note: "",
     linkText: "Beställ och se menyn"
   },
@@ -136,7 +137,7 @@ window.RESTAURANTS = [
     url: "https://qopla.com/restaurant/akoya-sushi/qbg99gZ7rA/order",
     section: "lunch",
     area: "Döbelnsgatan 51",
-    walk: "",
+    walk: "~90 m",
     note: "",
     linkText: "Beställ och se menyn"
   },
@@ -146,7 +147,7 @@ window.RESTAURANTS = [
     url: "https://qopla.com/restaurant/babel-deli---vasastan/qEQQeBrjz8/order",
     section: "lunch",
     area: "Kungstensgatan 33",
-    walk: "",
+    walk: "~140 m",
     note: "",
     linkText: "Beställ och se menyn"
   }

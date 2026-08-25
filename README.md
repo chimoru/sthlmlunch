@@ -297,6 +297,25 @@ Gammal meny är bättre än en tom sida.
 `renderHome()` tömmer sina behållare först, så en omritning ersätter korten i
 stället för att lägga nya under de gamla. Ändrar du renderingen: behåll det.
 
+## Gångavståndet på korten
+
+`walk`-fältet visar avståndet från kontoret, t.ex. `~250 m`, direkt efter adressen.
+
+Siffrorna är **riktiga gångvägar längs gatorna**, inte fågelvägen — den senare
+underskattar systematiskt eftersom man måste följa kvarteren. Räkna ut ett nytt
+avstånd med:
+
+```bash
+./tools/avstand.sh "Odengatan 45"
+```
+
+Skriptet slår upp adressens koordinater hos Nominatim och låter OSRM räkna
+gångvägen. Båda är öppna tjänster utan nyckel. Kontorets koordinater ligger som
+en konstant i skriptet.
+
+Avstånden avrundas till närmaste tiotal meter och skrivs med `~`, eftersom en
+ruttberäkning är dörr-till-dörr på ungefär och inte en uppmätt sträcka.
+
 ## Adressen är en kartlänk
 
 Ett klick på adressen öppnar Google Maps; resten av kortet leder till menyn.
