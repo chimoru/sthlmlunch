@@ -277,6 +277,63 @@ window.MENUS = {
           "price": "155:-"
         }
       ]
+    },
+    "bastard-burgers": {
+      "status": "ok",
+      "manual": true,
+      "priceInfo": "Dagens lunch 135 kr, dubbel 160 kr · Pommes och dryck ingår",
+      "days": [
+        {
+          "weekday": "Måndag",
+          "dishes": [
+            {
+              "name": "Texas Bacon & BBQ",
+              "desc": "Barbequeburgare med svenskt nötkött, bacon, rödlök, sallad, dubbel ost, BBQ-sås och chipotledressing.",
+              "price": ""
+            }
+          ]
+        },
+        {
+          "weekday": "Tisdag",
+          "dishes": [
+            {
+              "name": "London Truffle",
+              "desc": "Bistroburgare med svenskt nötkött, tryffelmayo, pepperjackost, ost, picklad rödlök och sallad.",
+              "price": ""
+            }
+          ]
+        },
+        {
+          "weekday": "Onsdag",
+          "dishes": [
+            {
+              "name": "The Bastard Classic Cheese",
+              "desc": "Klassisk cheeseburgare med svenskt nötkött, pickles, dubbel ost, mayo, senap, ketchup och gul lök.",
+              "price": ""
+            }
+          ]
+        },
+        {
+          "weekday": "Torsdag",
+          "dishes": [
+            {
+              "name": "New York Original",
+              "desc": "Vår variant av gatuköksburgaren med svenskt nötkött, tomat, sallad, dubbel ost, Bastard originaldressing och rödlök.",
+              "price": ""
+            }
+          ]
+        },
+        {
+          "weekday": "Fredag",
+          "dishes": [
+            {
+              "name": "Luleå Cheese",
+              "desc": "Norrländsk cheeseburgare med svenskt nötkött, dubbel ost, rödlök och gurk- & jalapeñodressing.",
+              "price": ""
+            }
+          ]
+        }
+      ]
     }
   }
 }

@@ -94,6 +94,13 @@ jobs:
                veckomeny att hämta — deras kort länkar direkt till restaurangens
                egen sida. Hämta ingenting för dem, och lägg INTE in dem i
                data/menus.js. Saknas fältet "section" gäller "veckomeny".
+
+               HOPPA ÖVER också varje restaurang som har "manual": true. Deras meny
+               är fast och lagd för hand. Hämta inte deras sida, och lämna deras post
+               i data/menus.js exakt som den är — rör inte ett tecken, inte heller
+               "status" eller "fetched". Att försöka läsa deras sida vore både onödigt
+               och riskabelt: misslyckas det sätts status till "stale" och larmet går
+               varje morgon för en meny som aldrig ändras.
             2. Läs den nuvarande data/menus.js. Den är din utgångspunkt — du ska
                uppdatera den, inte börja om från noll.
             3. Har restaurangen ett "hint"-fält: läs det först. Det beskriver var
@@ -185,7 +192,8 @@ jobs:
               så besökaren ser dem. Tolka dem aldrig som att rätten är fri från något.
             - Är restauranglistan tom, ändra ingenting.
             - Finns en post i menus.js vars id inte längre är en "veckomeny"-restaurang
-              i restaurants.js: ta bort posten. Den visas inte på sidan ändå.
+              i restaurants.js: ta bort posten. Den visas inte på sidan ändå. Poster
+              för restauranger med "manual": true ska däremot ALLTID behållas orörda.
 
             Skriv bara filen. Committa inte, pusha inte, kör inga kommandon.
 

@@ -116,6 +116,18 @@
     return url;
   }
 
+  // Extra länk på ett veckomeny-kort, t.ex. till beställning. Måste ligga ovanpå
+  // kortets utspända klickyta, annars fångar kortets egen länk klicket och man
+  // hamnar på veckomenyn i stället.
+  function extraLank(r) {
+    var a = el("a", "extra-lank", (r.orderText || "Beställ") + " ");
+    a.appendChild(utPil());
+    a.href = r.orderUrl;
+    a.target = "_blank";
+    a.rel = "noopener";
+    return a;
+  }
+
   function adressRad(r) {
     var p = el("p", "meta");
 
@@ -326,6 +338,14 @@
 
       var foot = el("div", "card-foot");
       foot.appendChild(el("p", "price-info", menu.priceInfo || "Se hela veckomenyn →"));
+
+      if (r.orderUrl) {
+        var rad = el("p", "extra-rad");
+        rad.appendChild(extraLank(r));
+        foot.appendChild(rad);
+        if (r.note) foot.appendChild(el("p", "note-rad", r.note));
+      }
+
       a.appendChild(foot);
       return a;
     }
@@ -362,6 +382,13 @@
     link.rel = "noopener";
     link.target = "_blank";
     head.appendChild(link);
+
+    if (r.orderUrl) {
+      var extra = el("p", "extra-rad");
+      extra.appendChild(extraLank(r));
+      head.appendChild(extra);
+    }
+
     root.appendChild(head);
 
     if (r.note) root.appendChild(el("p", "note", r.note));
@@ -417,7 +444,14 @@
       root.appendChild(box);
     }
 
-    root.appendChild(el("p", "stamp", stampText(menu.fetched)));
+    // En hämtningsstämpel vore missvisande för en meny som lagts in för hand och
+    // aldrig hämtas. Säg vad som faktiskt gäller i stället.
+    if (r.manual) {
+      root.appendChild(el("p", "stamp",
+        "Fast veckomeny — samma varje vecka, inlagd för hand"));
+    } else {
+      root.appendChild(el("p", "stamp", stampText(menu.fetched)));
+    }
   }
 
   /* ---------- Färgtema ---------- */

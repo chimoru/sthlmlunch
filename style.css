@@ -135,7 +135,21 @@ section + section { margin-top: 34px; }
 
 /* Anteckning på ett Lunch-kort: en rad, ingen ruta. Håller korten låga. */
 .note-rad { margin: -8px 0 0; font-size: 13px; color: var(--muted); }
+/* Den negativa marginalen ovan drar anteckningen tätt under adressen på
+   Lunch-korten. Följer den i stället efter en länk krockar de — då behövs
+   normalt avstånd. */
+.extra-rad + .note-rad { margin-top: 6px; }
 .card-extern:hover { border-style: solid; }
+/* Extra länk på ett veckomeny-kort. Samma z-index-trick som kartlänken, så den
+   ligger ovanpå kortets utspända klickyta. */
+.extra-rad { margin: 8px 0 0; }
+.extra-lank {
+  position: relative; z-index: 1;
+  font-size: 14px; font-weight: 500; color: var(--accent); text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+}
+.extra-lank:hover { border-bottom-style: solid; }
+
 .extern-lank { margin: 0; font-size: 15px; font-weight: 400; color: var(--accent); }
 
 /* Ritad pil i stället för tecknet ↗, som iOS visar som emoji. Ärver textens

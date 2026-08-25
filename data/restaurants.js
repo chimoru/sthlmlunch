@@ -23,6 +23,13 @@
  *   note     Valfritt. Anteckning som visas för besökaren.
  *   linkText Valfritt, bara för section "lunch". Texten på kortets länk.
  *            Standard: "Öppna menyn".
+ *   manual   Valfritt, bara för section "veckomeny". true betyder att menyn är
+ *            fast och lagd för hand. Automatiken hämtar då INTE restaurangen och
+ *            rör inte dess post i menus.js. Använd för ställen med en veckomeny
+ *            som aldrig ändras.
+ *   orderUrl Valfritt, bara för section "veckomeny". Extra länk på kortet, t.ex.
+ *            till beställning. Kortet i övrigt leder fortfarande till veckomenyn.
+ *   orderText Valfritt. Texten på orderUrl-länken. Standard: "Beställ".
  *   placeId  Valfritt. Googles plats-id för restaurangen. Behövs bara om
  *            kartlänken hamnar på fel ställe — namn plus adress räcker normalt.
  *   hint     Valfritt, bara för section "veckomeny". Instruktion till
@@ -72,6 +79,18 @@ window.RESTAURANTS = [
           "Lunch serveras tisdag till fredag; ta inte med måndag."
   },
   {
+    id: "bastard-burgers",
+    name: "Bastard Burgers",
+    url: "https://bastardburgers.com/se/meny/",
+    orderUrl: "https://order.bastardburgers.com/se/sv-se",
+    orderText: "Se meny och beställ",
+    section: "veckomeny",
+    manual: true,
+    area: "Rehnsgatan 22",
+    walk: "~240 m",
+    note: "Beställningen går till hela kedjan — välj Vasastan."
+  },
+  {
     id: "fullmoon-wok",
     name: "Fullmoon Wok",
     url: "https://order.openpos.tech/fullmoonwok/",
@@ -90,16 +109,6 @@ window.RESTAURANTS = [
     walk: "~170 m",
     note: "",
     linkText: "Se menyn"
-  },
-  {
-    id: "bastard-burgers",
-    name: "Bastard Burgers",
-    url: "https://order.bastardburgers.com/se/sv-se",
-    section: "lunch",
-    area: "Rehnsgatan 22",
-    walk: "~240 m",
-    note: "Välj Vasastan.",
-    linkText: "Beställ och se menyn"
   },
   {
     id: "taameya",

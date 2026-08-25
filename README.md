@@ -297,6 +297,28 @@ Gammal meny är bättre än en tom sida.
 `renderHome()` tömmer sina behållare först, så en omritning ersätter korten i
 stället för att lägga nya under de gamla. Ändrar du renderingen: behåll det.
 
+## Fasta veckomenyer
+
+Bastard Burgers ligger i **Veckomeny** men hämtas inte. Deras dagens-lunch är
+densamma varje vecka, så menyn är lagd för hand i `data/menus.js` och posten i
+`data/restaurants.js` har `manual: true`.
+
+Automatiken instrueras att hoppa över sådana restauranger helt och lämna deras
+post orörd. Att låta den försöka läsa sidan varje morgon hade varit både onödigt
+och skadligt: misslyckas hämtningen sätts status till `stale` och larmet går varje
+dag för en meny som aldrig ändras.
+
+Veckomenysidan visar då *"Fast veckomeny — samma varje vecka, inlagd för hand"* i
+stället för en hämtningsstämpel, eftersom en tidsstämpel vore missvisande.
+
+Posten har inget `week`-fält. Menyn upprepas varje vecka, så ett veckonummer vore
+fel och skulle utlösa veckonotisen. Sidan matchar dagens dag på veckodagens namn.
+
+Kortet kan dessutom bära en extra länk via `orderUrl` och `orderText` — hos
+Bastard Burgers "Se meny och beställ". Länken ligger ovanpå kortets klickyta med
+`z-index`, samma grepp som kartlänken, så ett klick på den öppnar beställningen
+medan resten av kortet leder till veckomenyn.
+
 ## Gångavståndet på korten
 
 `walk`-fältet visar avståndet från kontoret, t.ex. `~250 m`, direkt efter adressen.
