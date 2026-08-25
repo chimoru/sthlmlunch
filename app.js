@@ -444,12 +444,9 @@
       root.appendChild(box);
     }
 
-    // En hämtningsstämpel vore missvisande för en meny som lagts in för hand och
-    // aldrig hämtas. Säg vad som faktiskt gäller i stället.
-    if (r.manual) {
-      root.appendChild(el("p", "stamp",
-        "Fast veckomeny — samma varje vecka, inlagd för hand"));
-    } else {
+    // Ingen stämpel för en handlagd meny: den hämtas aldrig, så det finns inget
+    // klockslag att redovisa.
+    if (!r.manual) {
       root.appendChild(el("p", "stamp", stampText(menu.fetched)));
     }
   }

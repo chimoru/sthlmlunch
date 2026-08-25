@@ -308,8 +308,8 @@ post orörd. Att låta den försöka läsa sidan varje morgon hade varit både o
 och skadligt: misslyckas hämtningen sätts status till `stale` och larmet går varje
 dag för en meny som aldrig ändras.
 
-Veckomenysidan visar då *"Fast veckomeny — samma varje vecka, inlagd för hand"* i
-stället för en hämtningsstämpel, eftersom en tidsstämpel vore missvisande.
+Veckomenysidan visar ingen hämtningsstämpel för sådana restauranger. Menyn hämtas
+aldrig, så det finns inget klockslag att redovisa.
 
 Posten har inget `week`-fält. Menyn upprepas varje vecka, så ett veckonummer vore
 fel och skulle utlösa veckonotisen. Sidan matchar dagens dag på veckodagens namn.
