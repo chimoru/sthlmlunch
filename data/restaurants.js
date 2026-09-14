@@ -95,12 +95,7 @@ window.RESTAURANTS = [
     manual: true,
     area: "Rehnsgatan 22",
     walk: "~240 m",
-    note: "Närmast: Vasastan",
-    offer: {
-      text: "25 % rabatt med koden",
-      code: "BASTARDDEALS25",
-      until: "2026-12-31"
-    }
+    note: "Närmast: Vasastan"
   },
   {
     id: "fullmoon-wok",
