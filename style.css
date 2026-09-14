@@ -252,6 +252,24 @@ code {
   --shadow: none;
 }
 
+/* ---------- Erbjudande ---------- */
+/* Liten men tydlig: accentfärg mot mjuk bakgrund, och koden i teckenbredd så
+   den går att läsa av utan att man tvekar om I kontra 1 eller O kontra 0. */
+.erbjudande {
+  margin: 0 0 10px;
+  padding: 7px 11px;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 13px;
+}
+.erbjudande .kod {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 600;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
 /* ---------- Appläget ---------- */
 /* Gäller bara när sidan startats från hemskärmen, inte i en vanlig webbläsare.
    I webbläsaren SKA en länk bete sig som en länk — långtryck ger förhandsvisning

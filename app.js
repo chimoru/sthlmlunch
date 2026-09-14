@@ -128,6 +128,33 @@
     return a;
   }
 
+  // Ett erbjudande visas till och med sista giltighetsdagen, svensk tid, och
+  // försvinner sedan av sig självt. Ingen behöver komma ihåg att plocka bort det.
+  //
+  // Saknas eller är "until" felskrivet visas INGENTING. Medvetet strikt: en
+  // utgången rabattkod på en publik sida är pinsam vid kassan, medan ett
+  // erbjudande som inte syns bara är ett missat tillfälle.
+  function aktivtErbjudande(r) {
+    var e = r.offer;
+    if (!e || !e.until) return null;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(e.until)) return null;
+    if (todayISO() > e.until) return null;
+    return e;
+  }
+
+  function langtDatum(iso) {
+    return new Intl.DateTimeFormat("sv-SE", { day: "numeric", month: "long", year: "numeric" })
+      .format(new Date(iso + "T12:00:00"));
+  }
+
+  function erbjudandeRad(e) {
+    var p = el("p", "erbjudande");
+    if (e.text) p.appendChild(document.createTextNode(e.text + " "));
+    if (e.code) p.appendChild(el("span", "kod", e.code));
+    p.title = "Gäller till och med " + langtDatum(e.until);
+    return p;
+  }
+
   function adressRad(r) {
     var p = el("p", "meta");
 
@@ -339,6 +366,9 @@
       var foot = el("div", "card-foot");
       foot.appendChild(el("p", "price-info", menu.priceInfo || "Se hela veckomenyn →"));
 
+      var erbjudande = aktivtErbjudande(r);
+      if (erbjudande) foot.appendChild(erbjudandeRad(erbjudande));
+
       if (r.orderUrl) {
         var rad = el("p", "extra-rad");
         rad.appendChild(extraLank(r));
@@ -382,6 +412,9 @@
     link.rel = "noopener";
     link.target = "_blank";
     head.appendChild(link);
+
+    var erbjudandeDetalj = aktivtErbjudande(r);
+    if (erbjudandeDetalj) head.appendChild(erbjudandeRad(erbjudandeDetalj));
 
     if (r.orderUrl) {
       var extra = el("p", "extra-rad");

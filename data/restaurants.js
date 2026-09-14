@@ -30,6 +30,13 @@
  *   orderUrl Valfritt, bara för section "veckomeny". Extra länk på kortet, t.ex.
  *            till beställning. Kortet i övrigt leder fortfarande till veckomenyn.
  *   orderText Valfritt. Texten på orderUrl-länken. Standard: "Beställ".
+ *   offer    Valfritt. Erbjudande som visas på kortet och veckomenysidan:
+ *              text   inledande text, t.ex. "25 % rabatt med koden"
+ *              code   själva koden, visas tydligt avskild
+ *              until  sista giltighetsdag, ÅÅÅÅ-MM-DD
+ *            Raden försvinner av sig själv dagen efter "until". Saknas eller är
+ *            "until" felskrivet visas ingenting alls — hellre ett missat
+ *            erbjudande än en utgången kod på en publik sida.
  *   placeId  Valfritt. Googles plats-id för restaurangen. Behövs bara om
  *            kartlänken hamnar på fel ställe — namn plus adress räcker normalt.
  *   hint     Valfritt, bara för section "veckomeny". Instruktion till
@@ -88,7 +95,12 @@ window.RESTAURANTS = [
     manual: true,
     area: "Rehnsgatan 22",
     walk: "~240 m",
-    note: "Närmast: Vasastan"
+    note: "Närmast: Vasastan",
+    offer: {
+      text: "25 % rabatt med koden",
+      code: "BASTARDDEALS25",
+      until: "2026-12-31"
+    }
   },
   {
     id: "fullmoon-wok",

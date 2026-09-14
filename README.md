@@ -242,6 +242,23 @@ Att fråga efter datan i stället ger tre saker gratis:
 Varje feltillstånd — trasig fil, oläsbar tidsstämpel, saknad fil — svarar **ja**.
 Hellre en onödig hämtning än en tyst utebliven.
 
+## Erbjudanden som försvinner av sig själva
+
+Fältet `offer` i `data/restaurants.js` visar en rad på kortet och veckomenysidan:
+
+```js
+offer: { text: "25 % rabatt med koden", code: "BASTARDDEALS25", until: "2026-12-31" }
+```
+
+Raden visas till och med `until` och försvinner dagen efter. Ingen behöver komma
+ihåg att plocka bort den.
+
+Saknas `until`, eller är det felskrivet, visas **ingenting alls**. Det är ett
+medvetet strikt val: en utgången rabattkod på en publik sida är pinsam vid kassan,
+medan ett erbjudande som inte syns bara är ett missat tillfälle.
+
+Gränsfallen täcks av `node tools/test-erbjudande.js`.
+
 ## Identiteten i commits
 
 Repot har en egen `user.email` satt lokalt:
