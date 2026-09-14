@@ -247,7 +247,7 @@ Hellre en onödig hämtning än en tyst utebliven.
 Fältet `offer` i `data/restaurants.js` visar en rad på kortet och veckomenysidan:
 
 ```js
-offer: { text: "25 % rabatt med koden", code: "BASTARDDEALS25", until: "2026-12-31" }
+offer: { text: "25 % rabatt med koden", code: "BASTARDDEAL25", until: "2026-12-31" }
 ```
 
 Raden visas till och med `until` och försvinner dagen efter. Ingen behöver komma

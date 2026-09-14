@@ -14,7 +14,7 @@ function grab(name) {
 let FAKE;
 eval(grab("aktivtErbjudande").replace(/todayISO\(\)/g, "FAKE"));
 
-const kod = { text: "25 % rabatt med koden", code: "BASTARDDEALS25", until: "2026-12-31" };
+const kod = { text: "25 % rabatt med koden", code: "EXEMPELKOD25", until: "2026-12-31" };
 
 const fall = [
   ["2026-09-14", kod, true,  "idag, långt innan sista dagen"],
