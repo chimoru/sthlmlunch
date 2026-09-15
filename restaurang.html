@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Håller sidan borta från sökresultat. Rabattkoder ska inte gå att googla.
+       Medvetet INGEN robots.txt som blockerar: en blockerad crawler kommer aldrig
+       in och ser den här taggen, och en redan indexerad sida blir då kvar för
+       alltid i sökresultaten. Crawlern måste få läsa sidan för att lyda den. -->
+  <meta name="robots" content="noindex, follow">
   <title>Veckomeny — TVX STHLM Lunch</title>
   <script>
     /* Körs innan sidan målas, så att man inte ser en blink av fel färger.

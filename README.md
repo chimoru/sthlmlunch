@@ -242,6 +242,25 @@ Att fråga efter datan i stället ger tre saker gratis:
 Varje feltillstånd — trasig fil, oläsbar tidsstämpel, saknad fil — svarar **ja**.
 Hellre en onödig hämtning än en tyst utebliven.
 
+## Sidan hålls borta från sökresultat
+
+Båda sidorna har `<meta name="robots" content="noindex, follow">`. Rabattkoder ska
+inte gå att googla.
+
+**Lägg inte till en `robots.txt` som blockerar crawlern.** En blockerad crawler
+kommer aldrig in och ser `noindex`, och en sida som redan hunnit indexeras blir då
+kvar i sökresultaten för alltid. Crawlern måste få läsa sidan för att kunna lyda
+taggen. (Dessutom gäller bara `robots.txt` i domänroten, som ligger i ett annat
+repo.)
+
+Vad `noindex` **inte** gör:
+
+- Sidan blir inte privat. Vem som helst med länken kommer in.
+- Repot `chimoru/sthlmlunch` är publikt, så `data/restaurants.js` går att läsa
+  direkt på GitHub utan inloggning. En rabattkod här är alltså i praktiken
+  offentlig, även med `noindex`.
+- En redan indexerad sida faller ur sökresultaten först efter dagar till veckor.
+
 ## Erbjudanden som försvinner av sig själva
 
 Fältet `offer` i `data/restaurants.js` visar en rad på kortet och veckomenysidan:
