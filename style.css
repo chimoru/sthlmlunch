@@ -44,7 +44,14 @@ body {
   margin-bottom: 32px;
 }
 .topbar .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.logo { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: .01em; font-variant: small-caps; }
+.logo {
+  margin: 0; font-size: 28px; font-weight: 400; letter-spacing: .01em;
+  font-variant: small-caps;
+  display: flex; align-items: center; gap: .34em;
+}
+/* Loggan är redan rund i sin SVG. border-radius är ett bälte till hängslena
+   mot kantutjämning, och flex: none hindrar att den kläms ihop på smal skärm. */
+.logga { width: 1.24em; height: 1.24em; flex: none; border-radius: 50%; }
 .today { margin: 0; color: var(--muted); font-size: 14.5px; font-style: italic; }
 .back { color: var(--accent); text-decoration: none; font-size: 15px; font-weight: 500; }
 
