@@ -263,7 +263,9 @@ code {
 /* Liten men tydlig: accentfärg mot mjuk bakgrund, och koden i teckenbredd så
    den går att läsa av utan att man tvekar om I kontra 1 eller O kontra 0. */
 .erbjudande {
-  margin: 0 0 10px;
+  /* Toppmarginal, annars klistrar sig rutan mot pristexten ovanför — den har
+     ingen egen bottenmarginal. */
+  margin: 14px 0 10px;
   padding: 7px 11px;
   border-radius: var(--radius);
   background: var(--accent-soft);
