@@ -15,12 +15,12 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-09-22T11:10:12Z",
+  "fetched": "2026-09-23T11:01:35Z",
   "week": 39,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-09-22T11:10:12Z",
+      "fetched": "2026-09-23T11:01:35Z",
       "week": 39,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
@@ -125,7 +125,7 @@ window.MENUS = {
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-09-22T11:10:12Z",
+      "fetched": "2026-09-23T11:01:35Z",
       "week": 39,
       "priceInfo": "Lunchpris Måndag - torsdag 160:- (13:00-14:00 150:- Take Away 145:-) · Fredagar 170:- (13:00-14:00 160:- Take Away 150:-) · 21/9 - 25/9 11:00 - 14:00",
       "days": [
@@ -225,16 +225,16 @@ window.MENUS = {
     },
     "adria": {
       "status": "ok",
-      "fetched": "2026-09-22T11:10:12Z",
-      "week": 38,
+      "fetched": "2026-09-23T11:01:35Z",
+      "week": 39,
       "priceInfo": "Lunch tisdag - fredag 11:30-14:00 · Hembakad focaccia och olivolja ingår i lunchen · Dagens 165:- · Hela veckan 155:-",
       "days": [
         {
           "weekday": "Tisdag",
           "dishes": [
             {
-              "name": "All´Amatriciana",
-              "desc": "Färska Maccheroni, San Marzano tomatsås, rostad griskind, svartpeppar, pecorino romano.",
+              "name": "Ragù",
+              "desc": "Färska Tagliatelle med nöt- och kalvkött, morot, lök, selleri, tomat, örter, Parmigiano.",
               "price": "165:-"
             }
           ]
@@ -243,8 +243,8 @@ window.MENUS = {
           "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Halstrad gulfenad tonfisk",
-              "desc": "ugnsbakad fänkål, puttanescasås på tomat, kapris, taggiascheoliver, sardell.",
+              "name": "Tomatbaserad fisk- och skaldjurgryta",
+              "desc": "med potatis, zucchini, krutonger, vild fänkål.",
               "price": "165:-"
             }
           ]
@@ -253,8 +253,8 @@ window.MENUS = {
           "weekday": "Torsdag",
           "dishes": [
             {
-              "name": "Alla Nerano",
-              "desc": "Spaghetti, friterad zucchini, provoloneost, Parmigiano.",
+              "name": "Saltimbocca",
+              "desc": "Bankat kalvkött med parmaskinka, stekt i smör och salvia. Serveras med rostad potatis, kokt morot.",
               "price": "165:-"
             }
           ]
@@ -263,8 +263,8 @@ window.MENUS = {
           "weekday": "Fredag",
           "dishes": [
             {
-              "name": "Cotoletta Bolognese",
-              "desc": "Fläskschnitzel med parmaskinka, parmigiano. Serveras med konfiterade Datterinitomater, friterad basilika.",
+              "name": "Färska Tagliatelle",
+              "desc": "blandad svamp, smör, salvia, vitlök, Parmigiano.",
               "price": "165:-"
             }
           ]
