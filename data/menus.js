@@ -15,12 +15,12 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-09-24T11:19:50Z",
+  "fetched": "2026-09-25T11:24:37Z",
   "week": 39,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-09-24T11:19:50Z",
+      "fetched": "2026-09-25T11:24:37Z",
       "week": 39,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
@@ -125,7 +125,7 @@ window.MENUS = {
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-09-24T11:19:50Z",
+      "fetched": "2026-09-25T11:24:37Z",
       "week": 39,
       "priceInfo": "Lunchpris Måndag - torsdag 160:- (13:00-14:00 150:- Take Away 145:-) · Fredagar 170:- (13:00-14:00 160:- Take Away 150:-) · 21/9 - 25/9 11:00 - 14:00",
       "days": [
@@ -225,7 +225,7 @@ window.MENUS = {
     },
     "adria": {
       "status": "ok",
-      "fetched": "2026-09-24T11:19:50Z",
+      "fetched": "2026-09-25T11:24:37Z",
       "week": 39,
       "priceInfo": "Lunch tisdag - fredag 11:30-14:00 · Hembakad focaccia och olivolja ingår i lunchen · Dagens 165:- · Hela veckan 155:-",
       "days": [
