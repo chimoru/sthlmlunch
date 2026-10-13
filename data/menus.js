@@ -15,12 +15,12 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-10-12T14:44:50Z",
+  "fetched": "2026-10-13T13:47:10Z",
   "week": 42,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-10-12T14:44:50Z",
+      "fetched": "2026-10-13T13:47:10Z",
       "week": 42,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
@@ -110,7 +110,7 @@ window.MENUS = {
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-10-12T14:44:50Z",
+      "fetched": "2026-10-13T13:47:10Z",
       "week": 42,
       "priceInfo": "Lunchpris Måndag - torsdag 160:- (13:00-14:00 150:- Take Away 145:-) · Fredagar 170:- (13:00-14:00 160:- Take Away 150:-) · 12/10 - 16/10 11:00 - 14:00",
       "days": [
@@ -209,17 +209,17 @@ window.MENUS = {
       ]
     },
     "adria": {
-      "status": "stale",
-      "fetched": "2026-10-09T06:00:00Z",
-      "week": 41,
+      "status": "ok",
+      "fetched": "2026-10-13T13:47:10Z",
+      "week": 42,
       "priceInfo": "Lunch tisdag - fredag 11:30-14:00 · Hembakad focaccia och olivolja ingår i lunchen · Dagens 165:- · Hela veckan 155:-",
       "days": [
         {
           "weekday": "Tisdag",
           "dishes": [
             {
-              "name": "Färska tagliatelle med färsk tonfisk",
-              "desc": "datterinitomater, kapris, taggiascheoliver, chili, vitlök.",
+              "name": "Parmigiana di melanzane",
+              "desc": "Gratinerad aubergine med San Marzano tomatsås, fior di latte, basilika, Parmigiano.",
               "price": "165:-"
             }
           ]
@@ -228,8 +228,8 @@ window.MENUS = {
           "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Bräserad oxkind",
-              "desc": "med potatismos, smörslungade morrötter, inlagd rödlök, skysås.",
+              "name": "Polpette",
+              "desc": "Köttbullar på nöt och fläsk i tomatsås, örter, krämig polenta, gröna ärtor.",
               "price": "165:-"
             }
           ]
@@ -238,8 +238,8 @@ window.MENUS = {
           "weekday": "Torsdag",
           "dishes": [
             {
-              "name": "Risotto ai funghi",
-              "desc": "Risotto på carnaroliris, blandad svamp, jordärtskockschips, Parmigiano.",
+              "name": "Lasagna di mare",
+              "desc": "Fisk- och skaldjurslasagne, skaldjursbechamel, citron zest.",
               "price": "165:-"
             }
           ]
@@ -248,8 +248,8 @@ window.MENUS = {
           "weekday": "Fredag",
           "dishes": [
             {
-              "name": "Ragù d’agnello",
-              "desc": "Färska tagliatelle med lammragu med morot, lök, selleri, tomat, rödvin, örter, Parmigiano.",
+              "name": "Porchetta",
+              "desc": "Rullad grillad fläsksida med örter, potatismos, haricot verts, skysås.",
               "price": "165:-"
             }
           ]
