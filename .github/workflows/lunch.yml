@@ -22,9 +22,14 @@ name: Hämta lunchmenyer
 
 on:
   schedule:
-    - cron: "0 6 * * 1-5"   # 08:00 svensk sommartid
-    - cron: "0 7 * * 1-5"   # 08:00 svensk vintertid
-    - cron: "0 9 * * 1-5"   # reserv om morgonens körning försenats bort eller misslyckats
+    # Avsiktligt udda minuter. Jämna timslag är de mest överbelastade hos GitHub,
+    # och under oktober 2026 startade körningarna 4–7 timmar för sent — alltså
+    # efter lunch, vilket gjorde sidan oanvändbar just när den behövdes.
+    # Tiderna i UTC, med svensk sommar- respektive vintertid inom parentes.
+    - cron: "7 6 * * 1-5"    # 08:07 / 07:07
+    - cron: "23 7 * * 1-5"   # 09:23 / 08:23
+    - cron: "41 8 * * 1-5"   # 10:41 / 09:41
+    - cron: "13 10 * * 1-5"  # 12:13 / 11:13 — sista utvägen
   workflow_dispatch:
 
 permissions:
@@ -126,12 +131,13 @@ jobs:
             Därefter "window.MENUS = " följt av ETT objekt i STRIKT JSON:
 
             {
-              "fetched": "<nu, ISO 8601 med Z>",
+              "fetched": "<lämna tom sträng, workflowet stämplar den riktiga tiden>",
               "week": <veckonummer som heltal>,
               "restaurants": {
                 "<restaurangens id>": {
                   "status": "ok" | "stale" | "error",
-                  "fetched": "<när just denna hämtades, ISO 8601 med Z>",
+                  "fetched": "<lämna orörd om du behåller gammal data, annars tom
+                             sträng — workflowet fyller i den riktiga tiden>",
                   "week": <veckonummer som RESTAURANGENS sida anger, heltal.
                            Utelämna fältet helt om sidan inte anger något.>,
                   "priceInfo": "<prisuppgift ordagrant från sidan, eller \"\">",
@@ -174,7 +180,8 @@ jobs:
               Radera aldrig data du inte kunde ersätta.
             - Finns ingen gammal data alls för en restaurang som inte gick att läsa:
               status "error" och "days": [].
-            - Lyckas hämtningen: status "ok" och "fetched" satt till nu.
+            - Lyckas hämtningen: status "ok". Rör inte "fetched" — du vet inte vad
+              klockan är, och workflowet stämplar den åt dig direkt efteråt.
             - Saknar en dag meny på sidan (t.ex. stängt): ta med dagen med "dishes": [].
             - "date" skriver du BARA om sidan faktiskt tryckt ett datum för dagen.
               Räkna aldrig fram datum ur ett veckonummer och gissa aldrig — utelämna
@@ -196,6 +203,12 @@ jobs:
               för restauranger med "manual": true ska däremot ALLTID behållas orörda.
 
             Skriv bara filen. Committa inte, pusha inte, kör inga kommandon.
+
+      # A clock is not something to ask a model for. Claude used to write the
+      # timestamp from a prompt that said "now", and guessed the scheduled hour
+      # instead — the page claimed 08:00 for runs that happened after 12:00.
+      - name: Stamp the real fetch time
+        run: python3 tools/stamp_fetch_time.py
 
       # Vakten: är filen hel? Annars avbryts hela körningen här och nu,
       # ingenting committas, och den gamla sidan ligger kvar.

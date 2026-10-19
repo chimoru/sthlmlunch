@@ -242,6 +242,37 @@ Att fråga efter datan i stället ger tre saker gratis:
 Varje feltillstånd — trasig fil, oläsbar tidsstämpel, saknad fil — svarar **ja**.
 Hellre en onödig hämtning än en tyst utebliven.
 
+## Tidsstämpeln skrivs av maskinen, inte av modellen
+
+`tools/stamp_fetch_time.py` körs direkt efter att Claude skrivit `data/menus.js`
+och fyller i den riktiga UTC-tiden.
+
+Tidigare skrev Claude själv tidsstämpeln, från en instruktion som bara sa "nu".
+En språkmodell har ingen klocka, så den gissade — oftast på den schemalagda
+timmen. Den 16 oktober 2026 påstod sidan 08:00 fast körningen skedde 12:57, och
+tre av de fyra föregående dagarna hade samma fel.
+
+**Fråga aldrig en modell vad klockan är.** Allt som kan mätas ska mätas.
+
+Skriptet rör inte allt: en restaurang med status `stale` eller `error` behåller
+sin gamla tidsstämpel, så sidan kan fortsätta visa när den senast lästes med
+framgång. En handlagd meny saknar tidsstämpel helt och lämnas därhän.
+
+## Schemat ligger på udda minuter
+
+Cron-tiderna är `7 6`, `23 7`, `41 8` och `13 10` i UTC — alltså 08:07, 09:23,
+10:41 och 12:13 svensk sommartid.
+
+De jämna timslagen är de mest överbelastade hos GitHub, eftersom alla
+schemalägger `0 * * * *`. Under oktober 2026 startade körningarna 4–7 timmar för
+sent, alltså efter lunch, vilket gjorde sidan oanvändbar just när den behövdes.
+
+Fyra tider i stället för tre kostar ingenting, eftersom grinden ser till att bara
+den första som hinner fram gör jobbet. De senare blir automatiskt reserver.
+
+GitHub lovar aldrig när en schemalagd körning startar. Udda minuter och fler
+försök förbättrar oddsen — de garanterar ingenting.
+
 ## Sidan hålls borta från sökresultat
 
 Båda sidorna har `<meta name="robots" content="noindex, follow">`. Rabattkoder ska
