@@ -179,6 +179,52 @@
   // Pil som pekar ut ur sidan, ritad i stället för skriven. Tecknet ↗ har
   // emojiform som standard på iOS och blev en blå ruta i telefonen — en ritad
   // pil ärver textens färg och storlek och ser likadan ut överallt.
+  // An outlined triangle rather than a filled one: the page is set in a serif
+  // face with hairline rules, and a solid warning sign would shout over it.
+  // currentColor makes it follow the warning colour in both themes.
+  function warningIcon() {
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 16 16");
+    svg.setAttribute("class", "varningsikon");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+
+    var triangle = document.createElementNS(ns, "path");
+    triangle.setAttribute("d", "M8 1.9 15 14.2H1z");
+    triangle.setAttribute("fill", "none");
+    triangle.setAttribute("stroke", "currentColor");
+    triangle.setAttribute("stroke-width", "1.4");
+    triangle.setAttribute("stroke-linejoin", "round");
+
+    var stroke = document.createElementNS(ns, "path");
+    stroke.setAttribute("d", "M8 6.4v3.1");
+    stroke.setAttribute("stroke", "currentColor");
+    stroke.setAttribute("stroke-width", "1.4");
+    stroke.setAttribute("stroke-linecap", "round");
+
+    var dot = document.createElementNS(ns, "circle");
+    dot.setAttribute("cx", "8");
+    dot.setAttribute("cy", "11.7");
+    dot.setAttribute("r", "0.85");
+    dot.setAttribute("fill", "currentColor");
+
+    svg.appendChild(triangle);
+    svg.appendChild(stroke);
+    svg.appendChild(dot);
+    return svg;
+  }
+
+  // A warning line: icon plus text. Only for things that are actually wrong —
+  // the neutral "info" notice deliberately has no icon, so a perfectly normal
+  // weekend does not look like a problem.
+  function warningLine(text) {
+    var p = el("p", "status");
+    p.appendChild(warningIcon());
+    p.appendChild(document.createTextNode(text));
+    return p;
+  }
+
   function utPil() {
     var NS = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(NS, "svg");
@@ -343,13 +389,17 @@
       a.appendChild(adressRad(r));
 
       if (menu.status === "stale") {
-        a.appendChild(el("p", "status", "Kunde inte läsas idag — visar senast hämtade meny"));
+        a.appendChild(warningLine("Kunde inte läsas idag — visar senast hämtade meny"));
       } else if (menu.status === "error" || !menu.days) {
-        a.appendChild(el("p", "status", "Ingen meny kunde läsas från restaurangens sida"));
+        a.appendChild(warningLine("Ingen meny kunde läsas från restaurangens sida"));
       }
 
       var notice = weekNotice(menu);
-      if (notice) a.appendChild(el("p", notice.level, notice.text));
+      if (notice) {
+        a.appendChild(notice.level === "warn"
+          ? warningLine(notice.text)
+          : el("p", notice.level, notice.text));
+      }
 
       var day = menuAppliesNow(menu) ? findToday(menu.days) : null;
       var dishes = (day && day.dishes) ? day.dishes : [];
@@ -427,12 +477,16 @@
     if (r.note) root.appendChild(el("p", "note", r.note));
 
     var notice = weekNotice(menu);
-    if (notice) root.appendChild(el("p", notice.level, notice.text));
+    if (notice) {
+      root.appendChild(notice.level === "warn"
+        ? warningLine(notice.text)
+        : el("p", notice.level, notice.text));
+    }
 
     if (menu.status === "stale") {
-      root.appendChild(el("p", "status", "Kunde inte läsas vid senaste försöket. " + stampText(menu.fetched) + "."));
+      root.appendChild(warningLine("Kunde inte läsas vid senaste försöket. " + stampText(menu.fetched) + "."));
     } else if (menu.status === "error" || !menu.days || !menu.days.length) {
-      root.appendChild(el("p", "status", "Ingen meny kunde läsas. Öppna restaurangens egen sida ovan."));
+      root.appendChild(warningLine("Ingen meny kunde läsas. Öppna restaurangens egen sida ovan."));
     }
 
     var todayDay = menuAppliesNow(menu) ? findToday(menu.days) : null;

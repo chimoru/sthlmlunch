@@ -207,10 +207,16 @@ section + section { margin-top: 34px; }
   font-variant: small-caps; letter-spacing: .1em; }
 
 /* ---------- Status ---------- */
+/* Varningsrad: ikon plus text, med ikonen överst så den syns även när texten
+   går över flera rader. Flex i stället för inline, annars hänger ikonen i
+   textens baslinje och hamnar snett. */
 .status {
-  font-size: 13px; padding: 8px 11px; border-radius: 8px; margin: 0 0 14px;
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13px; padding: 9px 11px; border-radius: 8px; margin: 0 0 14px;
   background: var(--warn-soft); color: var(--warn);
+  border-left: 3px solid var(--warn);
 }
+.varningsikon { flex: none; width: 15px; height: 15px; margin-top: 1px; }
 /* Neutral notis: inget är fel, men värt att nämna. Skiljs medvetet från
    .status så att en helt normal helg inte ser ut som ett problem. */
 .info {
