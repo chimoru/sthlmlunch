@@ -260,7 +260,7 @@ framgång. En handlagd meny saknar tidsstämpel helt och lämnas därhän.
 
 ## Schemat ligger på udda minuter
 
-Cron-tiderna är `7 6`, `23 7`, `41 8` och `13 10` i UTC — alltså 08:07, 09:23,
+Måndagar och tisdagar är cron-tiderna `7 6`, `23 7`, `41 8` och `13 10` i UTC — alltså 08:07, 09:23,
 10:41 och 12:13 svensk sommartid.
 
 De jämna timslagen är de mest överbelastade hos GitHub, eftersom alla
@@ -272,6 +272,12 @@ den första som hinner fram gör jobbet. De senare blir automatiskt reserver.
 
 **Udda minuter hjälpte inte.** Veckan efter ändringen startade körningarna
 fortfarande 6–9 timmar sent. Måndagens första hämtning landar därför efter lunch.
+
+**Onsdag–fredag körs inte alls.** Menyerna är veckomenyer, så efter måndag och
+tisdag finns veckan redan i datan, och en körning skulle bara hämta samma meny
+igen. Tisdag är kvar som reserv för ställen som lägger ut sent. Priset är att en
+rättelse mitt i veckan inte syns förrän söndag, och att två misslyckade dagar i
+rad inte prövas igen förrän dess — då finns Run workflow-knappen.
 
 **Därför körs även söndagar**, tre gånger under dagen. Restaurangerna lägger
 oftast ut nästa veckas meny fredag eller helgen, och en söndagskörning hinner

@@ -1,6 +1,9 @@
 # Hämtar veckomenyerna och publicerar sidan.
 #
-# Körs vardagsmorgnar och söndagar, året runt.
+# Körs söndagar, måndagar och tisdagar, året runt.
+# Wednesday to Friday are skipped on purpose: the menus are weekly, so by then
+# the week is already fetched and a run would only fetch the same menu again.
+# Tuesday stays as a fallback for restaurants that publish late.
 #
 # GitHubs cron känner bara UTC, så 08:00 svensk tid är två olika UTC-tider: 06:00
 # på sommaren och 07:00 på vintern. Båda är därför schemalagda, plus en senare
@@ -26,10 +29,11 @@ on:
     # och under oktober 2026 startade körningarna 4–7 timmar för sent — alltså
     # efter lunch, vilket gjorde sidan oanvändbar just när den behövdes.
     # Tiderna i UTC, med svensk sommar- respektive vintertid inom parentes.
-    - cron: "7 6 * * 1-5"    # 08:07 / 07:07
-    - cron: "23 7 * * 1-5"   # 09:23 / 08:23
-    - cron: "41 8 * * 1-5"   # 10:41 / 09:41
-    - cron: "13 10 * * 1-5"  # 12:13 / 11:13 — sista utvägen
+    # Monday and Tuesday only, see the note at the top of the file.
+    - cron: "7 6 * * 1-2"    # 08:07 / 07:07
+    - cron: "23 7 * * 1-2"   # 09:23 / 08:23
+    - cron: "41 8 * * 1-2"   # 10:41 / 09:41
+    - cron: "13 10 * * 1-2"  # 12:13 / 11:13 — sista utvägen
     # Sunday runs pick up next week's menus, which restaurants usually publish
     # on Friday or over the weekend. Weekday runs start six to nine hours late
     # on GitHub, so Monday's first run lands after lunch; a Sunday run finishes
