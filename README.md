@@ -270,6 +270,14 @@ sent, alltså efter lunch, vilket gjorde sidan oanvändbar just när den behövd
 Fyra tider i stället för tre kostar ingenting, eftersom grinden ser till att bara
 den första som hinner fram gör jobbet. De senare blir automatiskt reserver.
 
+**Udda minuter hjälpte inte.** Veckan efter ändringen startade körningarna
+fortfarande 6–9 timmar sent. Måndagens första hämtning landar därför efter lunch.
+
+**Därför körs även söndagar**, tre gånger under dagen. Restaurangerna lägger
+oftast ut nästa veckas meny fredag eller helgen, och en söndagskörning hinner
+klart före måndag morgon hur sent den än startar. Tisdag–fredag är förseningen
+mindre viktig: veckomenyn hämtades redan, och sidan visar rätt dags rätt ur den.
+
 GitHub lovar aldrig när en schemalagd körning startar. Udda minuter och fler
 försök förbättrar oddsen — de garanterar ingenting.
 
