@@ -171,5 +171,15 @@ window.RESTAURANTS = [
     walk: "~140 m",
     note: "",
     linkText: "Beställ och se menyn"
+  },
+  {
+    id: "zios-pasta",
+    name: "Zios Pasta",
+    url: "https://www.ziospasta.se/meny/",
+    section: "lunch",
+    area: "Döbelnsgatan 34D",
+    walk: "~310 m",
+    note: "",
+    linkText: "Se menyn"
   }
 ]
