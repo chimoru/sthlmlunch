@@ -15,21 +15,21 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-11-03T14:01:20Z",
-  "week": 45,
+  "fetched": "2026-11-08T14:16:01Z",
+  "week": 46,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-11-03T14:01:20Z",
-      "week": 45,
+      "fetched": "2026-11-08T14:16:01Z",
+      "week": 46,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
         {
           "weekday": "Måndag",
           "dishes": [
             {
-              "name": "Kycklingfilé",
-              "desc": "med krämig pesto- och parmesansås, rostade tomater och ris",
+              "name": "Kyckling Bourguignon",
+              "desc": "med champinjoner och potatispuré",
               "price": "165 kr"
             }
           ]
@@ -38,13 +38,13 @@ window.MENUS = {
           "weekday": "Tisdag",
           "dishes": [
             {
-              "name": "Fläsklägg",
-              "desc": "med rotmos, senap och persiljesky",
+              "name": "Pytt Bellman",
+              "desc": "med saltgurka, rödbetor och stekt ägg",
               "price": "165 kr"
             },
             {
-              "name": "Stekt rödingfilé",
-              "desc": "med risotto och basilikagremolata",
+              "name": "Fiskgryta",
+              "desc": "med saffran, räkor och krutonger",
               "price": "165 kr"
             }
           ]
@@ -53,8 +53,8 @@ window.MENUS = {
           "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Wallenbergare",
-              "desc": "med gräddsås, lingon, ärtor och potatispuré",
+              "name": "Gulaschgryta",
+              "desc": "med smetana och ris",
               "price": "165 kr"
             }
           ]
@@ -63,13 +63,13 @@ window.MENUS = {
           "weekday": "Torsdag",
           "dishes": [
             {
-              "name": "Bratwurst",
-              "desc": "med smörstekt spetskål, potatisstomp och krämig senapssås",
+              "name": "Ärtsoppa",
+              "desc": "med pannkakor",
               "price": "165 kr"
             },
             {
-              "name": "Fish and chips",
-              "desc": "med tartardressing och gröna ärtor",
+              "name": "Teriyaki-lax",
+              "desc": "med ponzudressing, kimchi och ris",
               "price": "165 kr"
             }
           ]
@@ -78,8 +78,8 @@ window.MENUS = {
           "weekday": "Fredag",
           "dishes": [
             {
-              "name": "Schnitzel",
-              "desc": "med bearnaise, rödvinssås, haricots verts och stekt potatis",
+              "name": "Grillad fläskkarré",
+              "desc": "med rostad paprika och grönpepparsås",
               "price": "165 kr"
             }
           ]
@@ -102,29 +102,29 @@ window.MENUS = {
           "price": "210 kr"
         },
         {
-          "name": "Pumparisotto",
-          "desc": "med burrata, salvia och parmesan",
+          "name": "Tortellini",
+          "desc": "fylld med spenat och ricotta med caponata",
           "price": "165 kr"
         }
       ]
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-11-03T14:01:20Z",
-      "week": 45,
-      "priceInfo": "Lunchpris Måndag - torsdag 160:- (13:00-14:00 150:- Take Away 145:-) · Fredagar 170:- (13:00-14:00 160:- Take Away 150:-) · 2/11 - 6/11 11:00 - 14:00",
+      "fetched": "2026-11-08T14:16:01Z",
+      "week": 46,
+      "priceInfo": "Lunchpris Måndag - torsdag 160:- (13:00-14:00 150:- Take Away 145:-) · Fredagar 170:- (13:00-14:00 160:- Take Away 150:-) · 9/11 - 13/11 11:00 - 14:00",
       "days": [
         {
           "weekday": "Måndag",
           "dishes": [
             {
-              "name": "Peppargrillad opanerad fläskschnitzel",
-              "desc": "chipotlebearnaise, picklad rödlök, persiljestekt potatis (Ä)",
+              "name": "Helgrillad fläskfilé",
+              "desc": "bbq-sås, ranchdressing, cheesy fries (L,Ä)",
               "price": "160:-"
             },
             {
-              "name": "Vitvinspocherad hokifilé",
-              "desc": "vitvinssås, räkor, svartkål, spenat, potatis (L)",
+              "name": "Dillhalstrad hokifilé",
+              "desc": "romssås, picklad lök, ruccola, persiljeslungad potatis (Ä)",
               "price": "160:-"
             }
           ]
@@ -138,8 +138,8 @@ window.MENUS = {
               "price": "160:-"
             },
             {
-              "name": "Lax- & saffransfylld flundra",
-              "desc": "hummersås, crudité, parmesankrossad potatis (Ä,L)",
+              "name": "Flundra, fylld med räk- & laxfärs",
+              "desc": "krämig bouillabaisse, lök, dill, citronkrossad potatis (Ä,L)",
               "price": "160:-"
             }
           ]
@@ -148,13 +148,13 @@ window.MENUS = {
           "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Nattbakad oxinnanlår",
-              "desc": "calvadosgräddsås, äppelchutney, råstekt potatis (L)",
+              "name": "Chili- & vitlöksstekt majskyckling",
+              "desc": "khao soicocosås, friterade nudlar, pickles, jasminris (Ä)",
               "price": "160:-"
             },
             {
-              "name": "Jamaican jerked kap kummel",
-              "desc": "het mangosalsa, gräddfil, fried rice (L)",
+              "name": "Citronångad sej",
+              "desc": "örtagårdsgräddsås, räkor, spenat, potatis (L)",
               "price": "160:-"
             }
           ]
@@ -163,13 +163,13 @@ window.MENUS = {
           "weekday": "Torsdag",
           "dishes": [
             {
-              "name": "Rosmarin- & timjanstekt fläskhare",
-              "desc": "balsamicosky, gräddkokt potatis, baconcrisp (L)",
+              "name": "Pancetta- taleggiofylld pannbiff",
+              "desc": "soltorkad tomat, basilika, grädde, örtstekt potatis (L,Ä,G)",
               "price": "160:-"
             },
             {
-              "name": "Parmesan- & dragonstekt sejrygg",
-              "desc": "färskostkräm, dill-, citronrostad potatis (L,G)",
+              "name": "Misobakad nilaborre",
+              "desc": "teriyakisås, limegräddfil, salladslök, picklad lök, jasminris (L)",
               "price": "160:-"
             }
           ]
@@ -178,13 +178,13 @@ window.MENUS = {
           "weekday": "Fredag",
           "dishes": [
             {
-              "name": "Helstekt tempererad oxfilé",
-              "desc": "bearnaisesås, marinerade bönor, pommes frites (Ä) — varje fredag",
+              "name": "(varje fredag) Helstekt tempererad oxfilé",
+              "desc": "bearnaisesås, marinerade bönor, pommes frites (Ä)",
               "price": "170:-"
             },
             {
-              "name": "Grillad lax",
-              "desc": "höstprimörsallad, parmesancrème, friterad lök (Ä,L)",
+              "name": "Grillad gös",
+              "desc": "vitt vin, grädde, druvor, mangoldskott, citronslungad potatis (L)",
               "price": "170:-"
             }
           ]
@@ -192,34 +192,34 @@ window.MENUS = {
       ],
       "always": [
         {
-          "name": "Fisksoppa",
+          "name": "FISKSOPPA",
           "desc": "het aioli, vitlöksbröd (G,Ä)",
           "price": ""
         },
         {
-          "name": "Vegetarisk",
-          "desc": "Vegansk hot chili, tomat, lök, gräddfil, ost, isberg, vetetortilla (L,Ä)",
+          "name": "VEGETARISK",
+          "desc": "Dill- & tomatkryddad linssallad rostad blomkål, fetaost yoghurt (L)",
           "price": ""
         },
         {
-          "name": "Soulfood",
-          "desc": "Koreansk pulled pork, sesamfrö, kimchi, srirachamayo, gurka, isberg, bao buns (G,Ä)",
+          "name": "SOULFOOD",
+          "desc": "Texas xxx hot chili, gräddfil, isberg, tomat, lök, ost, vetetortilla (L,G)",
           "price": ""
         }
       ]
     },
     "adria": {
       "status": "ok",
-      "fetched": "2026-11-03T14:01:20Z",
-      "week": 45,
+      "fetched": "2026-11-08T14:16:01Z",
+      "week": 46,
       "priceInfo": "Lunch tisdag - fredag 11:30-14:00 · Hembakad focaccia och olivolja ingår i lunchen · Dagens 165:- · Hela veckan 155:-",
       "days": [
         {
           "weekday": "Tisdag",
           "dishes": [
             {
-              "name": "Minestrone",
-              "desc": "Italiensk grönsakssoppa med buljong, morot, lök, selleri, stjärnpasta, Parmigiano.",
+              "name": "Ragù Bolognese",
+              "desc": "Färska Tagliatelle med nötfärsragu, tomat, morot, lök, selleri, vin, Parmigiano.",
               "price": "165:-"
             }
           ]
@@ -228,8 +228,8 @@ window.MENUS = {
           "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Bräserad fläskkarré",
-              "desc": "med svampsås, smörslungad savoykål, chili, morot.",
+              "name": "Panerad koljafilé",
+              "desc": "klyftpotatis, sauterad grönkål, chili, vitlök, tartarsås.",
               "price": "165:-"
             }
           ]
@@ -238,8 +238,8 @@ window.MENUS = {
           "weekday": "Torsdag",
           "dishes": [
             {
-              "name": "Tagliatelle al salmone",
-              "desc": "Tagliatelle med lax, grädde, citronzest, datterini tomater, dill, svartpeppar.",
+              "name": "Risotto Pescatora",
+              "desc": "Tomatrisotto på Carnaroliris, calamari, vongole, scampi, vitlök, persilja.",
               "price": "165:-"
             }
           ]
@@ -248,8 +248,8 @@ window.MENUS = {
           "weekday": "Fredag",
           "dishes": [
             {
-              "name": "Scaloppine",
-              "desc": "Bankat kalvkött med smör, vitt vin, rosmarin, parmesanpommes, vitlöksslungad haricot verts.",
+              "name": "Guancia",
+              "desc": "Bräserad oxkind, rödvinssky, blomkålspuré, Parmigiano, haricot verts, morot.",
               "price": "165:-"
             }
           ]
