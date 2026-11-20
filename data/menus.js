@@ -281,7 +281,7 @@ window.MENUS = {
     "bastard-burgers": {
       "status": "ok",
       "manual": true,
-      "priceInfo": "Dagens lunch 135 kr, dubbel 160 kr · Pommes och dryck ingår",
+      "priceInfo": "Dagens lunch 141 kr, dubbel 171 kr · Pommes och dryck ingår",
       "days": [
         {
           "weekday": "Måndag",
