@@ -15,12 +15,12 @@
  * Sidan matchar då på veckodagsnamn istället — vi hittar inte på datum.
  */
 window.MENUS = {
-  "fetched": "2026-11-22T15:13:59Z",
+  "fetched": "2026-11-23T17:56:37Z",
   "week": 48,
   "restaurants": {
     "man-in-the-moon": {
       "status": "ok",
-      "fetched": "2026-11-22T15:13:59Z",
+      "fetched": "2026-11-23T17:56:37Z",
       "week": 48,
       "priceInfo": "Dagens Lunch 165 kr Inkl. salladsbuffé och kaffe · Serveras vardagar kl 11.00-14.00",
       "days": [
@@ -110,7 +110,7 @@ window.MENUS = {
     },
     "sue-ellen": {
       "status": "ok",
-      "fetched": "2026-11-22T15:13:59Z",
+      "fetched": "2026-11-23T17:56:37Z",
       "week": 48,
       "priceInfo": "Lunchpris Måndag - torsdag 160:- (13:00-14:00 150:- Take Away 145:-) · Fredagar 170:- (13:00-14:00 160:- Take Away 150:-) · 23/11 - 27/11 11:00 - 14:00",
       "days": [
@@ -210,16 +210,16 @@ window.MENUS = {
     },
     "adria": {
       "status": "ok",
-      "fetched": "2026-11-22T15:13:59Z",
-      "week": 47,
+      "fetched": "2026-11-23T17:56:37Z",
+      "week": 48,
       "priceInfo": "Lunch tisdag - fredag 11:30-14:00 · Hembakad focaccia och olivolja ingår i lunchen · Dagens 165:- · Hela veckan 155:-",
       "days": [
         {
           "weekday": "Tisdag",
           "dishes": [
             {
-              "name": "L´Amatricana",
-              "desc": "Färska Maccheroni, San Marzano tomatsås. rostad griskind, pecorino romano, svartpeppar.",
+              "name": "Risotto",
+              "desc": "på Carnaroliris, kräm på gröna ärtor, ricotta salata, knippmorötter, piemontesiska hasselnötter.",
               "price": "165:-"
             }
           ]
@@ -228,8 +228,8 @@ window.MENUS = {
           "weekday": "Onsdag",
           "dishes": [
             {
-              "name": "Stekt laxfilé",
-              "desc": "parmesangratinerad fänkål, kokt potatis, citronsås.",
+              "name": "Scaloppine",
+              "desc": "Bankat kalvkött stekt med mjöl, vin, citron. Serveras med chili- och vitlöksslungad savojkål, potatispuré.",
               "price": "165:-"
             }
           ]
@@ -238,8 +238,8 @@ window.MENUS = {
           "weekday": "Torsdag",
           "dishes": [
             {
-              "name": "Spezzatino",
-              "desc": "Nötköttsgryta med tomat, ärtor, morot, lök, örter. Serveras med basmatiris.",
+              "name": "Parmigiana di melanzane",
+              "desc": "Auberginegratäng med fior di latte, San Marzano tomatsås, basilika, Parmigiano.",
               "price": "165:-"
             }
           ]
@@ -248,8 +248,8 @@ window.MENUS = {
           "weekday": "Fredag",
           "dishes": [
             {
-              "name": "Zuppa di pesce",
-              "desc": "Tomatbaserad fisksoppa med tonfisk, calamari, rödtunga, kolja, scampi, potatis, selleri, krutonger.",
+              "name": "Panerad sejfilé",
+              "desc": "konfiterad potatis, Datterinitomater, taggiascheoliver, kapris, örter.",
               "price": "165:-"
             }
           ]
